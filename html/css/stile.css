@@ -1,0 +1,15 @@
+body {
+	margin: 5px 0;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 14px;
+	color: #303030;
+}
+
+.tablesorter-default {
+	font-family: 'Open Sans', sans-serif !important;
+	font-size: 14px !important;
+}
+
+.tablesorter-default .tablesorter-filter-row td {
+	border: 0;
+}
