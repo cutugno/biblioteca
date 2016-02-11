@@ -44,6 +44,23 @@
 		public function insertPrestito ($dati) {
 			
 			if ($query=$this->db->insert('prestiti', $dati)) return $this->db->insert_id();
+			return FALSE;
+			
+		}
+		
+		public function elencoPrestiti () {
+				
+			$query=$this->db->select('prestiti.*, libri.inventario, libri.titolo, utenti.nome')
+				->join('libri', 'prestiti.id_libro=libri.id')
+				->join('utenti', 'prestiti.id_utente=utenti.id')
+				->order_by('codice')
+				->get('prestiti');
+				
+			if ($query->num_rows()>0){
+				return $query->result();
+			}else{
+				return FALSE;
+			}
 			
 		}
 			

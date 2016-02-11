@@ -2,7 +2,7 @@
 <script src="<?php echo site_url('js/jquery.maskedinput.min.js'); ?>"></script>
 <script src="<?php echo site_url('js/validation.js'); ?>"></script>
 <script>
-	
+		
 	validaLibro("#nuovolibro"); // chiamata a funzione in validation.js
 	
 	$(document).ready(function() {

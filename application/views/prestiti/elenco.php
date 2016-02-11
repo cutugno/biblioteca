@@ -1,8 +1,60 @@
 <div class="container">
-	<h1>Nuovo elenco</h1>
+	<h1>Elenco Prestiti</h1>
 	<div class="row">
-		<div class="col-xs-12">
-			
-		</div>
+		<div class="col-xs-12 pagin text-left">
+		<form>
+			<img src="<?php echo site_url('images/icons/first.png'); ?>" class="first"/>
+			<img src="<?php echo site_url('images/icons/prev.png'); ?>" class="prev"/>
+			<input type="text" class="pagedisplay form-control input-sm" style="width:130px; display:inline;background: #fff" readonly />
+			<img src="<?php echo site_url('images/icons/next.png'); ?>" class="next"/>
+			<img src="<?php echo site_url('images/icons/last.png'); ?>" class="last"/>
+			<select class="pagesize form-control input-sm" style="width:60px; display:inline">
+				<option selected="selected"  value="10">10</option>
+				<option value="25">25</option>
+				<option value="50">50</option>
+			</select>
+		</form>
+	  </div>
+	   <div class="col-xs-12 table-responsive">
+		  <table class="table tablesorter hover-highlight" id="prestiti_table">
+			  <thead>
+					<tr>
+						<th>Codice</th>
+						<th>Inventario</th>
+						<th>Titolo</th>
+						<th>Utente</th>
+						<th>Data prestito</th>
+						<th>Data reso</th>						
+						<th class="filter-false"><span class="noorder"></span></th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach ($prestiti as $val): ?>
+					<tr>
+						<td><?php echo $val->codice; ?></td>
+						<td><?php echo strtoupper($val->inventario); ?></td>
+						<td><?php echo $val->titolo; ?></td>
+						<td><?php echo $val->nome; ?></td>
+						<td><?php echo $val->data_prestito; ?></td>
+						<td><?php echo $val->data_reso; ?></td>						
+						<td class="text-right"><a href="<?php echo site_url('prestiti/scheda/'.$val->id); ?>" class="btn btn-danger btn-sm"><i class="fa fa-eye"></i></a></td>
+					</tr>
+					<?php endforeach; ?>
+				</tbody>
+			</table>			
+	  </div>
+	  <div class="col-xs-12 pagin text-left">
+		<form>
+			<img src="<?php echo site_url('images/icons/first.png'); ?>" class="first"/>
+			<img src="<?php echo site_url('images/icons/prev.png'); ?>" class="prev"/>
+			<input type="text" class="pagedisplay form-control input-sm" style="width:130px; display:inline;background: #fff" readonly />
+			<img src="<?php echo site_url('images/icons/next.png'); ?>" class="next"/>
+			<img src="<?php echo site_url('images/icons/last.png'); ?>" class="last"/>
+			<select class="pagesize form-control input-sm" style="width:60px; display:inline">
+				<option selected="selected"  value="10">10</option>
+				<option value="25">25</option>
+				<option value="50">50</option>
+			</select>
+		</form>
 	</div>
 </div>

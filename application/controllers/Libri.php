@@ -38,6 +38,7 @@ class Libri extends MY_Controller {
 		$this->load->view('libri/js_nuovo');
 		$this->load->view('templates/close');
 		
+		$this->session->unset_userdata('idlibro');
 		$this->session->unset_userdata('insertlibro');
 		$this->session->unset_userdata('noinsertlibro');
 	}
@@ -52,7 +53,7 @@ class Libri extends MY_Controller {
 		$this->session->unset_userdata('nuovo');
 		if ($libro=$this->libri_model->insertLibro($nuovo)){
 			log_message("info", "Libro inserito con id #".$libro.". Utente id #".$this->session->utente->id.". (libri/insert)", LOGPREFIX);
-			$this->session->set_userdata('insertlibro',1);
+			$this->session->set_userdata('prestitiinsertlibro',1);
 		}else{
 			log_message("error", "Errore inserimento libro. Utente id #".$this->session->utente->id.". (libri/insert)", LOGPREFIX);
 			$this->session->set_userdata('noinsertlibro',1);
@@ -85,6 +86,7 @@ class Libri extends MY_Controller {
 		$this->load->view('libri/js_elenco',$data);
 		$this->load->view('templates/close');
 		
+		$this->session->unset_userdata('idlibro');
 		$this->session->unset_userdata('eliminalibro');
 		$this->session->unset_userdata('noeliminalibro');
 		
@@ -96,6 +98,8 @@ class Libri extends MY_Controller {
 			redirect('login');
 		}
 		if (empty($id)) redirect('libri/elenco'); // se $id non esiste torno a elenco
+		
+		$this->session->set_userdata('idlibro',$id);
 		
 		$this->load->library('form_validation');
 	

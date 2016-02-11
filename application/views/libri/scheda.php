@@ -179,7 +179,7 @@
 			<p>Questo libro è 
 			<?php if ($disp==0) : ?>
 			<span class="text-success">disponibile</span> per il prestito</p>
-			<a href="<?php echo site_url('prestiti/nuovo/'.$libro->id); ?>" class="btn btn-success">REGISTRA PRESTITO</a>
+			<a href="<?php echo site_url('prestiti/nuovo'); ?>" class="btn btn-success">REGISTRA PRESTITO</a>
 			<?php else : ?>
 			<span class="text-danger">in prestito</span></p>pulsante "registra reso"
 			<?php endif ?>

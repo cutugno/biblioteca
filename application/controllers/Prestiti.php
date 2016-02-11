@@ -3,12 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Prestiti extends MY_Controller {
 
-	public function nuovo($id_libro="")	{
+	public function nuovo()	{
 		
 		if (!$this->checkLevel(1)){ // controllo se loggato
 			redirect('login');
 		}
-		
+				
 		$this->load->library('form_validation');
 		
 		$this->form_validation->set_error_delimiters('<label class="text-danger">', '</label>');
@@ -41,9 +41,10 @@ class Prestiti extends MY_Controller {
 			$this->session->set_userdata('nuovop',$prestito);
 			redirect ("prestiti/insertP");
 		}
-		
-		if (isset($id_libro)){ // vengo da scheda libro
-			$prestito=$this->libri_model->getLibro($id_libro);
+
+		$idlibro=$this->session->idlibro;
+		if (isset($idlibro)){ // vengo da scheda libro
+			$prestito=$this->libri_model->getLibro($idlibro);
 			$data['prestito']=$prestito;
 		}else{
 			$data['prestito']=NULL;
@@ -68,6 +69,10 @@ class Prestiti extends MY_Controller {
 		// altri js
 		$this->load->view('prestiti/js_nuovo');
 		$this->load->view('templates/close');
+		
+		$this->session->unset_userdata('idlibro');
+		$this->session->unset_userdata('insertprestito');
+		$this->session->unset_userdata('noinsertprestito');
 	}
 	
 	public function insertP() {
@@ -86,7 +91,6 @@ class Prestiti extends MY_Controller {
 			$this->session->set_userdata('noinsertprestito',1);
 			log_message("error", "Errore nell'inserimento prestito libro con id #".$prestito['id_libro'].". Utente con id #".$id_utente.". (prestiti/nuovo)", LOGPREFIX);
 		}
-		
 		redirect ('prestiti/nuovo');
 		
 	}
@@ -105,6 +109,8 @@ class Prestiti extends MY_Controller {
 		$this->load->view('templates/footer');
 		// altri js
 		$this->load->view('templates/close');
+		
+		$this->session->unset_userdata('idlibro');
 	}
 	
 	public function elenco() {
@@ -114,13 +120,17 @@ class Prestiti extends MY_Controller {
 		}
 		
 		$data['utente']=$this->session->utente;
+		$data['prestiti']=$this->prestiti_model->elencoPrestiti();
 		
 		$this->load->view('templates/header');
 		$this->load->view('templates/menu',$data);
-		$this->load->view('prestiti/elenco');
+		$this->load->view('prestiti/elenco',$data);
 		$this->load->view('templates/footer');
 		// altri js
+		$this->load->view('prestiti/js_elenco');
 		$this->load->view('templates/close');
+		
+		$this->session->unset_userdata('idlibro');
 	}
 	
 }

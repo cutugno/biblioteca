@@ -1,4 +1,7 @@
 <div class="container">
+	<?php if ($prestito) : ?>
+	<a href="<?php echo site_url('libri/elenco'); ?>" class="btn btn-link pull-right">Torna all'elenco libri</a>
+	<?php endif ?>
 	<h1>Registra prestito</h1>
 	<?php
 		$attr=array("id"=>"schedaprestito");
