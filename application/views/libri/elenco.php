@@ -5,10 +5,10 @@
 		<form>
 			<img src="<?php echo site_url('images/icons/first.png'); ?>" class="first"/>
 			<img src="<?php echo site_url('images/icons/prev.png'); ?>" class="prev"/>
-			<input type="text" class="pagedisplay" readonly />
+			<input type="text" class="pagedisplay form-control input-sm" style="width:130px; display:inline;background: #fff" readonly />
 			<img src="<?php echo site_url('images/icons/next.png'); ?>" class="next"/>
 			<img src="<?php echo site_url('images/icons/last.png'); ?>" class="last"/>
-			<select class="pagesize">
+			<select class="pagesize form-control input-sm" style="width:60px; display:inline">
 				<option selected="selected"  value="10">10</option>
 				<option value="25">25</option>
 				<option value="50">50</option>
@@ -53,10 +53,10 @@
 		<form>
 			<img src="<?php echo site_url('images/icons/first.png'); ?>" class="first"/>
 			<img src="<?php echo site_url('images/icons/prev.png'); ?>" class="prev"/>
-			<input type="text" class="pagedisplay" readonly />
+			<input type="text" class="pagedisplay form-control input-sm" style="width:130px; display:inline;background: #fff" readonly />
 			<img src="<?php echo site_url('images/icons/next.png'); ?>" class="next"/>
 			<img src="<?php echo site_url('images/icons/last.png'); ?>" class="last"/>
-			<select class="pagesize">
+			<select class="pagesize form-control input-sm" style="width:60px; display:inline">
 				<option selected="selected"  value="10">10</option>
 				<option value="25">25</option>
 				<option value="50">50</option>
