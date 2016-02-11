@@ -102,6 +102,14 @@ $config = array(
 	),
 	'prestito' => array(
 			array(
+					'field'  => 'id_libro',
+					'label'  => 'Inventario',
+					'rules'  => 'required',
+					'errors' => array(
+                         'required' => '%s obbligatorio'
+					)
+			),
+			array(
 					'field'  => 'nome',
 					'label'  => 'Utente',
 					'rules'  => 'required',
