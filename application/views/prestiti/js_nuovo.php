@@ -8,7 +8,8 @@
 	validaPrestito("#schedaprestito");
 	
 	$(document).ready(function() {
-		
+		var dati=$("#schedaprestito").serialize();
+		alert(dati);
 		<?php if ($this->session->insertprestito==1) :?>
 		swal({title:"", text:"Prestito inserito", timer:1500, showConfirmButton:false, type: "success"});
 		<?php endif ?>
@@ -28,11 +29,11 @@
 			$("#preload_inv").show();
 			var questo=$(this);
 			var inventario=questo.val();
-				if (inventario=="__-____") {
-					$("#error_inv").show();
-				}else{
-					$("#error_inv").hide();
-				}
+			if (inventario=="__-____") {
+				$("#error_inv").show();
+			}else{
+				$("#error_inv").hide();
+			}
 			data="inventario="+inventario;
 			url="<?php echo site_url('libri/ajaxFetch'); ?>";
 			$.post(url,data,function(msg) {	

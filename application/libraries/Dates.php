@@ -37,5 +37,16 @@ Class Dates {
 		
 	}
 	
+	public function dateDifference($date_1,$date_2,$differenceFormat='%a' ) {
+		
+		$datetime1 = new DateTime($date_1);
+		$datetime2 = new DateTime($date_2);
+		
+		$interval = $datetime1->diff($datetime2);
+		
+		return $interval->format($differenceFormat);
+		
+	}
+	
 	
 }

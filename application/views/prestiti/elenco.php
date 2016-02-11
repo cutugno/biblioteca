@@ -1,3 +1,4 @@
+<?php var_dump ($prestiti); ?>
 <div class="container">
 	<h1>Elenco Prestiti</h1>
 	<div class="row">
@@ -23,8 +24,8 @@
 						<th>Inventario</th>
 						<th>Titolo</th>
 						<th>Utente</th>
-						<th>Data prestito</th>
-						<th>Data reso</th>						
+						<th data-placeholder="Tutti"><span class="past">Data prestito</span></th>
+						<th data-placeholder="Tutti"><span class="past">Data reso</span></th>						
 						<th class="filter-false"><span class="noorder"></span></th>
 					</tr>
 				</thead>
@@ -35,8 +36,8 @@
 						<td><?php echo strtoupper($val->inventario); ?></td>
 						<td><?php echo $val->titolo; ?></td>
 						<td><?php echo $val->nome; ?></td>
-						<td><?php echo $val->data_prestito; ?></td>
-						<td><?php echo $val->data_reso; ?></td>						
+						<td data-past="<?php echo $val->diff_prestito; ?>"><?php echo $val->data_prestito; ?></td>
+						<td data-past="<?php echo isset($val->diff_reso) ? $val->diff_reso : "0"; ?>"><?php echo $val->data_reso; ?></td>						
 						<td class="text-right"><a href="<?php echo site_url('prestiti/scheda/'.$val->id); ?>" class="btn btn-danger btn-sm"><i class="fa fa-eye"></i></a></td>
 					</tr>
 					<?php endforeach; ?>
