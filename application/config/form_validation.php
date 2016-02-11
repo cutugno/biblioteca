@@ -98,6 +98,16 @@ $config = array(
 					'errors' => array(
                         'max_length' => 'Massimo {param} caratteri'
 					)
-			),
+			)
+	),
+	'prestito' => array(
+			array(
+					'field'  => 'nome',
+					'label'  => 'Utente',
+					'rules'  => 'required',
+					'errors' => array(
+                         'required' => '%s obbligatorio'
+					)
+			)
 	)
 );

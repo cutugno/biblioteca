@@ -8,7 +8,9 @@
 		
 		public function insertLibro ($dati) {
 			
-			return $query=$this->db->insert('libri', $dati);			
+			 if ($query=$this->db->insert('libri', $dati)) return $this->db->insert_id();
+			 
+			 return FALSE;
 		
 		}
 		
@@ -34,7 +36,10 @@
 		
 		public function elencoLibri () {  // migliorare con join su prestiti
 				
-			$query=$this->db->order_by('inventario')
+			$query=$this->db->select('libri.*,localizzazioni.nome as localizzazione,generi.nome as genere')
+				->join('localizzazioni','libri.id_localizzazione=localizzazioni.id')
+				->join('generi','libri.id_genere=generi.id')
+				->order_by('inventario')
 				->get('libri');
 				
 			if ($query->num_rows()>0){
@@ -46,8 +51,20 @@
 		}
 		
 		public function getLibro ($id) {
+						
+			$query=$this->db->get_where('libri',array('id'=>$id));
 			
-			$query=$this->db->get_where('libri',array("id"=>$id));
+			if ($query->num_rows()>0){
+				return $query->row();
+			}else{
+				return FALSE;
+			}
+			
+		}
+		
+		public function getLibroByInv ($inventario) {
+						
+			$query=$this->db->get_where('libri',array('inventario'=>$inventario));
 			
 			if ($query->num_rows()>0){
 				return $query->row();

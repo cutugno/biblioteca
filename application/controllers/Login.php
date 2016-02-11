@@ -8,6 +8,9 @@ class Login extends MY_Controller {
 		/* controllo se loggato */
 		if ($this->checkLevel(0)){ 
 			redirect ('homepage');
+		}else{
+			$utente = new stdClass();
+			$utente->livello=0;
 		}
 
 		$this->load->library('form_validation');
@@ -44,8 +47,11 @@ class Login extends MY_Controller {
 				$this->session->set_flashdata('nologin',1);
 			}
 		}
+		
+		$data['utente']=$utente;
 				
 		$this->load->view('templates/header');
+		$this->load->view('templates/menu',$data);
 		$this->load->view('login/index');
 		$this->load->view('templates/footer');
 		$this->load->view('login/js_login');
@@ -62,7 +68,7 @@ class Login extends MY_Controller {
 		log_message("info","Logout effettuato. Utente id #".$this->session->utente->id.". (login/logout)", LOGPREFIX);		
 		$this->session->sess_destroy();		
 		
-		redirect('login');
+		redirect('homepage');
 		
 	}
 	

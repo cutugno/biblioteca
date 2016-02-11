@@ -5,14 +5,14 @@ class Homepage extends MY_Controller {
 
 	public function index()	{
 		
-		if (!$this->checkLevel(0)){ // controllo se loggato
-			redirect('login');
+		if ($this->checkLevel(0)){ // controllo se loggato
+			$utente=$this->session->utente;
+		}else{
+			$utente = new stdClass();
+			$utente->livello=0;
 		}
-		
-		$data['utente']=$this->session->utente;
-		$data['select_local']=$this->select_model->selectItems("localizzazioni");
-		$data['select_tipidoc']=$this->select_model->selectItems("tipidocumento");
-		$data['select_generi']=$this->select_model->selectItems("generi");
+
+		$data['utente']=$utente;		
 		
 		$this->load->view('templates/header');
 		$this->load->view('templates/menu',$data);

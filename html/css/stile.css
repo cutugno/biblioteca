@@ -13,3 +13,19 @@ body {
 .tablesorter-default .tablesorter-filter-row td {
 	border: 0;
 }
+
+table.hover-highlight tbody > tr:hover > td {
+	background-color: #f4f4f4;
+}
+
+
+i.fa.fa-circle.danger {
+	color: #d9534f;
+}
+
+.fa-circle.success {
+	color: #5cb85c;
+}
+
+
+

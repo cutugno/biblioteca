@@ -1,6 +1,6 @@
 <script src="<?php echo site_url('js/jquery.validate.js'); ?>"></script>
 <script src="<?php echo site_url('js/jquery.maskedinput.min.js'); ?>"></script>
-<script src="<?php echo site_url('js/libro_validation.js'); ?>"></script>
+<script src="<?php echo site_url('js/validation.js'); ?>"></script>
 <script>
 	
 	function resetForm(form) {
@@ -10,7 +10,7 @@
 		});
 	}
 	
-	validaLibro("#schedalibro"); // chiamata a funzione in libro_validation.js
+	validaLibro("#schedalibro"); // chiamata a funzione in validation.js
 	
 	$(document).ready(function() {	
 		<?php if ($this->session->updatelibro==1) :?>

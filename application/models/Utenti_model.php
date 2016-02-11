@@ -26,13 +26,46 @@
 				->where("utenti.id", $id)
 				->get();
 			if ($query->num_rows()>0){
-				$res=$query->row();
-				return $res;
+				return $query->row();
 			}else{
 				return null;
 			}
 			
 		}
+		
+		public function getUtentiAutocomplete($nome) {
 			
+			$query=$this->db->select('id,nome')
+				->like('nome', $nome, 'after') 
+				->get('utenti');
+		
+			if ($query->num_rows()>0){
+				return $query->result();
+			}
+			return FALSE;
+			
+		}	
+		
+		public function updateUtente ($dati) {
+			
+			extract ($dati);		
+			
+			$query=$this->db->set('nome',$nome)
+				->set('classe',$classe)
+				->set('email',$email)
+				->where('id',$id)
+				->update('utenti');
+				
+			return $this->db->affected_rows()>0;
+		
+		}
+		
+		public function insertUtente ($dati) {
+			
+			if ($query=$this->db->insert('utenti', $dati)) return $this->db->insert_id();
+			 
+			return FALSE;
+			
+		}
 	}
 	

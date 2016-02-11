@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /* 	COSTANTI */
 
 define ('LOGPREFIX', 'BIBLIO_'); // prefisso per log personali in /var/log/biblioteca
+define ('CODL', 4); // lunghezza codice prestito
 
 /*
 |--------------------------------------------------------------------------

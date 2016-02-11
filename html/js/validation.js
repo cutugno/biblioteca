@@ -46,17 +46,17 @@ function validaLibro (form){
 		},
 		messages: {
 			inventario: {
-				required: "Campo obbligatorio"
+				required: "Inventario obbligatorio"
 			},
 			collocazione: {
 				maxlength: jQuery.validator.format("Massimo {0} caratteri")
 			},
 			autore: {
-				required: "Campo obbligatorio",
+				required: "Autore obbligatorio",
 				maxlength: jQuery.validator.format("Massimo {0} caratteri")
 			},
 			titolo: {
-				required: "Campo obbligatorio",
+				required: "Titolo obbligatorio",
 				maxlength: jQuery.validator.format("Massimo {0} caratteri")
 			},
 			editore: {
@@ -91,3 +91,29 @@ function validaLibro (form){
 		}
 	});
 }
+
+function validaPrestito (form){
+	$(form).validate({
+		rules: {
+			inventario: {
+				required: true
+			},
+			nome: {
+				required: true
+			}
+		},
+		messages: {
+			inventario: {
+				required: "Inventario obbligatorio"
+			},
+			nome: {
+				required: "Nome obbligatorio"
+			}
+		},
+		errorPlacement: function(error, element) {
+			element.before(error);
+			error.css("color","#a94442");
+		}
+	});
+}
+		
