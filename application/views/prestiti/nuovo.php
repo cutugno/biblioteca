@@ -22,7 +22,7 @@
 	
 	<div class="row">
 		<div class="form-group col-xs-12 col-sm-4 col-md-2">
-			<label for="inventario">Cod. inventario</label> <i id="preload_inv" class="fa fa-spin fa-spinner" style="display:none"></i>
+			<label for="inventario">Cod. inventario</label> <?php echo form_error('inventario'); ?> <label class="text-danger" id="error_inv" style="display:none">Inventario obbligatorio</label> <i id="preload_inv" class="fa fa-spin fa-spinner" style="display:none"></i>
 			<?php 
 				$attr=array("class"=>"form-control text-uppercase","id"=>"inventario","value"=>@$prestito->inventario);
 				echo form_input($attr);
@@ -66,7 +66,7 @@
 	
 	<div class="row">
 		<div class="form-group col-xs-12 col-sm-4">
-			<label for="nome">Utente</label> <i id="preload_ute" class="fa fa-spin fa-spinner" style="display:none"></i>
+			<label for="nome">Utente</label> <?php echo form_error('nome'); ?> <i id="preload_ute" class="fa fa-spin fa-spinner" style="display:none"></i>
 			<?php 
 				$attr=array(
 						'type'  => 'hidden',

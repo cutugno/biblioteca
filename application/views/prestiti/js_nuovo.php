@@ -20,10 +20,19 @@
 		// input mask
 	    $("#inventario").mask("aa-9999");
 		
+		$("#inventario").focusin(function(){
+			$(this).siblings(".text-danger").hide();
+		});
+		
 		$("#inventario").focusout(function(){
 			$("#preload_inv").show();
 			var questo=$(this);
 			var inventario=questo.val();
+				if (inventario=="__-____") {
+					$("#error_inv").show();
+				}else{
+					$("#error_inv").hide();
+				}
 			data="inventario="+inventario;
 			url="<?php echo site_url('libri/ajaxFetch'); ?>";
 			$.post(url,data,function(msg) {	

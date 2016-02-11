@@ -119,8 +119,15 @@ class Prestiti extends MY_Controller {
 			redirect('login');
 		}
 		
+		
+		$prestiti=$this->prestiti_model->elencoPrestiti();
+		$this->load->library('dates');
+		foreach ($prestiti as $key=>$val){
+			if (null != $val->data_prestito) $prestiti[$key]->data_prestito=$this->dates->convertDateTime($val->data_prestito);
+			if (null != $val->data_reso) $prestiti[$key]->data_reso=$this->dates->convertDateTime($val->data_reso);
+		}
 		$data['utente']=$this->session->utente;
-		$data['prestiti']=$this->prestiti_model->elencoPrestiti();
+		$data['prestiti']=$prestiti;
 		
 		$this->load->view('templates/header');
 		$this->load->view('templates/menu',$data);
