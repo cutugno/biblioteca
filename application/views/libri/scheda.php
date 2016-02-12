@@ -223,7 +223,7 @@
 					</div>
 					<div class="col-xs-12 spacer-10"></div>
 					<div class="col-xs-12 ">
-						<a href="#" class="btn btn-primary"><i class="fa fa-envelope-o"></i> CONTATTA UTENTE</a>
+						<!-- <a href="#" class="btn btn-primary"><i class="fa fa-envelope-o"></i> CONTATTA UTENTE</a> -->
 					</div>
 				</div>				
 				<?php endif ?>
