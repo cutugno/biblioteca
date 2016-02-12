@@ -43,7 +43,9 @@
 						<td><?php echo $val->isbn; ?></td>
 						<td><?php echo $val->cdd; ?></td>
 						<td data-disp="<?php echo $val->disp; ?>" class="text-center"><?php $disp=$val->disp ? "success" : "danger" ; ?><i class='fa fa-circle fa-2x <?php echo $disp; ?>'></i></td>
-						<td class="text-right"><a href="<?php echo site_url('libri/scheda/'.$val->id); ?>" class="btn btn-danger btn-sm"><i class="fa fa-eye"></i></a></td>
+						<td class="text-right">
+							<a href="<?php echo site_url('libri/scheda/'.$val->id); ?>" class="btn btn-danger btn-sm"><i class="fa fa-eye"></i></a>							
+						</td>
 					</tr>
 					<?php endforeach; ?>
 				</tbody>

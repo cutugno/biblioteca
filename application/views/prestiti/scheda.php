@@ -3,7 +3,7 @@
 	<h1>Prestito #<?php echo $prestito->codice; ?></h1>
 	<div class="spacer-10"></div>
 	<div class="row">
-		<div class="col-md-8">
+		<div class="col-md-9">
 			<div class="row">
 				<div class="col-xs-12 col-sm-6 col-md-4">
 					<label>Data prestito</label> 
@@ -65,13 +65,14 @@
 				</div>
 			</div>		
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-3">
 			<div class="row">
 				<div class="col-xs-12">
-					<?php if ($prestito->disp==0) : ?>
-						<p>pulsante reso</p>
-					<?php endif ?>
-					<!-- <p>pulsante stampa</p> -->
+					<?php if ($prestito->disp==0) : ?>		
+					<!-- <p>pulsante stampa ricevuta</p> -->				
+					<!-- <p>pulsante annulla prestito</p> -->				
+						<a href="<?php echo site_url('prestiti/reso/'.$prestito->id); ?>" class="btn btn-success"><i class="fa fa-reply"></i> REGISTRA RESO</a>
+					<?php endif ?>					
 				</div>
 			</div>
 		</div>

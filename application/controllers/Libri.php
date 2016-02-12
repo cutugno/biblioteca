@@ -5,10 +5,12 @@ class Libri extends MY_Controller {
 
 	public function nuovo()	{
 		
+		$this->session->set_userdata('dopo',current_url());
+		
 		if (!$this->checkLevel(0)){ // controllo se non loggato
 			redirect('login');
 		}
-		
+				
 		$this->load->library('form_validation');
 					
 		$this->form_validation->set_error_delimiters('<label class="text-danger">', '</label>');
@@ -71,6 +73,8 @@ class Libri extends MY_Controller {
 			$this->session->set_userdata('utente',$utente);
 		}
 		
+		$this->session->set_userdata('dopo',current_url()); 
+		
 		$data['utente']=$this->session->utente;
 		$data['libri']=$this->libri_model->elencoLibri();
 		
@@ -99,6 +103,7 @@ class Libri extends MY_Controller {
 		if (empty($id)) redirect('libri/elenco'); // se $id non esiste torno a elenco
 		
 		$this->session->set_userdata('idlibro',$id); // mi serve se da qui passo alla scheda prestito
+		$this->session->set_userdata('dopo',current_url()); 
 		
 		$this->load->library('form_validation');
 	
@@ -142,6 +147,8 @@ class Libri extends MY_Controller {
 		
 		$this->session->unset_userdata('updatelibro');
 		$this->session->unset_userdata('noupdatelibro');
+		$this->session->unset_userdata('registratoreso');
+		$this->session->unset_userdata('noregistratoreso');
 		
 	}
 	

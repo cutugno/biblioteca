@@ -35,6 +35,7 @@
 				->join('libri','prestiti.id_libro=libri.id')
 				->join('utenti','prestiti.id_utente=utenti.id')
 				->where('prestiti.id_libro',$id_libro)
+				->where('prestiti.data_reso',NULL)
 				->order_by('data_prestito','DESC')
 				->limit(1)
 				->get('prestiti');
@@ -82,6 +83,26 @@
 			}else{
 				return FALSE;
 			}
+			
+		}
+		
+		public function registraReso ($id) {
+			
+			$inquery=$this->db->select('id_libro')
+				->where('id',$id)
+				->get_compiled_select('prestiti');
+				
+			// query update disp in libri
+			$query=$this->db->set('disp',1)
+				->where('id','('.$inquery.')',FALSE)
+				->update('libri');
+				
+			// query update data_reso in prestiti
+			$query=$this->db->set('data_reso','NOW()',FALSE)
+				->where('id',$id)
+				->update('prestiti');
+			
+			return $this->db->affected_rows()>0;
 			
 		}
 			

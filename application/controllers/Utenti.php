@@ -5,7 +5,7 @@ class Utenti extends MY_Controller {
 
 	public function ajaxFetch() {
 		
-		if (!$this->checkLevel(1)){ // controllo se loggato
+		if (!$this->checkLevel(0)){ // controllo se loggato
 			redirect('login');
 		}
 		if (empty($this->input->get())) redirect('homepage');
@@ -21,7 +21,7 @@ class Utenti extends MY_Controller {
 	
 	public function ajaxFetchSingolo() {
 		
-		if (!$this->checkLevel(1)){ // controllo se loggato
+		if (!$this->checkLevel(0)){ // controllo se loggato
 			redirect('login');
 		}
 		if (empty($this->input->post())) redirect('homepage');

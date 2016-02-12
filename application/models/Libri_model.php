@@ -16,14 +16,14 @@
 		
 		public function updateLibro ($dati) {
 			
-			return $query=$this->db->set($dati)
+			$query=$this->db->set($dati)
 						->where('id',$dati['id'])
 						->update('libri');
 					
 			return $this->db->affected_rows()>0;
 		
 		}
-		
+	
 		public function eliminaLibro ($id) {
 			
 			return $query=$this->db->delete('libri', array('id' => $id));

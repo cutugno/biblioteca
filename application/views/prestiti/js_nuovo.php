@@ -8,13 +8,6 @@
 	validaPrestito("#schedaprestito");
 	
 	$(document).ready(function() {
-		<?php if ($this->session->insertprestito==1) :?>
-		swal({title:"", text:"Prestito inserito", timer:1500, showConfirmButton:false, type: "success"});
-		<?php endif ?>
-		
-		<?php if ($this->session->noinsertprestito==1) :?>
-		swal({title:"", text:"Errore durante l'inserimento del prestito. Riprova", timer:1500, showConfirmButton:false, type: "error"});
-		<?php endif ?>
 		
 		// input mask
 	    $("#inventario").mask("aa-9999");

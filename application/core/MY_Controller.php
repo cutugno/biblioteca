@@ -6,8 +6,7 @@ class MY_Controller extends CI_Controller {
 			
 			parent::__construct();
 			
-			$this->output->enable_profiler(TRUE);
-			
+			$this->output->enable_profiler(TRUE);	
         }
         
         protected function checkLevel($liv=0) {

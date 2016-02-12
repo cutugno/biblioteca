@@ -5,10 +5,12 @@ class Prestiti extends MY_Controller {
 
 	public function nuovo()	{
 		
+		$this->session->set_userdata('dopo',current_url());
+		
 		if (!$this->checkLevel(0)){ // controllo se loggato
 			redirect('login');
 		}
-				
+					
 		$this->load->library('form_validation');
 		
 		$this->form_validation->set_error_delimiters('<label class="text-danger">', '</label>');
@@ -71,8 +73,7 @@ class Prestiti extends MY_Controller {
 		$this->load->view('templates/close');
 		
 		$this->session->unset_userdata('idlibro');
-		$this->session->unset_userdata('insertprestito');
-		$this->session->unset_userdata('noinsertprestito');
+				
 	}
 	
 	public function insertP() {
@@ -97,29 +98,38 @@ class Prestiti extends MY_Controller {
 		
 	}
 	
-	public function reso() {
+	public function reso($id) {
 		
 		if (!$this->checkLevel(0)){ // controllo se loggato
 			redirect('login');
 		}
 		
-		$data['utente']=$this->session->utente;
+		if (empty($id)) redirect('prestiti/elenco'); // se $id non esiste torno a elenco
 		
-		$this->load->view('templates/header');
-		$this->load->view('templates/menu',$data);
-		$this->load->view('prestiti/reso');
-		$this->load->view('templates/footer');
-		// altri js
-		$this->load->view('templates/close');
+		// query reso
+		if ($this->prestiti_model->registraReso($id)){
+			$this->session->set_userdata('registratoreso',1);
+		}else{
+			$this->session->set_userdata('noregistratoreso',1);
+			$redir="prestiti/scheda/".$id;
+		}
 		
-		$this->session->unset_userdata('idlibro');
+		// redirect
+		if (empty($redir)){
+			$redir=$this->session->dopo;
+			$this->session->unset_userdata('dopo');
+		}
+		redirect($redir);
+
 	}
 	
 	public function elenco() {
 		
+		$this->session->set_userdata('dopo',current_url());
+	
 		if (!$this->checkLevel(0)){ // controllo se loggato
 			redirect('login');
-		}
+		}		
 		
 		$prestiti=$this->prestiti_model->elencoPrestiti();
 		$this->load->library('dates');
@@ -151,14 +161,19 @@ class Prestiti extends MY_Controller {
 		$this->load->view('templates/close');
 		
 		$this->session->unset_userdata('idlibro');
+		$this->session->unset_userdata('registratoreso');
+		$this->session->unset_userdata('noregistratoreso');
+		
 	}
 	
 	public function scheda($id) {
 		
+		$this->session->set_userdata('dopo',current_url()); 
+		
 		if (!$this->checkLevel(0)){ // controllo se loggato
 			redirect('login');
 		}
-		if (empty($id)) redirect('prestiti/elenco'); // se $id non esiste torno a elenco
+		if (empty($id)) redirect('prestiti/elenco'); // se $id non esiste torno a elenco	
 		
 		$this->load->library('dates');
 				
@@ -179,10 +194,14 @@ class Prestiti extends MY_Controller {
 		$this->load->view('prestiti/scheda',$data);
 		$this->load->view('templates/footer');
 		// altri js
-		//$this->load->view('prestiti/js_scheda',$data);
+		$this->load->view('prestiti/js_scheda',$data);
 		$this->load->view('templates/close');
 		
 		$this->session->unset_userdata('idlibro');
+		$this->session->unset_userdata('insertprestito');
+		$this->session->unset_userdata('noinsertprestito');
+		$this->session->unset_userdata('registratoreso');
+		$this->session->unset_userdata('noregistratoreso');
 		
 	}
 	

@@ -41,7 +41,7 @@ class Login extends MY_Controller {
 					$logmsg.=" Settato cookie persistente.";
 				}
 				log_message("info", $logmsg." (login/index)", LOGPREFIX);
-				redirect ('homepage');
+				redirect ($this->session->dopo);
 			}else{
 				log_message("error", "Login errato. Username ".$this->input->post("username").". (login/index)", LOGPREFIX);
 				$this->session->set_flashdata('nologin',1);
