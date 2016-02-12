@@ -20,7 +20,7 @@
 		<?php endif ?>
 		
 	    // input mask
-	    $("#inventario").mask("aa-9999");
+	    $("#inventario").mask("aa9999");
 	    $("#isbn").mask("999-99-9999-999-9");
 
 	});
