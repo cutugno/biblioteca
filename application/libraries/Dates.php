@@ -26,14 +26,13 @@ Class Dates {
 				
 	}
 	
-	public function convertDateTime ($date,$cleanseconds=0,$direction=1,$sep=" ") {
+	public function convertDateTime ($date,$clean=0,$direction=1,$sep=" ") {
 		
 		$expldate=explode(" ",$date);
-		$date=$expldate[0];
-		if ($cleanseconds==1){
-			$expldate[1]=substr($expldate[1],0,-3);
-		}
-		return $this->convertDate($date,$direction).$sep.$expldate[1];
+		$date=$this->convertDate($expldate[0],$direction);
+		if ($clean==0) $date.=$sep.$expldate[1];
+		
+		return $date;
 		
 	}
 	

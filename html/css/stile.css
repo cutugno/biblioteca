@@ -5,6 +5,16 @@ body {
 	color: #303030;
 }
 
+.spacer-10 {
+	height: 10px;
+}
+.spacer-25 {
+	height: 25px;
+}
+.spacer-50 {
+	height: 50px;
+}
+
 .tablesorter-default {
 	font-family: 'Open Sans', sans-serif !important;
 	font-size: 14px !important;
@@ -25,6 +35,12 @@ i.fa.fa-circle.danger {
 
 .fa-circle.success {
 	color: #5cb85c;
+}
+
+@media screen and (max-width: 767px) {
+    .center-xs {
+        text-align: center;
+    }
 }
 
 

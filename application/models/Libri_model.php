@@ -16,7 +16,11 @@
 		
 		public function updateLibro ($dati) {
 			
-			return $query=$this->db->replace('libri', $dati);			
+			return $query=$this->db->set($dati)
+						->where('id',$dati['id'])
+						->update('libri');
+					
+			return $this->db->affected_rows()>0;
 		
 		}
 		
@@ -72,6 +76,15 @@
 				return FALSE;
 			}
 			
+		}
+		
+		public function toggleDisp ($id,$disp) {
+			
+			$query=$this->db->set('disp',$disp)
+				->where('id',$id)
+				->update('libri');
+			return $this->db->affected_rows()>0;
+	
 		}
 			
 	}

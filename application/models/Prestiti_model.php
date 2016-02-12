@@ -14,9 +14,30 @@
 						
 		}
 		
-		public function getPrestito($id_libro) {
+		public function getPrestito($id) {
 			
-			$query=$this->db->get_where('prestiti',array('id_libro'=>$id_libro));
+			$query=$this->db->select('prestiti.*,libri.inventario, libri.autore, libri.titolo, libri.isbn, libri.disp, utenti.nome as utente, utenti.email, utenti.classe')
+				->join('libri','prestiti.id_libro=libri.id')
+				->join('utenti','prestiti.id_utente=utenti.id')
+				->where('prestiti.id',$id)
+				->get('prestiti');
+			
+			if ($query->num_rows()>0) {
+				return $query->row();
+			}
+			return FALSE;
+			
+		}
+		
+		public function getPrestitoByIdlibro($id_libro) {
+			
+			$query=$this->db->select('prestiti.*,libri.inventario, libri.autore, libri.titolo, libri.isbn, libri.disp, utenti.nome as utente, utenti.email, utenti.classe')
+				->join('libri','prestiti.id_libro=libri.id')
+				->join('utenti','prestiti.id_utente=utenti.id')
+				->where('prestiti.id_libro',$id_libro)
+				->order_by('data_prestito','DESC')
+				->limit(1)
+				->get('prestiti');
 			
 			if ($query->num_rows()>0) {
 				return $query->row();

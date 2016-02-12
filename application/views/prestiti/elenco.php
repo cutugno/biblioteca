@@ -1,4 +1,3 @@
-<?php var_dump ($prestiti); ?>
 <div class="container">
 	<h1>Elenco Prestiti</h1>
 	<div class="row">

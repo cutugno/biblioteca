@@ -5,7 +5,7 @@ class Prestiti extends MY_Controller {
 
 	public function nuovo()	{
 		
-		if (!$this->checkLevel(1)){ // controllo se loggato
+		if (!$this->checkLevel(0)){ // controllo se loggato
 			redirect('login');
 		}
 				
@@ -28,7 +28,7 @@ class Prestiti extends MY_Controller {
 				$datiutente['nome']=$this->input->post('nome');
 				$datiutente['classe']=$this->input->post('classe');
 				$datiutente['email']=$this->input->post('email');
-				$datiutente['livello']=1;
+				//$datiutente['livello']=1;
 				$id_utente=$this->utenti_model->insertUtente($datiutente);
 				log_message("debug", "Inserito utente con id #".$id_utente.". (prestiti/nuovo)", LOGPREFIX);
 			}
@@ -52,7 +52,7 @@ class Prestiti extends MY_Controller {
 		
 		// setto cod. prestito
 		$count=$this->prestiti_model->lastPrestito(); // ultimo codice
-		$count=substr($count,-1);
+		$count ? $count=substr($count,-1) : $count=0;
 		$count++;
 		$cod="";
 		for ($x=1;$x<=CODL-strlen($count);$x++){
@@ -77,7 +77,7 @@ class Prestiti extends MY_Controller {
 	
 	public function insertP() {
 		
-		if (!$this->checkLevel(1)){ // controllo se non loggato
+		if (!$this->checkLevel(0)){ // controllo se non loggato
 			redirect('login');
 		}
 		
@@ -85,19 +85,21 @@ class Prestiti extends MY_Controller {
 		$this->session->unset_userdata('nuovop');
 		
 		if ($id_prestito=$this->prestiti_model->insertPrestito($prestito)) { // $ ins è id prestito appena inserito
+			// update disponibilità libro=0
+			$this->libri_model->toggleDisp($prestito['id_libro'],0);
 			$this->session->set_userdata('insertprestito',1);
 			log_message("debug", "Inserito prestito con id #".$id_prestito.". Utente con id #".$id_utente.". (prestiti/nuovo)", LOGPREFIX);
 		}else{
 			$this->session->set_userdata('noinsertprestito',1);
 			log_message("error", "Errore nell'inserimento prestito libro con id #".$prestito['id_libro'].". Utente con id #".$id_utente.". (prestiti/nuovo)", LOGPREFIX);
 		}
-		redirect ('prestiti/nuovo');
+		redirect ('prestiti/scheda/'.$id_prestito);
 		
 	}
 	
 	public function reso() {
 		
-		if (!$this->checkLevel(1)){ // controllo se loggato
+		if (!$this->checkLevel(0)){ // controllo se loggato
 			redirect('login');
 		}
 		
@@ -115,10 +117,9 @@ class Prestiti extends MY_Controller {
 	
 	public function elenco() {
 		
-		if (!$this->checkLevel(1)){ // controllo se loggato
+		if (!$this->checkLevel(0)){ // controllo se loggato
 			redirect('login');
 		}
-		
 		
 		$prestiti=$this->prestiti_model->elencoPrestiti();
 		$this->load->library('dates');
@@ -129,13 +130,13 @@ class Prestiti extends MY_Controller {
 				$prestito=explode(" ",$val->data_prestito);
 				$prestito=$prestito[0];
 				$prestiti[$key]->diff_prestito=$this->dates->dateDifference($adesso,$prestito);
-				$prestiti[$key]->data_prestito=$this->dates->convertDateTime($val->data_prestito);
+				$prestiti[$key]->data_prestito=$this->dates->convertDateTime($val->data_prestito,1);
 			}			
 			if (null != $val->data_reso) {
 				$reso=explode(" ",$val->data_reso);
 				$reso=$reso[0];
 				$prestiti[$key]->diff_reso=$this->dates->dateDifference($adesso,$reso);
-				$prestiti[$key]->data_reso=$this->dates->convertDateTime($val->data_reso);				
+				$prestiti[$key]->data_reso=$this->dates->convertDateTime($val->data_reso,1);				
 			}
 		}
 		$data['utente']=$this->session->utente;
@@ -150,6 +151,39 @@ class Prestiti extends MY_Controller {
 		$this->load->view('templates/close');
 		
 		$this->session->unset_userdata('idlibro');
+	}
+	
+	public function scheda($id) {
+		
+		if (!$this->checkLevel(0)){ // controllo se loggato
+			redirect('login');
+		}
+		if (empty($id)) redirect('prestiti/elenco'); // se $id non esiste torno a elenco
+		
+		$this->load->library('dates');
+				
+		// info prestito
+		$prestito=$this->prestiti_model->getPrestito($id);
+		
+		// gestione date
+		$prestito->data_prestito=$this->dates->convertDateTime($prestito->data_prestito);
+		$prestito->data_reso ? $prestito->data_reso=$this->dates->convertDateTime($prestito->data_reso) : $prestito->data_reso="";
+		
+		$data['prestito']=$prestito;
+
+		// info menu
+		$data['utente']=$this->session->utente;
+		
+		$this->load->view('templates/header');
+		$this->load->view('templates/menu',$data);
+		$this->load->view('prestiti/scheda',$data);
+		$this->load->view('templates/footer');
+		// altri js
+		//$this->load->view('prestiti/js_scheda',$data);
+		$this->load->view('templates/close');
+		
+		$this->session->unset_userdata('idlibro');
+		
 	}
 	
 }

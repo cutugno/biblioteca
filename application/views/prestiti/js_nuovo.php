@@ -8,8 +8,6 @@
 	validaPrestito("#schedaprestito");
 	
 	$(document).ready(function() {
-		var dati=$("#schedaprestito").serialize();
-		alert(dati);
 		<?php if ($this->session->insertprestito==1) :?>
 		swal({title:"", text:"Prestito inserito", timer:1500, showConfirmButton:false, type: "success"});
 		<?php endif ?>

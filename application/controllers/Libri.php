@@ -5,7 +5,7 @@ class Libri extends MY_Controller {
 
 	public function nuovo()	{
 		
-		if (!$this->checkLevel(1)){ // controllo se non loggato
+		if (!$this->checkLevel(0)){ // controllo se non loggato
 			redirect('login');
 		}
 		
@@ -45,7 +45,7 @@ class Libri extends MY_Controller {
 	
 	public function insert() {
 		
-		if (!$this->checkLevel(1)){ // controllo se non loggato
+		if (!$this->checkLevel(0)){ // controllo se non loggato
 			redirect('login');
 		}
 		
@@ -53,7 +53,7 @@ class Libri extends MY_Controller {
 		$this->session->unset_userdata('nuovo');
 		if ($libro=$this->libri_model->insertLibro($nuovo)){
 			log_message("info", "Libro inserito con id #".$libro.". Utente id #".$this->session->utente->id.". (libri/insert)", LOGPREFIX);
-			$this->session->set_userdata('prestitiinsertlibro',1);
+			$this->session->set_userdata('insertlibro',1);
 		}else{
 			log_message("error", "Errore inserimento libro. Utente id #".$this->session->utente->id.". (libri/insert)", LOGPREFIX);
 			$this->session->set_userdata('noinsertlibro',1);
@@ -65,19 +65,15 @@ class Libri extends MY_Controller {
 	
 	public function elenco() {
 		
-		if (!$this->checkLevel(1)){ // controllo se non loggato
-			redirect('login');
+		if (!$this->checkLevel(0)){ // solo qui e in scheda libro, se utente non loggato entro lo stesso con livello = 0		
+			$utente = new stdClass();
+			$utente->livello=0;
+			$this->session->set_userdata('utente',$utente);
 		}
 		
 		$data['utente']=$this->session->utente;
 		$data['libri']=$this->libri_model->elencoLibri();
-		// info prestiti
-		foreach ($data['libri'] as $key=>$val) {
-			$id=$val->id;	
-			$prestato=$this->prestiti_model->checkPrestito($id);
-			$data['libri'][$key]->disp=$prestato ? 0 : 1;
-		}
-
+		
 		$this->load->view('templates/header');
 		$this->load->view('templates/menu',$data);
 		$this->load->view('libri/elenco',$data);
@@ -94,12 +90,15 @@ class Libri extends MY_Controller {
 	
 	public function scheda($id) {
 		
-		if (!$this->checkLevel(1)){ // controllo se non loggato
-			redirect('login');
-		}
+		if (!$this->checkLevel(0)){
+			$utente = new stdClass();
+			$utente->livello=0;
+			$this->session->set_userdata('utente',$utente);
+		}		
+		
 		if (empty($id)) redirect('libri/elenco'); // se $id non esiste torno a elenco
 		
-		$this->session->set_userdata('idlibro',$id);
+		$this->session->set_userdata('idlibro',$id); // mi serve se da qui passo alla scheda prestito
 		
 		$this->load->library('form_validation');
 	
@@ -110,21 +109,26 @@ class Libri extends MY_Controller {
 			redirect ("libri/update");
 		}
 
+		$this->load->library('dates');
+		
 		// info libro
 		$libro=$this->libri_model->getLibro($id);
 		$data['libro']=$libro;
 		$data['select_local']=$this->select_model->selectItems("localizzazioni");
 		$data['select_tipidoc']=$this->select_model->selectItems("tipidocumento");
 		$data['select_generi']=$this->select_model->selectItems("generi");
+		
 		// info prestito
-		if ($disp=$this->prestiti_model->checkPrestito($id)) {
-			$prestito="";			
-		}else{
-			// non disponibile
-			$prestito=$this->prestiti_model->getPrestito($id);
+		$prestito=$this->prestiti_model->getPrestitoByIdlibro ($id);
+		
+		// gestione date
+		if ($prestito) {
+			$prestito->data_prestito=$this->dates->convertDateTime($prestito->data_prestito,1);
+			$prestito->data_reso ? $prestito->data_reso=$this->dates->convertDateTime($prestito->data_reso,1) : $prestito->data_reso="";
 		}
-		$data['disp']=$disp;
+		
 		$data['prestito']=$prestito;
+		
 		// info menu
 		$data['utente']=$this->session->utente;
 		
@@ -143,7 +147,7 @@ class Libri extends MY_Controller {
 	
 	public function update() {
 		
-		if (!$this->checkLevel(1)){ // controllo se non loggato
+		if (!$this->checkLevel(0)){ // controllo se non loggato
 			redirect('login');
 		}
 		
@@ -164,7 +168,7 @@ class Libri extends MY_Controller {
 	
 	public function delete($id) {
 		
-		if (!$this->checkLevel(1)){ // controllo se non loggato
+		if (!$this->checkLevel(0)){ // controllo se non loggato
 			redirect('login');
 		}
 		if (empty($id)) redirect('libri/elenco'); // se $id non esiste torno a elenco
@@ -181,7 +185,7 @@ class Libri extends MY_Controller {
 		
 	public function ajaxFetch() {
 		
-		if (!$this->checkLevel(1)){ // controllo se loggato
+		if (!$this->checkLevel(0)){ // controllo se loggato
 			redirect('login');
 		}
 		if (empty($this->input->post())) return false;
