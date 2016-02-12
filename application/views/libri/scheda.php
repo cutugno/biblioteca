@@ -1,5 +1,9 @@
 <div class="container">
+	<?php if ($this->session->fromsearch) : ?>
+	<a href="<?php echo site_url('search'); ?>" class="btn btn-link pull-right">Torna ai risultati</a>
+	<?php else : ?>
 	<a href="<?php echo site_url('libri/elenco'); ?>" class="btn btn-link pull-right">Torna all'elenco</a>
+	<?php endif ?>
 	<h1><?php echo $libro->titolo; ?></h1>
 	<div class="row">
 		<div class="col-md-9">

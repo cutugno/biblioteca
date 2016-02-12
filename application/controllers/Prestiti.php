@@ -131,25 +131,31 @@ class Prestiti extends MY_Controller {
 			redirect('login');
 		}		
 		
-		$prestiti=$this->prestiti_model->elencoPrestiti();
-		$this->load->library('dates');
-		foreach ($prestiti as $key=>$val){
-			// gestione date e giorni passati
-			$adesso=date("Y-m-d", time());
-			if (null != $val->data_prestito) {
-				$prestito=explode(" ",$val->data_prestito);
-				$prestito=$prestito[0];
-				$prestiti[$key]->diff_prestito=$this->dates->dateDifference($adesso,$prestito);
-				$prestiti[$key]->data_prestito=$this->dates->convertDateTime($val->data_prestito,1);
-			}			
-			if (null != $val->data_reso) {
-				$reso=explode(" ",$val->data_reso);
-				$reso=$reso[0];
-				$prestiti[$key]->diff_reso=$this->dates->dateDifference($adesso,$reso);
-				$prestiti[$key]->data_reso=$this->dates->convertDateTime($val->data_reso,1);				
-			}
-		}
 		$data['utente']=$this->session->utente;
+		
+		$prestiti=$this->prestiti_model->elencoPrestiti();
+		if ($prestiti) {
+			$this->load->library('dates');
+			foreach ($prestiti as $key=>$val){
+				// gestione date e giorni passati
+				$adesso=date("Y-m-d", time());
+				if (null != $val->data_prestito) {
+					$prestito=explode(" ",$val->data_prestito);
+					$prestito=$prestito[0];
+					$prestiti[$key]->diff_prestito=$this->dates->dateDifference($adesso,$prestito);
+					$prestiti[$key]->data_prestito=$this->dates->convertDateTime($val->data_prestito,1);
+				}			
+				if (null != $val->data_reso) {
+					$reso=explode(" ",$val->data_reso);
+					$reso=$reso[0];
+					$prestiti[$key]->diff_reso=$this->dates->dateDifference($adesso,$reso);
+					$prestiti[$key]->data_reso=$this->dates->convertDateTime($val->data_reso,1);				
+				}
+			}
+		}else{
+			$prestiti="";
+		}
+		
 		$data['prestiti']=$prestiti;
 		
 		$this->load->view('templates/header');

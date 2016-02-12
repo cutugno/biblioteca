@@ -67,7 +67,7 @@ class Libri extends MY_Controller {
 	
 	public function elenco() {
 		
-		if (!$this->checkLevel(0)){ // solo qui e in scheda libro, se utente non loggato entro lo stesso con livello = 0		
+		if (!$this->checkLevel(0)){ // se utente non loggato entro lo stesso con livello = 0		
 			$utente = new stdClass();
 			$utente->livello=0;
 			$this->session->set_userdata('utente',$utente);
@@ -76,7 +76,8 @@ class Libri extends MY_Controller {
 		$this->session->set_userdata('dopo',current_url()); 
 		
 		$data['utente']=$this->session->utente;
-		$data['libri']=$this->libri_model->elencoLibri();
+		$libri=$this->libri_model->elencoLibri();
+		$libri ? $data['libri']=$libri : $data['libri']="";
 		
 		$this->load->view('templates/header');
 		$this->load->view('templates/menu',$data);

@@ -102,7 +102,6 @@ $config = array(
 	),
 	'prestito' => array(
 			array(
-
 					'field'  => 'id_libro',
 					'label'  => 'Inventario',
 					'rules'  => 'required',
@@ -118,5 +117,17 @@ $config = array(
                          'required' => '%s obbligatorio'
 					)
 			)
+	),
+	// tipi ricerca
+	'semplice' => array(
+			array(
+					'field'  => 'keyword',
+					'label'  => 'Cerca',
+					'rules'  => 'required',
+					'errors' => array(
+                         'required' => '%s qualcosa!'
+					)
+			)
 	)
+		
 );

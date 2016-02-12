@@ -1,7 +1,9 @@
 <div class="container">
-	<h1>Elenco libri</h1>
+	<a href="<?php echo site_url('homepage'); ?>" class="btn btn-link pull-right">Nuova ricerca</a>
+	<h1>Risultati ricerca</h1>
+	<!-- <h5>Tipo ricerca: </h5> -->
 	<div class="row">
-	  <?php if (!empty($libri)) : ?> 	
+	  <?php if (!empty($risultati)) : ?> 
 	  <div class="col-xs-12 pagin text-left">
 		<form>
 			<img src="<?php echo site_url('images/icons/first.png'); ?>" class="first"/>
@@ -33,7 +35,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<?php foreach ($libri as $val): ?>
+					<?php foreach ($risultati as $val): ?>
 					<tr>
 						<td><?php echo strtoupper($val->inventario); ?></td>
 						<td><?php echo $val->titolo; ?></td>
@@ -67,7 +69,7 @@
 		</form>
 	  </div>
 	  <?php else : ?>
-	  <div class="col-xs-12">Nessun libro presente</div>
+	  <div class="col-xs-12">Nessun risultato</div>
 	  <?php endif ?>
 	</div>
 </div>

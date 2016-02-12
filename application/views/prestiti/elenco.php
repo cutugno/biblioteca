@@ -1,6 +1,7 @@
 <div class="container">
 	<h1>Elenco Prestiti</h1>
 	<div class="row">
+		 <?php if (!empty($prestiti)) : ?> 	
 		<div class="col-xs-12 pagin text-left">
 		<form>
 			<img src="<?php echo site_url('images/icons/first.png'); ?>" class="first"/>
@@ -56,5 +57,8 @@
 				<option value="50">50</option>
 			</select>
 		</form>
+		<?php else : ?>
+	    <div class="col-xs-12">Nessun prestito presente</div>
+	    <?php endif ?>
 	</div>
 </div>

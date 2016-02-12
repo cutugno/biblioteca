@@ -38,12 +38,30 @@
 			
 		}
 		
-		public function elencoLibri () {  // migliorare con join su prestiti
+		public function elencoLibri () { 
 				
 			$query=$this->db->select('libri.*,localizzazioni.nome as localizzazione,generi.nome as genere')
 				->join('localizzazioni','libri.id_localizzazione=localizzazioni.id')
 				->join('generi','libri.id_genere=generi.id')
 				->order_by('inventario')
+				->get('libri');
+				
+			if ($query->num_rows()>0){
+				return $query->result();
+			}else{
+				return FALSE;
+			}
+			
+		}
+		
+		public function searchLibriSemplice ($keyword) {
+			
+			$query=$this->db->select('libri.*,localizzazioni.nome as localizzazione,generi.nome as genere')
+				->select("MATCH(libri.keywords) AGAINST ('$keyword') as attinenza","")
+				->join('localizzazioni','libri.id_localizzazione=localizzazioni.id')
+				->join('generi','libri.id_genere=generi.id')
+				->where("MATCH(libri.keywords) AGAINST ('$keyword')")
+				->order_by('attinenza','DESC')
 				->get('libri');
 				
 			if ($query->num_rows()>0){

@@ -14,6 +14,15 @@ class Homepage extends MY_Controller {
 		
 		$this->session->set_userdata('dopo',current_url());
 		
+		$this->load->library('form_validation');
+	
+		$this->form_validation->set_error_delimiters('<label class="text-danger">', '</label>');
+				
+		if ($this->form_validation->run($this->input->post('type')) !== FALSE) {
+			$this->session->set_userdata('search',$this->input->post());
+			redirect ("search");
+		}
+		
 		$data['utente']=$utente;		
 		
 		$this->load->view('templates/header');
@@ -22,6 +31,10 @@ class Homepage extends MY_Controller {
 		$this->load->view('templates/footer');
 		// altri js
 		$this->load->view('templates/close');
+		
+		$this->session->unset_userdata('idlibro');
+		$this->session->unset_userdata('fromsearch');
 	}
+	
 	
 }

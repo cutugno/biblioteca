@@ -7,7 +7,7 @@
 			<div class="col-xs-12">
 				<?php 
 					$attr=array("class"=>"form-inline", "id"=>"searchlibro");
-					echo form_open("search",$attr);
+					echo form_open("homepage",$attr);
 				?>
 				  <div class="form-group col-xs-10">
 					<?php
@@ -17,10 +17,12 @@
 				  </div>
 				  <div class="col-xs-2">
 					<?php
+						echo form_hidden('type', 'semplice');
 						$attr=array("type"=>"submit","class"=>"btn btn-primary btn-lg", "id"=>"btn_searchlibro", "content"=>"CERCA");
 						echo form_button($attr);
 					?>
 				  </div>
+				  <div class="col-xs-12"><?php echo form_error('keyword'); ?></div>
 				<?php echo form_close(); ?>
 			</div>
 		</div>
