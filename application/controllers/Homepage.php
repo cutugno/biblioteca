@@ -10,6 +10,7 @@ class Homepage extends MY_Controller {
 		}else{
 			$utente = new stdClass();
 			$utente->livello=0;
+			$this->session->utente=$utente;
 		}
 		
 		$this->session->set_userdata('dopo',current_url());
@@ -41,6 +42,7 @@ class Homepage extends MY_Controller {
 		$this->load->view('homepage/index');
 		$this->load->view('templates/footer');
 		// altri js
+		$this->load->view('homepage/js_index');
 		$this->load->view('templates/close');
 		
 		$this->session->unset_userdata('idlibro');

@@ -43,10 +43,14 @@ i.fa.fa-circle.danger {
     }
 }
 
+.nav-tabs {
+	border-bottom: 0px !important;
+}
+
 .searchjumbo {
 	border-radius: 0 !important;
 	border: 1px solid #ddd;
-	border-top: none;
+	
 	background-color: #fff;
 }
 
