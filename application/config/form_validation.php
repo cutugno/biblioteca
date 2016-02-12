@@ -119,13 +119,23 @@ $config = array(
 			)
 	),
 	// tipi ricerca
-	'semplice' => array(
+	'csemplice' => array(
 			array(
 					'field'  => 'keyword',
 					'label'  => 'Cerca',
 					'rules'  => 'required',
 					'errors' => array(
                          'required' => '%s qualcosa!'
+					)
+			)
+	),
+	'cprestito' => array(
+			array(
+					'field'  => 'codice',
+					'label'  => 'Codice',
+					'rules'  => 'required',
+					'errors' => array(
+                         'required' => '%s obbligatorio'
 					)
 			)
 	)

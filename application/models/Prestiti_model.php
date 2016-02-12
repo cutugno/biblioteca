@@ -105,6 +105,21 @@
 			return $this->db->affected_rows()>0;
 			
 		}
+		
+		public function getPrestitoByCodice($codice) {
+					
+			$query=$this->db->select('prestiti.*,libri.inventario, libri.autore, libri.titolo, libri.isbn, libri.disp, utenti.nome as utente, utenti.email, utenti.classe')
+				->join('libri','prestiti.id_libro=libri.id')
+				->join('utenti','prestiti.id_utente=utenti.id')
+				->where('prestiti.codice',$codice)
+				->get('prestiti');
+			
+			if ($query->num_rows()>0) {
+				return $query->row();
+			}
+			return FALSE;
+			
+		}
 			
 	}
 	

@@ -23,7 +23,18 @@ class Homepage extends MY_Controller {
 			redirect ("search");
 		}
 		
-		$data['utente']=$utente;		
+		$data['utente']=$utente;	
+		
+		// controllo tab attivo all'ingresso
+		$data['activelibro']=$data['activeprestito']="";
+		switch ($this->input->post('type')) {
+			case "cprestito":
+				$data['activeprestito']="active ";
+				break;
+			default:
+				$data['activelibro']="active ";
+				break;
+		}
 		
 		$this->load->view('templates/header');
 		$this->load->view('templates/menu',$data);
