@@ -5,12 +5,10 @@ class Homepage extends MY_Controller {
 	
 	public function index()	{
 		
-		if ($this->checkLevel(0)){ // controllo se loggato
-			$utente=$this->session->utente;
-		}else{
+		if (!$this->checkLevel(0)){ // controllo se loggato
 			$utente = new stdClass();
 			$utente->livello=0;
-			$this->session->utente=$utente;
+			$this->session->set_userdata('utente',$utente);
 		}
 		
 		$this->session->set_userdata('dopo',current_url());
@@ -24,7 +22,7 @@ class Homepage extends MY_Controller {
 			redirect ("search");
 		}
 		
-		$data['utente']=$utente;	
+		$data['utente']=$this->session->utente;	
 		
 		// controllo tab attivo all'ingresso
 		$data['activelibro']=$data['activeprestito']="";

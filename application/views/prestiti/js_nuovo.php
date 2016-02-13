@@ -10,7 +10,7 @@
 	$(document).ready(function() {
 		
 		// input mask
-	    $("#inventario").mask("aa-9999");
+	    $("#inventario").mask("aa9999");
 		
 		$("#inventario").focusin(function(){
 			$(this).siblings(".text-danger").hide();

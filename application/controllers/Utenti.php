@@ -5,6 +5,8 @@ class Utenti extends MY_Controller {
 
 	public function ajaxFetch() {
 		
+		/* recupero elenco utenti per autocomplete nella scheda nuovo prestito */
+		
 		if (!$this->checkLevel(0)){ // controllo se loggato
 			redirect('login');
 		}
@@ -20,6 +22,8 @@ class Utenti extends MY_Controller {
 	}
 	
 	public function ajaxFetchSingolo() {
+		
+		/* recupero dati dell'utente il cui nome è stato appena selezionato nell'autocomplete nella scheda nuovo prestito */
 		
 		if (!$this->checkLevel(0)){ // controllo se loggato
 			redirect('login');

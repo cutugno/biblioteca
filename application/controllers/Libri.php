@@ -7,7 +7,7 @@ class Libri extends MY_Controller {
 		
 		$this->session->set_userdata('dopo',current_url());
 		
-		if (!$this->checkLevel(0)){ // controllo se non loggato
+		if (!$this->checkLevel(1)){ // controllo se non loggato
 			redirect('login');
 		}
 				
@@ -47,7 +47,7 @@ class Libri extends MY_Controller {
 	
 	public function insert() {
 		
-		if (!$this->checkLevel(0)){ // controllo se non loggato
+		if (!$this->checkLevel(1)){ // controllo se non loggato
 			redirect('login');
 		}
 		
@@ -155,7 +155,7 @@ class Libri extends MY_Controller {
 	
 	public function update() {
 		
-		if (!$this->checkLevel(0)){ // controllo se non loggato
+		if (!$this->checkLevel(1)){ // controllo se non loggato
 			redirect('login');
 		}
 		
@@ -176,7 +176,7 @@ class Libri extends MY_Controller {
 	
 	public function delete($id) {
 		
-		if (!$this->checkLevel(0)){ // controllo se non loggato
+		if (!$this->checkLevel(1)){ // controllo se non loggato
 			redirect('login');
 		}
 		if (empty($id)) redirect('libri/elenco'); // se $id non esiste torno a elenco
@@ -193,6 +193,8 @@ class Libri extends MY_Controller {
 		
 	public function ajaxFetch() {
 		
+		/* recupero dati del libro il cui inventario è stato appena digitato nella scheda nuovo prestito */
+		
 		if (!$this->checkLevel(0)){ // controllo se loggato
 			redirect('login');
 		}
@@ -202,13 +204,13 @@ class Libri extends MY_Controller {
 		
 		$inv=$this->input->post('inventario');
 		if ($libro=$this->libri_model->getLibroByInv($inv)){
-			if (!$disp=$this->prestiti_model->checkPrestito($libro->id)) {
-				echo json_encode($libro);
+			if ($libro->disp==1) {
+				echo json_encode($libro); // libro disponibile
 			}else{
-				echo "no";
+				echo "no"; // non disponibile
 			}
 		}else{
-			echo "false";
+			echo "false"; // inventario inesistente
 		}
 		
 	}

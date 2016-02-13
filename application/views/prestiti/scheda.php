@@ -21,7 +21,7 @@
 			<div class="spacer-25"></div>
 			<div class="row">
 				<div class="col-xs-12">
-					<p class="lead">Info libro</p>
+					<p class="lead" style="display:inline">Info libro</p>					
 				</div>
 			</div>
 			<div class="row">
@@ -44,6 +44,11 @@
 					<p><?php echo $prestito->titolo; ?></p>
 				</div>
 			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<!-- <a href="#" class="btn btn-xs btn-primary">SCHEDA LIBRO</a> -->
+				</div>
+			</div>
 			<div class="spacer-25"></div>
 			<div class="row">
 				<div class="col-xs-12">
@@ -63,7 +68,12 @@
 					<label>Email</label> 
 					<p><?php echo $prestito->email ?></p>
 				</div>
-			</div>		
+			</div>	
+			<div class="row">
+				<div class="col-xs-12">
+					<!-- <a href="#" class="btn btn-xs btn-primary">CONTATTA UTENTE</a> -->
+				</div>
+			</div>	
 		</div>
 		<div class="col-md-3">
 			<div class="row">
