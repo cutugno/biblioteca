@@ -45,6 +45,7 @@ class Homepage extends MY_Controller {
 		
 		$this->session->unset_userdata('idlibro');
 		$this->session->unset_userdata('fromsearch');
+		$this->session->unset_userdata('nocons');
 	}
 	
 	

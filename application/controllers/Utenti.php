@@ -7,9 +7,13 @@ class Utenti extends MY_Controller {
 		
 		/* recupero elenco utenti per autocomplete nella scheda nuovo prestito */
 		
+		/*
 		if (!$this->checkLevel(0)){ // controllo se loggato
+			$this->session->set_userdata('nocons',1);
 			redirect('login');
 		}
+		*/
+		 
 		if (empty($this->input->get())) redirect('homepage');
 		
 		$this->output->enable_profiler(FALSE);
@@ -25,9 +29,13 @@ class Utenti extends MY_Controller {
 		
 		/* recupero dati dell'utente il cui nome è stato appena selezionato nell'autocomplete nella scheda nuovo prestito */
 		
+		/*
 		if (!$this->checkLevel(0)){ // controllo se loggato
+			$this->session->set_userdata('nocons',1);
 			redirect('login');
 		}
+		*/
+		
 		if (empty($this->input->post())) redirect('homepage');
 		
 		$this->output->enable_profiler(FALSE);

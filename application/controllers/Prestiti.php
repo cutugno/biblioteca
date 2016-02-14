@@ -8,6 +8,7 @@ class Prestiti extends MY_Controller {
 		$this->session->set_userdata('dopo',current_url());
 		
 		if (!$this->checkLevel(0)){ // controllo se loggato
+			$this->session->set_userdata('nocons',1);
 			redirect('login');
 		}
 					
@@ -79,8 +80,11 @@ class Prestiti extends MY_Controller {
 	public function insertP() {
 		
 		if (!$this->checkLevel(0)){ // controllo se non loggato
+			$this->session->set_userdata('nocons',1);
 			redirect('login');
 		}
+		
+		if (!$this->session->nuovop) redirect('homepage');
 		
 		$prestito=$this->session->nuovop;
 		$this->session->unset_userdata('nuovop');
@@ -101,6 +105,7 @@ class Prestiti extends MY_Controller {
 	public function reso($id) {
 		
 		if (!$this->checkLevel(0)){ // controllo se loggato
+			$this->session->set_userdata('nocons',1);
 			redirect('login');
 		}
 		
@@ -128,6 +133,7 @@ class Prestiti extends MY_Controller {
 		$this->session->set_userdata('dopo',current_url());
 	
 		if (!$this->checkLevel(0)){ // controllo se loggato
+			$this->session->set_userdata('nocons',1);
 			redirect('login');
 		}		
 		
@@ -177,6 +183,7 @@ class Prestiti extends MY_Controller {
 		$this->session->set_userdata('dopo',current_url()); 
 		
 		if (!$this->checkLevel(0)){ // controllo se loggato
+			$this->session->set_userdata('nocons',1);
 			redirect('login');
 		}
 		if (empty($id)) redirect('prestiti/elenco'); // se $id non esiste torno a elenco	

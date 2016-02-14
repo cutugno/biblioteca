@@ -8,6 +8,7 @@ class Libri extends MY_Controller {
 		$this->session->set_userdata('dopo',current_url());
 		
 		if (!$this->checkLevel(1)){ // controllo se non loggato
+			$this->session->set_userdata('nocons',1);
 			redirect('login');
 		}
 				
@@ -48,8 +49,11 @@ class Libri extends MY_Controller {
 	public function insert() {
 		
 		if (!$this->checkLevel(1)){ // controllo se non loggato
+			$this->session->set_userdata('nocons',1);
 			redirect('login');
 		}
+		
+		if (!$this->session->nuovo) redirect ('homepage');
 		
 		$nuovo=$this->session->nuovo;
 		$this->session->unset_userdata('nuovo');
@@ -156,8 +160,11 @@ class Libri extends MY_Controller {
 	public function update() {
 		
 		if (!$this->checkLevel(1)){ // controllo se non loggato
+			$this->session->set_userdata('nocons',1);
 			redirect('login');
 		}
+		
+		if (!$this->session->aggiornamento) redirect ('homepage');
 		
 		$aggiornamento=$this->session->aggiornamento;
 		$this->session->unset_userdata('aggiornamento');
@@ -177,6 +184,7 @@ class Libri extends MY_Controller {
 	public function delete($id) {
 		
 		if (!$this->checkLevel(1)){ // controllo se non loggato
+			$this->session->set_userdata('nocons',1);
 			redirect('login');
 		}
 		if (empty($id)) redirect('libri/elenco'); // se $id non esiste torno a elenco
@@ -195,9 +203,13 @@ class Libri extends MY_Controller {
 		
 		/* recupero dati del libro il cui inventario è stato appena digitato nella scheda nuovo prestito */
 		
+		/*
 		if (!$this->checkLevel(0)){ // controllo se loggato
+			$this->session->set_userdata('nocons',1);
 			redirect('login');
 		}
+		*/
+		 
 		if (empty($this->input->post())) return false;
 		
 		$this->output->enable_profiler(FALSE);
