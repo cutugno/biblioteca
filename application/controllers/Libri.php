@@ -59,7 +59,7 @@ class Libri extends MY_Controller {
 		$nuovo=$this->session->nuovo;
 		$this->session->unset_userdata('nuovo');
 		if ($libro=$this->libri_model->insertLibro($nuovo)){
-			log_message("info", "Libro inserito con id #".$libro.". Utente id #".$this->session->utente->id.". (libri/insert)", LOGPREFIX);
+			log_message("debug", "Libro inserito con id #".$libro.". Utente id #".$this->session->utente->id.". (libri/insert)", LOGPREFIX);
 			$this->session->set_userdata('insertlibro',1);
 		}else{
 			log_message("error", "Errore inserimento libro. Utente id #".$this->session->utente->id.". (libri/insert)", LOGPREFIX);
@@ -172,7 +172,7 @@ class Libri extends MY_Controller {
 		$this->session->unset_userdata('aggiornamento');
 
 		if ($libro=$this->libri_model->updateLibro($aggiornamento)){
-			log_message("info", "Aggiornato libro con id #".$aggiornamento['id'].". Utente id #".$this->session->utente->id.". (libri/update)", LOGPREFIX);
+			log_message("debug", "Aggiornato libro con id #".$aggiornamento['id'].". Utente id #".$this->session->utente->id.". (libri/update)", LOGPREFIX);
 			$this->session->set_userdata('updatelibro',1);
 		}else{
 			log_message("error", "Errore aggiornamento libro con id #".$aggiornamento['id'].". Utente id #".$this->session->utente->id.". (libri/update)", LOGPREFIX);
@@ -192,7 +192,7 @@ class Libri extends MY_Controller {
 		if (empty($id)) redirect('libri/elenco'); // se $id non esiste torno a elenco
 		
 		if ($elimina=$this->libri_model->eliminaLibro($id)){
-			log_message("info", "Eliminato libro con id #".$id.". Utente id #".$this->session->utente->id.". (libri/delete)", LOGPREFIX);
+			log_message("debug", "Eliminato libro con id #".$id.". Utente id #".$this->session->utente->id.". (libri/delete)", LOGPREFIX);
 			$this->session->set_userdata('eliminalibro',1);
 		}else{
 			log_message("error", "Errore eliminazione libro con id #".$id.". Utente id #".$this->session->utente->id.". (libri/delete)", LOGPREFIX);

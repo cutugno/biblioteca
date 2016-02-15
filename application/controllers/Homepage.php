@@ -19,6 +19,7 @@ class Homepage extends MY_Controller {
 				
 		if ($this->form_validation->run($this->input->post('type')) !== FALSE) {
 			$this->session->set_userdata('search',$this->input->post());
+			log_message("info", "Effettuata ricerca. Criteri: ".json_encode($this->input->post()).". (search/index)", LOGPREFIX); 
 			redirect ("search");
 		}
 		

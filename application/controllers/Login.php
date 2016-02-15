@@ -40,7 +40,7 @@ class Login extends MY_Controller {
 					$this->input->set_cookie('ci_session', $cookie, '157680000'); 
 					$logmsg.=" Settato cookie persistente.";
 				}
-				log_message("info", $logmsg." (login/index)", LOGPREFIX);
+				log_message("debug", $logmsg." (login/index)", LOGPREFIX);
 				redirect ($this->session->dopo);
 			}else{
 				log_message("error", "Login errato. Username ".$this->input->post("username").". (login/index)", LOGPREFIX);
@@ -65,7 +65,7 @@ class Login extends MY_Controller {
 			redirect ('homepage');
 		}
 		
-		log_message("info","Logout effettuato. Utente id #".$this->session->utente->id.". (login/logout)", LOGPREFIX);		
+		log_message("debug","Logout effettuato. Utente id #".$this->session->utente->id.". (login/logout)", LOGPREFIX);		
 		$this->session->sess_destroy();		
 		
 		redirect('homepage');
