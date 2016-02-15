@@ -16,6 +16,22 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `argomenti`
+--
+
+DROP TABLE IF EXISTS `argomenti`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `argomenti` (
+  `id` tinyint(4) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) NOT NULL,
+  `cod` varchar(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `ci_sessions`
 --
 
@@ -30,22 +46,6 @@ CREATE TABLE `ci_sessions` (
   PRIMARY KEY (`id`),
   KEY `ci_sessions_timestamp` (`timestamp`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `generi`
---
-
-DROP TABLE IF EXISTS `generi`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `generi` (
-  `id` tinyint(4) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`),
-  UNIQUE KEY `genere_UNIQUE` (`nome`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,7 +68,7 @@ CREATE TABLE `libri` (
   `anno` varchar(4) DEFAULT NULL,
   `note` longtext,
   `isbn` varchar(20) DEFAULT NULL,
-  `id_genere` tinyint(1) DEFAULT NULL,
+  `id_argomento` tinyint(1) DEFAULT NULL,
   `cdd` varchar(20) DEFAULT NULL,
   `descrizione_cdd` varchar(100) DEFAULT NULL,
   `curatore` varchar(100) DEFAULT NULL,
@@ -95,10 +95,10 @@ DELIMITER ;;
 BEFORE INSERT
 ON libri FOR EACH ROW
 BEGIN
-SET @genere=(SELECT nome FROM generi WHERE id=NEW.id_genere);
+SET @argomento=(SELECT nome FROM argomenti WHERE id=NEW.id_argomento);
 SET @localiz=(SELECT nome FROM localizzazioni WHERE id=NEW.id_localizzazione);
 SET @tipodoc=(SELECT nome FROM tipidocumento WHERE id=NEW.id_tipodoc);
-SET NEW.keywords = CONCAT(stripSpeciaChars(NEW.autore),' ',stripSpeciaChars(NEW.titolo),' ',stripSpeciaChars(NEW.editore),' ',stripSpeciaChars(NEW.curatore),' ',stripSpeciaChars(NEW.traduttore),' ',NEW.inventario,' ',NEW.isbn,' ',NEW.cdd,' ',@genere,' ',@localiz,' ',@tipodoc);
+SET NEW.keywords = CONCAT(stripSpeciaChars(NEW.autore),' ',stripSpeciaChars(NEW.titolo),' ',stripSpeciaChars(NEW.editore),' ',stripSpeciaChars(NEW.curatore),' ',stripSpeciaChars(NEW.traduttore),' ',NEW.inventario,' ',NEW.isbn,' ',NEW.cdd,' ',@argomento,' ',@localiz,' ',@tipodoc);
 END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -120,7 +120,7 @@ CREATE TABLE `livelli` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `livello_UNIQUE` (`livello`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -160,7 +160,7 @@ CREATE TABLE `prestiti` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `codice_UNIQUE` (`codice`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -218,7 +218,7 @@ CREATE TABLE `utenti` (
   `last_login` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -230,4 +230,4 @@ CREATE TABLE `utenti` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-02-12 17:36:53
+-- Dump completed on 2016-02-15 14:04:11
