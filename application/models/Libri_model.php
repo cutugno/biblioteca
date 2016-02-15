@@ -113,6 +113,31 @@
 			return $this->db->affected_rows()>0;
 	
 		}
+		
+		public function getLocalizzazioneInfo ($id_local) {
+						
+			$res = new stdClass();
+			
+			$query=$this->db->select('count(*) as quantita')
+				->where('id_localizzazione',$id_local)
+				->get('libri');
+				
+			if ($query->num_rows()>0){
+				$res->quantita=$query->row()->quantita;
+			}else{
+				return FALSE;
+			}				
+			$query=$this->db->select('pref_inventario')
+				->where('id',$id_local)
+				->get('localizzazioni');
+			if ($query->num_rows()>0){
+				$res->prefisso=$query->row()->pref_inventario;
+			}else{
+				return FALSE;
+			}	
+				
+			return $res;
+		}
 			
 	}
 	

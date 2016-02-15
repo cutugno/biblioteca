@@ -25,6 +25,17 @@
 
 	});
 	
+	$("#id_localizzazione").change(function(){		
+		$("#preload_loc").show();
+		local=$(this).val();
+		data="id_local="+local;
+		url="<?php echo site_url('libri/ajaxFetchInventario'); ?>";
+		$.post(url,data,function(msg) {	
+			$("#preload_loc").hide();
+			$("#inventario").val(msg);
+		});
+	});
+	
 </script>
 	
 

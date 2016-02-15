@@ -3,6 +3,9 @@
 function validaLibro (form){
 	$(form).validate({
 		rules: {
+			id_localizzazione: {
+				required: true
+			},
 			inventario: {
 				required: true
 			},
@@ -45,6 +48,9 @@ function validaLibro (form){
 			
 		},
 		messages: {
+			id_localizzazione: {
+				required: "Localizzazione obbligatoria"
+			},
 			inventario: {
 				required: "Inventario obbligatorio"
 			},

@@ -4,6 +4,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $config = array(
 	'libro' => array(
 			array(
+					'field'  => 'id_localizzazione',
+					'label'  => 'Localizzazione',
+					'rules'  => 'required',
+					'errors' => array(
+                        'required' => '%s obbligatoria'
+					)
+			),
+			array(
 					'field'  => 'inventario',
 					'label'  => 'Inventario',
 					'rules'  => 'required',

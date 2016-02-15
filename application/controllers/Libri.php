@@ -201,7 +201,7 @@ class Libri extends MY_Controller {
 		redirect ('libri/elenco');
 	}
 		
-	public function ajaxFetch() {
+	public function ajaxFetchLibro() {
 		
 		/* recupero dati del libro il cui inventario è stato appena digitato nella scheda nuovo prestito */
 		
@@ -227,6 +227,35 @@ class Libri extends MY_Controller {
 			echo "false"; // inventario inesistente
 		}
 		
+	}
+	
+	public function ajaxFetchInventario() {
+		
+		/* conto libri in db con id_localizzazione in post e genero nuovo inventario */
+		
+		/*
+		if (!$this->checkLevel(0)){ // controllo se loggato
+			$this->session->set_userdata('nocons',1);
+			redirect('login');
+		}
+		*/
+		
+		if (empty($this->input->post())) return false;
+		
+		$this->output->enable_profiler(FALSE);
+		
+		$info=$this->libri_model->getLocalizzazioneInfo($this->input->post('id_local'));		
+		$prefisso=$info->prefisso;		
+		$quantita=$info->quantita;
+		$quantita++;
+		$cod="";
+		for ($x=1;$x<=CODI-strlen($quantita);$x++){
+			$cod.="0";
+		}
+		$codinv=$prefisso.$cod.$quantita;
+		
+		echo $codinv;
+	
 	}
 	
 }

@@ -6,23 +6,23 @@
 	?>
 	<div class="row">
 	  <div class="form-group col-xs-12 col-sm-6 col-md-4">
-		<label for="inventario">Cod. inventario</label> <?php echo form_error('inventario'); ?>
-		<?php 
-			$attr=array("class"=>"form-control text-uppercase","id"=>"inventario","name"=>"inventario","placeholder"=>"PT0001","value"=>set_value('inventario'));
-			echo form_input($attr);
-		?>
-	  </div>
-	  <div class="form-group col-xs-12 col-sm-6 col-md-4">
-		<label for="id_localizzazione">Localizzazione</label> 
+		<label for="id_localizzazione">Localizzazione</label> <i id="preload_loc" class="fa fa-spin fa-spinner" style="display:none"></i><?php echo form_error('id_localizzazione'); ?>
 		<?php
-			$options=array();
-			$attr="class=form-control";
+			$options=array(""=>"Seleziona:");
+			$attr="class=form-control id=id_localizzazione";
 			foreach ($select_local as $val) {
 				$options[$val['id']]=$val['nome'];
 			}
 			echo form_dropdown('id_localizzazione', $options, '', $attr);
 		?>
-	  </div>
+	  </div>	
+	  <div class="form-group col-xs-12 col-sm-6 col-md-4">
+		<label for="inventario">Cod. inventario</label> <?php echo form_error('inventario'); ?>
+		<?php 
+			$attr=array("class"=>"form-control text-uppercase","id"=>"inventario","name"=>"inventario","placeholder"=>"PT0001","value"=>set_value('inventario'));
+			echo form_input($attr);
+		?>
+	  </div>	  
 	  <div class="form-group col-xs-12 col-sm-6 col-md-4">
 		<label for="collocazione">Collocazione</label> <?php echo form_error('collocazione'); ?>
 		<?php 

@@ -26,7 +26,7 @@
 				$("#error_inv").hide();
 			}
 			data="inventario="+inventario;
-			url="<?php echo site_url('libri/ajaxFetch'); ?>";
+			url="<?php echo site_url('libri/ajaxFetchLibro'); ?>";
 			$.post(url,data,function(msg) {	
 				$("#preload_inv").hide();
 				if (msg=="false") {
