@@ -1,5 +1,9 @@
 <div class="container">
+	<?php if ($this->session->fromsearch) : ?>
+	<a href="<?php echo site_url('search'); ?>" class="btn btn-link pull-right">Torna ai risultati</a>
+	<?php else : ?>
 	<a href="<?php echo site_url('prestiti/elenco'); ?>" class="btn btn-link pull-right">Torna all'elenco</a>
+	<?php endif ?>
 	<h1>Prestito #<?php echo $prestito->codice; ?></h1>
 	<div class="spacer-10"></div>
 	<div class="row">
