@@ -226,14 +226,13 @@ class Prestiti extends MY_Controller {
 			$this->session->set_userdata('nocons',1);
 			redirect('login');
 		}
-		if (empty($id)) redirect('prestiti/elenco'); // se $id non esiste torno a elenco	
-		
-		$this->load->library('dates');
+		if (empty($id)) redirect('prestiti/elenco'); // se $id non esiste torno a elenco
 				
 		// info prestito
-		$prestito=$this->prestiti_model->getPrestito($id);
+		if (!$prestito=$this->prestiti_model->getPrestito($id)) redirect('prestiti/elenco');
 		
 		// gestione date
+		$this->load->library('dates');
 		$prestito->data_prestito=$this->dates->convertDateTime($prestito->data_prestito);
 		$prestito->data_reso ? $prestito->data_reso=$this->dates->convertDateTime($prestito->data_reso) : $prestito->data_reso="";
 		
