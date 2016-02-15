@@ -23,7 +23,7 @@
 				<label for="id_localizzazione">Localizzazione</label> 
 				<?php
 					$options=array();
-					$attr="class=form-control";
+					$attr="class=form-control disabled=true";
 					foreach ($select_local as $val) {
 						$options[$val['id']]=$val['nome'];
 					}
