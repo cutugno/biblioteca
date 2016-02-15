@@ -43,6 +43,9 @@
           </ul>
         </li>
         <?php endif  ?>
+        <?php if ($utente->livello >= 3) : ?>
+		<li><a href="#">Operazioni</a></li>
+		<?php endif ?>
       </ul>
       <!-- /menu funzioni -->
           

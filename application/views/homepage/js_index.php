@@ -7,12 +7,12 @@
 		
 	$("#showavanzata").click(function(){
 		$("#csemplice").hide("blind","",300,function(){
-			$("#cavanzata").show("blind","",300);
+			$("#cavanzata").show("blind","",550);
 		});
 	});
 	
 	$("#showsemplice").click(function(){
-		$("#cavanzata").hide("blind","",300,function(){
+		$("#cavanzata").hide("blind","",550,function(){
 			$("#csemplice").show("blind","",300);
 		});
 	});
