@@ -31,7 +31,7 @@ class Libri extends MY_Controller {
 		$data['utente']=$this->session->utente;
 		$data['select_local']=$this->select_model->selectItems("localizzazioni");
 		$data['select_tipidoc']=$this->select_model->selectItems("tipidocumento");
-		$data['select_generi']=$this->select_model->selectItems("generi");
+		$data['select_argomenti']=$this->select_model->selectItems("argomenti");
 			
 		$this->load->view('templates/header');
 		$this->load->view('templates/menu',$data);
@@ -128,7 +128,7 @@ class Libri extends MY_Controller {
 		$data['libro']=$libro;
 		$data['select_local']=$this->select_model->selectItems("localizzazioni");
 		$data['select_tipidoc']=$this->select_model->selectItems("tipidocumento");
-		$data['select_generi']=$this->select_model->selectItems("generi");
+		$data['select_argomenti']=$this->select_model->selectItems("argomenti");
 		
 		// info prestito
 		$prestito=$this->prestiti_model->getPrestitoByIdlibro ($id);

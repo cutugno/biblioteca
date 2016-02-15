@@ -24,7 +24,7 @@
 						<th>Titolo</th>
 						<th>Autore</th>
 						<th class="filter-select" data-placeholder="Tutte">Local.ne</th>
-						<th class="filter-select" data-placeholder="Tutti">Genere</th>
+						<th class="filter-select" data-placeholder="Tutti">Argomento</th>
 						<th>Editore</th>
 						<th>ISBN</th>
 						<th>CDD</th>
@@ -39,7 +39,7 @@
 						<td><?php echo $val->titolo; ?></td>
 						<td><?php echo $val->autore; ?></td>
 						<td><?php echo $val->localizzazione; ?></td>
-						<td><?php echo $val->genere; ?></td>
+						<td><?php echo $val->argomento; ?></td>
 						<td><?php echo $val->editore; ?></td>
 						<td><?php echo $val->isbn; ?></td>
 						<td><?php echo $val->cdd; ?></td>

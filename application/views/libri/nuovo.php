@@ -86,14 +86,14 @@
 		?>
 	  </div>
 	  <div class="form-group col-xs-12 col-sm-6 col-md-4">
-		<label for="id_genere">Genere</label>
+		<label for="id_argomento">Argomento</label>
 		<?php
 			$options=array();
 			$attr="class=form-control";
-			foreach ($select_generi as $val) {
+			foreach ($select_argomenti as $val) {
 				$options[$val['id']]=$val['nome'];
 			}
-			echo form_dropdown('id_genere', $options, '', $attr);
+			echo form_dropdown('id_argomento', $options, '', $attr);
 		?>
 	  </div>
 	  <div class="form-group col-xs-12 col-sm-6 col-md-4">
