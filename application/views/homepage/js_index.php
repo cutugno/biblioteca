@@ -6,14 +6,14 @@
 	<?php endif ?>
 		
 	$("#showavanzata").click(function(){
-		$("#csemplice").hide("blind","",300,function(){
-			$("#cavanzata").show("blind","",550);
+		$("#csemplice").hide("blind","",150,function(){
+			$("#cavanzata").show("blind","",275);
 		});
 	});
 	
 	$("#showsemplice").click(function(){
-		$("#cavanzata").hide("blind","",550,function(){
-			$("#csemplice").show("blind","",300);
+		$("#cavanzata").hide("blind","",275,function(){
+			$("#csemplice").show("blind","",150);
 		});
 	});
 	
