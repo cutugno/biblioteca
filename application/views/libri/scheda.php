@@ -222,7 +222,7 @@
 						<a href="<?php echo site_url('prestiti/reso/'.$prestito->id); ?>" class="btn btn-success"><i class="fa fa-reply"></i> REGISTRA RESO</a>
 					</div>
 					<div class="col-xs-12 spacer-10"></div>
-					<div class="col-xs-12 ">
+					<div class="col-xs-12">
 						<!-- <a href="#" class="btn btn-primary"><i class="fa fa-envelope-o"></i> CONTATTA UTENTE</a> -->
 					</div>
 				</div>				

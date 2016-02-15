@@ -93,7 +93,7 @@
 			<?php echo form_close(); ?>
 		</div>
 		<div class="col-md-3">
-			<!-- pulsante contatta utente -->
+			<!-- <a href="#" class="btn btn-primary"><i class="fa fa-envelope-o"></i> CONTATTA UTENTE</a> -->
 		</div>
 		
 	</div>

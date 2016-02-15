@@ -48,11 +48,13 @@
 					<p><?php echo $prestito->titolo; ?></p>
 				</div>
 			</div>
+			<!--
 			<div class="row">
 				<div class="col-xs-12">
-					<!-- <a href="#" class="btn btn-xs btn-primary">SCHEDA LIBRO</a> -->
+					<a href="<?php echo site_url('libri/scheda/'.$prestito->id_libro); ?>" class="btn btn-xs btn-primary"><i class="fa fa-book"></i> SCHEDA LIBRO</a>
 				</div>
 			</div>
+			-->
 			<div class="spacer-25"></div>
 			<div class="row">
 				<div class="col-xs-12">
@@ -73,11 +75,15 @@
 					<p><?php echo $prestito->email ?></p>
 				</div>
 			</div>	
+			<?php if ($this->session->utente->livello >= 2) :?>
+			<!--
 			<div class="row">
 				<div class="col-xs-12">
-					<!-- <a href="#" class="btn btn-xs btn-primary">CONTATTA UTENTE</a> -->
+					<a href="<?php echo site_url('utenti/scheda/'.$prestito->id_utente); ?>" class="btn btn-xs btn-primary"><i class="fa fa-user"></i> SCHEDA UTENTE</a>
 				</div>
 			</div>	
+			-->
+			<?php endif ?>
 		</div>
 		<div class="col-md-3">
 			<div class="row">
