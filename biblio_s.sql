@@ -116,7 +116,7 @@ DROP TABLE IF EXISTS `livelli`;
 CREATE TABLE `livelli` (
   `id` tinyint(4) NOT NULL AUTO_INCREMENT,
   `livello` tinyint(1) NOT NULL,
-  `descrizione` varchar(45) NOT NULL,
+  `nome` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `livello_UNIQUE` (`livello`)
@@ -160,7 +160,7 @@ CREATE TABLE `prestiti` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `codice_UNIQUE` (`codice`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -210,7 +210,7 @@ CREATE TABLE `utenti` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(16) NOT NULL,
   `password` varchar(45) NOT NULL DEFAULT 'cambiami',
-  `livello` tinyint(1) NOT NULL DEFAULT '0',
+  `livello` varchar(1) NOT NULL DEFAULT '0',
   `nome` varchar(100) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
   `telefono` varchar(45) DEFAULT NULL,
@@ -230,4 +230,4 @@ CREATE TABLE `utenti` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-02-15 14:04:11
+-- Dump completed on 2016-02-15 17:41:49
