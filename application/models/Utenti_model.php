@@ -20,7 +20,7 @@
 		
 		public function getUserData($id) {
 			
-			$query = $this->db->select("utenti.*,livelli.descrizione")
+			$query = $this->db->select("utenti.*,livelli.nome as descrizione")
 				->from("utenti")
 				->join("livelli","livelli.livello=utenti.livello")
 				->where("utenti.id", $id)
@@ -66,6 +66,33 @@
 			 
 			return FALSE;
 			
+		}
+		
+		public function elencoUtenti () {
+			
+			$query=$this->db->select('utenti.id,utenti.nome,utenti.email,utenti.telefono,utenti.classe,livelli.nome as livello')
+				->join('livelli', 'utenti.livello=livelli.livello')
+				->get('utenti');
+			
+			if ($query->num_rows()>0){
+				return $query->result();
+			}
+			return FALSE;
+			
+		}
+		
+		public function getUtente ($id) {
+		
+			$query=$this->db->select('utenti.*,livelli.nome as descrizione')
+				->where('utenti.id',$id)
+				->join('livelli', 'utenti.livello=livelli.livello')
+				->get('utenti');
+				
+			if ($query->num_rows()>0){
+				return $query->row();
+			}
+			return FALSE;
+				
 		}
 	}
 	

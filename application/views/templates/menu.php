@@ -39,7 +39,7 @@
             <?php if ($utente->livello >= 3) : ?>
             <li><a href="#">Nuovo utente</a></li>
 			<?php endif ?>
-            <li><a href="#">Elenco utenti</a></li>
+            <li><a href="<?php echo site_url('utenti/elenco'); ?>">Elenco utenti</a></li>
           </ul>
         </li>
         <?php endif  ?>

@@ -50,7 +50,7 @@
 			source: function(request, response) {
 				$("#preload_ute").show();
 				$.ajax({
-					url: "<?php echo site_url('utenti/ajaxFetch'); ?>",
+					url: "<?php echo site_url('utenti/ajaxFetchUtenti'); ?>",
 					dataType: "json",
 					data: {term: request.term},
 					success: function(data) {
