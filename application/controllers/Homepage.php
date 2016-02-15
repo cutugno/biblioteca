@@ -24,6 +24,10 @@ class Homepage extends MY_Controller {
 		
 		$data['utente']=$this->session->utente;	
 		
+		$data['select_local']=$this->select_model->selectItems("localizzazioni");
+		$data['select_tipidoc']=$this->select_model->selectItems("tipidocumento");
+		$data['select_argomenti']=$this->select_model->selectItems("argomenti");
+		
 		// controllo tab attivo all'ingresso
 		$data['activelibro']=$data['activeprestito']="";
 		switch ($this->input->post('type')) {

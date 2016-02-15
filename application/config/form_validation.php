@@ -146,6 +146,17 @@ $config = array(
                          'required' => '%s obbligatorio'
 					)
 			)
+	),
+	'cavanzata' => array(
+			array(
+					'field'  => 'type',
+					'label'  => 'Tipo',
+					'rules'  => 'required',
+					'errors' => array(
+                         'required' => '%s obbligatorio'
+					)
+			)
 	)
+		
 		
 );

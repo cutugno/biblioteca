@@ -39,10 +39,13 @@ class Search extends MY_Controller {
 					$risultati->data_reso=$this->dates->convertDateTime($risultati->data_reso,1);				
 				}
 				break;
+			case "cavanzata":
+				$risultati=$this->libri_model->searchLibriAvanzata($this->session->search);
+				break;
 		}
 		
 		$risultati ? $data['risultati']=$risultati : $data['risultati']="";
-		//var_dump ($risultati);
+		// var_dump ($risultati);
 		
 		// info menu
 		$data['utente']=$this->session->utente;
