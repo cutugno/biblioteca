@@ -74,6 +74,7 @@ class Prestiti extends MY_Controller {
 		$this->load->view('templates/close');
 		
 		$this->session->unset_userdata('idlibro');
+		$this->session->unset_userdata('fromsearch');
 				
 	}
 	
@@ -93,10 +94,10 @@ class Prestiti extends MY_Controller {
 			// update disponibilità libro=0
 			$this->libri_model->toggleDisp($prestito['id_libro'],0);
 			$this->session->set_userdata('insertprestito',1);
-			log_message("debug", "Inserito prestito con id #".$id_prestito.". Utente con id #".$id_utente.". (prestiti/nuovo)", LOGPREFIX);
+			log_message("debug", "Inserito prestito con id #".$id_prestito.". Utente con id #".$this->session->utente->id.". (prestiti/nuovo)", LOGPREFIX);
 		}else{
 			$this->session->set_userdata('noinsertprestito',1);
-			log_message("error", "Errore nell'inserimento prestito libro con id #".$prestito['id_libro'].". Utente con id #".$id_utente.". (prestiti/nuovo)", LOGPREFIX);
+			log_message("error", "Errore nell'inserimento prestito libro con id #".$prestito['id_libro'].". Utente con id #".$this->session->utente->id.". (prestiti/nuovo)", LOGPREFIX);
 		}
 		redirect ('prestiti/scheda/'.$id_prestito);
 		
@@ -113,9 +114,11 @@ class Prestiti extends MY_Controller {
 		
 		// query reso
 		if ($this->prestiti_model->registraReso($id)){
+			log_message("debug", "Registrato reso a prestito con id #".$id.". Utente con id #".$this->session->utente->id.". (prestiti/reso)", LOGPREFIX);
 			$this->session->set_userdata('registratoreso',1);
 		}else{
 			$this->session->set_userdata('noregistratoreso',1);
+			log_message("errore", "Errore nella registrazione reso per il prestito con id #".$id.". Utente con id #".$this->session->utente->id.". (prestiti/reso)", LOGPREFIX);
 			$redir="prestiti/scheda/".$id;
 		}
 		
@@ -126,6 +129,38 @@ class Prestiti extends MY_Controller {
 		}
 		redirect($redir);
 
+	}
+	
+	public function annulla ($id) {
+		
+		if (!$this->checkLevel(0)){ // controllo se loggato
+			$this->session->set_userdata('nocons',1);
+			redirect('login');
+		}
+		
+		if (empty($id)) redirect('prestiti/elenco'); // se $id non esiste torno a elenco
+		
+		if ($prestito=$this->prestiti_model->getPrestito($id)){
+			if ($prestito->data_reso==NULL) {
+				if ($this->prestiti_model->annullaPrestito($id)) {
+					$this->libri_model->toggleDisp($prestito->id_libro,1);
+					log_message("debug", "Annullato prestito con id #".$id.". Utente con id #".$this->session->utente->id.". (prestiti/annulla)", LOGPREFIX);
+					$this->session->set_userdata('prestitoannullato',1);
+				}else{
+					log_message("error", "Errore nell'annullamento prestito con id #".$id.". Utente con id #".$this->session->utente->id.". (prestiti/annulla)", LOGPREFIX);
+					$this->session->set_userdata('errorprestitoannullato',1);
+				}
+			}else{
+				log_message("debug", "Tentativo di annullamento presito non annullabile. Prestito con id #".$id.". Utente con id #".$this->session->utente->id.". (prestiti/annulla)", LOGPREFIX);
+				$this->session->set_userdata('noprestitoannullato',1);
+			}
+		}else{
+			log_message("error", "Tentativo annullamento prestito inesistente. Prestito con id #".$id.". Utente con id #".$this->session->utente->id.". (prestiti/annulla)", LOGPREFIX);
+			$this->session->set_userdata('nonesiprestitoannullato',1);
+		}
+		
+		$this->session->fromsearch==1 ? redirect('homepage') : redirect('prestiti/elenco');
+				
 	}
 	
 	public function elenco() {
@@ -175,6 +210,11 @@ class Prestiti extends MY_Controller {
 		$this->session->unset_userdata('idlibro');
 		$this->session->unset_userdata('registratoreso');
 		$this->session->unset_userdata('noregistratoreso');
+		$this->session->unset_userdata('prestitoannullato');
+		$this->session->unset_userdata('errorprestitoannullato');
+		$this->session->unset_userdata('noprestitoannullato');
+		$this->session->unset_userdata('nonesiprestitoannullato');
+		$this->session->unset_userdata('fromsearch');
 		
 	}
 	
@@ -215,7 +255,8 @@ class Prestiti extends MY_Controller {
 		$this->session->unset_userdata('noinsertprestito');
 		$this->session->unset_userdata('registratoreso');
 		$this->session->unset_userdata('noregistratoreso');
-		
+			
 	}
+
 	
 }

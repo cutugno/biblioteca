@@ -70,6 +70,14 @@
 			
 		}
 		
+		public function annullaPrestito ($id) {
+			
+			$query=$this->db->delete('prestiti', array('id' => $id));	
+			
+			return $this->db->affected_rows();		
+			
+		}
+		
 		public function elencoPrestiti () {
 				
 			$query=$this->db->select('prestiti.*, libri.inventario, libri.titolo, utenti.nome')

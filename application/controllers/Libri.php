@@ -44,6 +44,7 @@ class Libri extends MY_Controller {
 		$this->session->unset_userdata('idlibro');
 		$this->session->unset_userdata('insertlibro');
 		$this->session->unset_userdata('noinsertlibro');
+		$this->session->unset_userdata('fromsearch');
 	}
 	
 	public function insert() {
@@ -94,6 +95,7 @@ class Libri extends MY_Controller {
 		$this->session->unset_userdata('idlibro');
 		$this->session->unset_userdata('eliminalibro');
 		$this->session->unset_userdata('noeliminalibro');
+		$this->session->unset_userdata('fromsearch');
 		
 	}
 	

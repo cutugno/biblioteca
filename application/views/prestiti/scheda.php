@@ -77,12 +77,21 @@
 		</div>
 		<div class="col-md-3">
 			<div class="row">
-				<div class="col-xs-12">
-					<?php if ($prestito->disp==0) : ?>		
-					<!-- <p>pulsante stampa ricevuta</p> -->				
-					<!-- <p>pulsante annulla prestito</p> -->				
-						<a href="<?php echo site_url('prestiti/reso/'.$prestito->id); ?>" class="btn btn-success"><i class="fa fa-reply"></i> REGISTRA RESO</a>
-					<?php endif ?>					
+				<div class="col-xs-12">						
+					<div class="row">
+					<!-- <p>pulsante stampa ricevuta</p> -->
+						<?php if ($prestito->data_reso=="") : ?>				
+						<div class="col-xs-12">
+							<a href="<?php echo site_url('prestiti/annulla/'.$prestito->id); ?>" class="btn btn-warning"><i class="fa fa-times"></i> ANNULLA PRESTITO</a>										
+						</div>
+						<?php endif ?>
+						<div class="col-xs-12 spacer-10"></div>
+						<?php if ($prestito->disp==0) : ?>	
+						<div class="col-xs-12">
+							<a href="<?php echo site_url('prestiti/reso/'.$prestito->id); ?>" class="btn btn-success"><i class="fa fa-reply"></i> REGISTRA RESO</a>
+						</div>
+						<?php endif ?>		
+					</div>
 				</div>
 			</div>
 		</div>
