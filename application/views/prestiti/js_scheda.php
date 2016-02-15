@@ -16,6 +16,26 @@
 	swal({title:"", text:"Errore durante l'inserimento del reso. Riprova", timer:2000, showConfirmButton:false, type: "error"});
 	<?php endif ?>		
 	
+	$("#annullaprestito").click(function(event){
+		event.preventDefault();
+		event.returnValue=0;
+		swal({ 
+				title: "", 
+				text: "Vuoi annullare questo presito?", 
+				html: true,
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#DD6B55", 
+				cancelButtonText: "Ok, meglio di no...", 
+				confirmButtonText: "E sia!",
+				closeOnConfirm: false
+			},function(isConfirm){ 
+				if (isConfirm){ // chiamata ajax cambio livello con logout  
+					window.location.href="<?php echo site_url('prestiti/annulla/'.$prestito->id) ?>";
+				}
+			}); 
+	});
+	
 </script>
 	
 

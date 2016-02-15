@@ -86,7 +86,7 @@
 					<!-- <p>pulsante stampa ricevuta</p> -->
 						<?php if ($prestito->data_reso=="") : ?>				
 						<div class="col-xs-12">
-							<a href="<?php echo site_url('prestiti/annulla/'.$prestito->id); ?>" class="btn btn-warning"><i class="fa fa-times"></i> ANNULLA PRESTITO</a>										
+							<a id="annullaprestito" href="#" class="btn btn-warning"><i class="fa fa-times"></i> ANNULLA PRESTITO</a>										
 						</div>
 						<?php endif ?>
 						<div class="col-xs-12 spacer-10"></div>
