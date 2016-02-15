@@ -159,7 +159,7 @@ class Prestiti extends MY_Controller {
 			$this->session->set_userdata('nonesiprestitoannullato',1);
 		}
 		
-		$this->session->fromsearch==1 ? redirect('homepage') : redirect('prestiti/elenco');
+		redirect('prestiti/elenco');
 				
 	}
 	
