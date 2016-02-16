@@ -2,6 +2,24 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 $config = array(
+	'login' => array(
+			array(
+					'field'  => 'username',
+					'label'  => 'Username',
+					'rules'  => 'required',
+					'errors' => array(
+                         'required' => '%s obbligatorio'
+					)
+			),
+			array(
+					'field'  => 'password',
+					'label'  => 'Password',
+					'rules'  => 'required',
+					'errors' => array(
+                         'required' => '%s obbligatoria'
+					)
+			)
+	),
 	'libro' => array(
 			array(
 					'field'  => 'id_localizzazione',
@@ -125,6 +143,16 @@ $config = array(
                          'required' => '%s obbligatorio'
 					)
 			)
+	),
+	'utente' => array(
+			array(
+					'field'  => 'nome',
+					'label'  => 'Utente',
+					'rules'  => 'required',
+					'errors' => array(
+                         'required' => '%s obbligatorio'
+					)
+			),			
 	),
 	// tipi ricerca
 	'csemplice' => array(

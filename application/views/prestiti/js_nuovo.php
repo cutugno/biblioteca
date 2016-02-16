@@ -75,6 +75,8 @@
 					msg=jQuery.parseJSON(msg);
 					$("#classe").val(msg.classe);
 					$("#email").val(msg.email);
+					$("#livello").val(msg.livello);
+					$("#telefono").val(msg.telefono);
 				});
 			}
 		});

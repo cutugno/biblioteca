@@ -53,6 +53,8 @@
 			$query=$this->db->set('nome',$nome)
 				->set('classe',$classe)
 				->set('email',$email)
+				->set('telefono',$telefono)
+				->set('livello',$livello)
 				->where('id',$id)
 				->update('utenti');
 				
@@ -72,6 +74,7 @@
 			
 			$query=$this->db->select('utenti.id,utenti.nome,utenti.email,utenti.telefono,utenti.classe,livelli.nome as livello')
 				->join('livelli', 'utenti.livello=livelli.livello')
+				->where_not_in('livelli.nome', 'super')
 				->get('utenti');
 			
 			if ($query->num_rows()>0){

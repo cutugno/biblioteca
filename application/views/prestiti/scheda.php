@@ -62,17 +62,21 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-xs-12 col-sm-6 col-md-4">
+				<div class="col-xs-12 col-sm-6 col-md-3">
 					<label>Nome</label> 
 					<p><?php echo $prestito->utente; ?><p>
 				</div>
-				<div class="col-xs-12 col-sm-6 col-md-4">
+				<div class="col-xs-12 col-sm-6 col-md-3">
 					<label>Classe</label> 
 					<p><?php echo $prestito->classe ?></p>
 				</div>
-				<div class="col-xs-12 col-sm-6 col-md-4">
+				<div class="col-xs-12 col-sm-6 col-md-3">
 					<label>Email</label> 
 					<p><?php echo $prestito->email ?></p>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-3">
+					<label>Telefono</label> 
+					<p><?php echo $prestito->telefono ?></p>
 				</div>
 			</div>	
 			<?php if ($this->session->utente->livello >= 2) :?>
@@ -90,7 +94,11 @@
 				<div class="col-xs-12">						
 					<div class="row">
 					<!-- <p>pulsante stampa ricevuta</p> -->
-						<?php if ($prestito->data_reso=="") : ?>				
+						<?php if ($prestito->data_reso=="") : ?>
+						<div class="col-xs-12">
+							<a id="stamparicevuta" href="<?php echo site_url('stampa/ricevuta/'.$prestito->id); ?>" class="btn btn-primary" target="_blank"><i class="fa fa-print"></i> STAMPA RICEVUTA</a>										
+						</div>			
+						<div class="col-xs-12 spacer-10"></div>	
 						<div class="col-xs-12">
 							<a id="annullaprestito" href="#" class="btn btn-warning"><i class="fa fa-times"></i> ANNULLA PRESTITO</a>										
 						</div>

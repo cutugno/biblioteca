@@ -68,7 +68,7 @@
 	</div>
 	
 	<div class="row">
-		<div class="form-group col-xs-12 col-sm-4">
+		<div class="form-group col-xs-12 col-sm-6 col-md-3">
 			<label for="nome">Utente</label> <?php echo form_error('nome'); ?> <i id="preload_ute" class="fa fa-spin fa-spinner" style="display:none"></i>
 			<?php 
 				$attr=array(
@@ -77,21 +77,34 @@
 						'id'    => 'id_utente'
 				);
 				echo form_input($attr);
+				$attr=array(
+						'type'  => 'hidden',
+						'name'  => 'livello',
+						'id'    => 'livello'
+				);
+				echo form_input($attr);
 				$attr=array("class"=>"form-control","id"=>"nome","name"=>"nome","value"=>"");
 				echo form_input($attr);
 			?>
 		</div>
-		<div class="form-group col-xs-12 col-sm-4">
+		<div class="form-group col-xs-12 col-sm-6 col-md-3">
 			<label for="classe">Classe</label>
 			<?php 
 				$attr=array("class"=>"form-control","id"=>"classe","name"=>"classe","value"=>"");
 				echo form_input($attr);
 			?>
 		</div>
-		<div class="form-group col-xs-12 col-sm-4">
-			<label for="classe">Email</label>
+		<div class="form-group col-xs-12 col-sm-6 col-md-3">
+			<label for="email">Email</label>
 			<?php 
 				$attr=array("class"=>"form-control","id"=>"email","name"=>"email","value"=>"");
+				echo form_input($attr);
+			?>
+		</div>
+		<div class="form-group col-xs-12 col-sm-6 col-md-3">
+			<label for="telefono">Telefono</label>
+			<?php 
+				$attr=array("class"=>"form-control","id"=>"telefono","name"=>"telefono","value"=>"");
 				echo form_input($attr);
 			?>
 		</div>

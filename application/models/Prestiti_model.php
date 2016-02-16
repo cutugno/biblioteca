@@ -16,7 +16,7 @@
 		
 		public function getPrestito($id) {
 			
-			$query=$this->db->select('prestiti.*,libri.inventario, libri.autore, libri.titolo, libri.isbn, libri.disp, utenti.id as id_utente, utenti.nome as utente, utenti.email, utenti.classe')
+			$query=$this->db->select('prestiti.*,libri.inventario, libri.autore, libri.titolo, libri.isbn, libri.disp, utenti.id as id_utente, utenti.nome as utente, utenti.email, utenti.classe, utenti.telefono')
 				->join('libri','prestiti.id_libro=libri.id')
 				->join('utenti','prestiti.id_utente=utenti.id')
 				->where('prestiti.id',$id)

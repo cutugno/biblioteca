@@ -10,6 +10,13 @@
 		});
 	}
 	
+	function setFormValues(form) {
+		$(form).find(':input').each(function(i, elem) {
+			 var input = $(elem);
+			 input.data('initialState', input.val());
+		});
+	}
+	
 	validaLibro("#schedalibro"); // chiamata a funzione in validation.js
 	
 	$(document).ready(function() {	
@@ -32,10 +39,7 @@
 		// input mask
 	    $("#isbn").mask("999-99-9999-999-9");
 	    	
-		$("#schedalibro :input").each(function(i, elem) {
-			 var input = $(elem);
-			 input.data('initialState', input.val());
-		});	
+	    setFormValues("#schedalibro"); // accoppiata a reset form
 	});
 	
 	$("#btn_undolibro").click(function(){

@@ -14,7 +14,6 @@ class Utenti extends MY_Controller {
 		
 		$data['utente']=$this->session->utente;
 		$utenti=$this->utenti_model->elencoUtenti();
-		// var_dump ($utenti);
 		$utenti ? $data['utenti']=$utenti : $data['utenti']="";
 		
 		$this->load->view('templates/header');
@@ -42,24 +41,59 @@ class Utenti extends MY_Controller {
 		
 		if (empty($id)) redirect('libri/elenco'); // se $id non esiste torno a elenco
 		
+		$this->load->library('form_validation');
+	
+		$this->form_validation->set_error_delimiters('<label class="text-danger">', '</label>');
+				
+		if ($this->form_validation->run('utente') !== FALSE) {
+			$this->session->set_userdata('aggiornamento_utente',$this->input->post());
+			redirect ("utenti/update");
+		}
+		
 		$data['utente']=$this->session->utente;
 		if (!$utente=$this->utenti_model->getUtente($id)) redirect('utenti/elenco');
 		$data['infoutente']=$utente;
 		$data['readonly']=$this->session->utente->livello < 3;
 		$data['readonly'] ? $data['btn_col']=6 : $data['btn_col']=4;
-		$data['select_livelli']=$this->select_model->selectItems('livelli');
+		$data['select_livelli']=$this->select_model->selectLivelli();
 		
 		$this->load->view('templates/header');
 		$this->load->view('templates/menu',$data);
 		$this->load->view('utenti/scheda',$data);
 		$this->load->view('templates/footer');
 		// altri js
-		// $this->load->view('utenti/js_scheda',$data);
+		$this->load->view('utenti/js_scheda',$data);
 		$this->load->view('templates/close');
 		
 		$this->session->unset_userdata('idlibro');
 		$this->session->unset_userdata('fromsearch');
+		$this->session->unset_userdata('updateutente');
+		$this->session->unset_userdata('noupdateutente');
 		
+		
+	}
+	
+	public function update () {
+		
+		if (!$this->checkLevel(2)){ // controllo se loggato
+			$this->session->set_userdata('nocons',1);
+			redirect('login');
+		}
+		
+		if (!$this->session->aggiornamento_utente) redirect ('homepage');
+		
+		$aggiornamento_utente=$this->session->aggiornamento_utente;
+		$this->session->unset_userdata('aggiornamento_utente');
+		
+		if ($utente=$this->utenti_model->updateUtente($aggiornamento_utente)){
+			log_message("debug", "Aggiornato utente con id #".$aggiornamento_utente['id'].". Utente id #".$this->session->utente->id.". (utenti/update)", LOGPREFIX);
+			$this->session->set_userdata('updateutente',1);
+		}else{
+			log_message("error", "Errore aggiornamento utente con id #".$aggiornamento_utente['id'].". Utente id #".$this->session->utente->id.". (utenti/update)", LOGPREFIX);
+			$this->session->set_userdata('noupdateutente',1);
+		}
+
+		redirect ('utenti/scheda/'.$aggiornamento_utente['id']);
 		
 	}
 

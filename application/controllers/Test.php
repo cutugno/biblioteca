@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  
 class Test extends MY_Controller {
  
-    public function pdf() {
+    public function pdf($id) {
 		
 		$this->session->set_userdata('dopo',current_url()); 
 		
@@ -13,10 +13,11 @@ class Test extends MY_Controller {
 			redirect('login');
 		}
 		
+		if (empty($id)) redirect('prestiti/elenco');
+		
 		$this->load->helper('tcpdf_helper');
 		$this->load->library('dates');
 				
-		$id=13; // passarlo in altra maniera
 		// info prestito
 		$prestito=$this->prestiti_model->getPrestito($id);
 		
@@ -27,7 +28,6 @@ class Test extends MY_Controller {
 		$data['prestito']=$prestito;
 		$data['title']="TEST";
 		$data['logo']=base_url('images/logoGL.png');
-		var_dump ($data['logo']);
         $data['content']=$this->load->view('templates/pdf/prestito',$data,TRUE); // content verrà generato da un altro template -> $content=$this->load->view('template',$data,TRUE)
         $data['pdf_name']="test.pdf";
         $data['pdf_oper']="I"; // I -> apre a video; D -> salva
@@ -99,7 +99,6 @@ class Test extends MY_Controller {
 			$libro['traduttore']=$data[14];
 			$libro['lingua']=$data[15];
 			
-
 			if ($new_libro=$this->import_model->newLibro($libro)){
 				$cont++;
 				echo "Libro #$total inserito. ID: $new_libro<br>";

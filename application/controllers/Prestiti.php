@@ -24,14 +24,18 @@ class Prestiti extends MY_Controller {
 				$datiutente['nome']=$this->input->post('nome');
 				$datiutente['classe']=$this->input->post('classe');
 				$datiutente['email']=$this->input->post('email');
+				$datiutente['telefono']=$this->input->post('telefono');
+				$datiutente['livello']=$this->input->post('livello');
 				if ($this->utenti_model->updateUtente($datiutente)) {
 					log_message("debug", "Aggiornato utente con id #".$id_utente.". (prestiti/nuovo)", LOGPREFIX);
 				}
 			}else{
 				$datiutente['nome']=$this->input->post('nome');
+				$datiutente['username']=$this->input->post('nome');
 				$datiutente['classe']=$this->input->post('classe');
 				$datiutente['email']=$this->input->post('email');
-				//$datiutente['livello']=1;
+				$datiutente['telefono']=$this->input->post('telefono');
+				$datiutente['password']=sha1('cambiami');
 				$id_utente=$this->utenti_model->insertUtente($datiutente);
 				log_message("debug", "Inserito utente con id #".$id_utente.". (prestiti/nuovo)", LOGPREFIX);
 			}
@@ -55,7 +59,6 @@ class Prestiti extends MY_Controller {
 		
 		// setto cod. prestito
 		$count=$this->prestiti_model->lastPrestito(); // ultimo codice
-		$count ? $count=substr($count,-1) : $count=0;
 		$count++;
 		$cod="";
 		for ($x=1;$x<=CODL-strlen($count);$x++){

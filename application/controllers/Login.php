@@ -15,16 +15,9 @@ class Login extends MY_Controller {
 
 		$this->load->library('form_validation');
 		
-		$this->form_validation->set_rules('username', 'Username', 'required',
-			array('required' => '%s obbligatorio')
-		);
-		$this->form_validation->set_rules('password', 'Password', 'required',
-			array('required' => '%s obbligatoria')
-		);
-		
 		$this->form_validation->set_error_delimiters('<label class="text-danger">', '</label>');
 		
-		if ($this->form_validation->run() !== FALSE) {
+		if ($this->form_validation->run('login') !== FALSE) {
 			// query validazione
 			$this->load->model('utenti_model');
 			$username=$this->input->post('username');
