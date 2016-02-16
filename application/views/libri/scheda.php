@@ -15,7 +15,8 @@
 			  <div class="form-group col-xs-12 col-sm-6 col-md-4">
 				<label for="inventario">Cod. inventario</label> <?php echo form_error('inventario'); ?>
 				<?php 
-					$attr=array("class"=>"form-control text-uppercase","id"=>"inventario","name"=>"inventario","placeholder"=>"PT0001","value"=>$libro->inventario, "readonly"=>"true");
+					$attr=array("class"=>"form-control text-uppercase","id"=>"inventario","name"=>"inventario","value"=>$libro->inventario, "readonly"=>"true");
+					if (!$readonly) $attr["readonly"]="true";
 					echo form_input($attr);
 				?>
 			  </div>
@@ -23,7 +24,8 @@
 				<label for="id_localizzazione">Localizzazione</label> 
 				<?php
 					$options=array();
-					$attr="class=form-control disabled=true";
+					$attr="class=form-control";
+					if (!$readonly) $attr.=" disabled=true";
 					foreach ($select_local as $val) {
 						$options[$val['id']]=$val['nome'];
 					}
@@ -33,7 +35,8 @@
 			  <div class="form-group col-xs-12 col-sm-6 col-md-4">
 				<label for="collocazione">Collocazione</label> <?php echo form_error('collocazione'); ?>
 				<?php 
-					$attr=array("class"=>"form-control","id"=>"collocazione","name"=>"collocazione","placeholder"=>"Armadio 3","value"=>$libro->collocazione);
+					$attr=array("class"=>"form-control","id"=>"collocazione","name"=>"collocazione","value"=>$libro->collocazione);
+					if (!$readonly) $attr["readonly"]="true";
 					echo form_input($attr);
 				?>
 			  </div>
@@ -43,14 +46,16 @@
 			  <div class="form-group col-xs-12 col-sm-6">
 				  <label for="autore">Autore</label> <?php echo form_error('autore'); ?>
 				  <?php 
-					 $attr=array("class"=>"form-control","id"=>"autore","name"=>"autore","placeholder"=>"Robert Jordan, Brandon Sanderson","value"=>$libro->autore);
+					 $attr=array("class"=>"form-control","id"=>"autore","name"=>"autore","value"=>$libro->autore);
+					 if (!$readonly) $attr["readonly"]="true";
 					 echo form_input($attr);
 				  ?>
 			  </div>
 			  <div class="form-group col-xs-12 col-sm-6">
 				  <label for="autore">Titolo</label> <?php echo form_error('titolo'); ?>
 				  <?php 
-					 $attr=array("class"=>"form-control","id"=>"titolo","name"=>"titolo","placeholder"=>"La ruota del tempo","value"=>$libro->titolo);
+					 $attr=array("class"=>"form-control","id"=>"titolo","name"=>"titolo","value"=>$libro->titolo);
+					 if (!$readonly) $attr["readonly"]="true";
 					 echo form_input($attr);
 				  ?>
 			  </div>
@@ -60,21 +65,24 @@
 			  <div class="form-group col-xs-12 col-sm-6 col-md-4">
 				<label for="editore">Editore</label> <?php echo form_error('editore'); ?>
 				<?php 
-					$attr=array("class"=>"form-control","id"=>"editore","name"=>"editore","placeholder"=>"Arnoldo Mondadori Editore","value"=>$libro->editore);
+					$attr=array("class"=>"form-control","id"=>"editore","name"=>"editore","value"=>$libro->editore);
+					if (!$readonly) $attr["readonly"]="true";
 					echo form_input($attr);
 				?>
 			  </div>
 			  <div class="form-group col-xs-12 col-sm-6 col-md-4">
 				<label for="luogo">Luogo</label> <?php echo form_error('luogo'); ?>
 				<?php 
-					$attr=array("class"=>"form-control","id"=>"luogo","name"=>"luogo","placeholder"=>"Milano","value"=>$libro->luogo);
+					$attr=array("class"=>"form-control","id"=>"luogo","name"=>"luogo","value"=>$libro->luogo);
+					if (!$readonly) $attr["readonly"]="true";
 					echo form_input($attr);
 				?>
 			  </div>
 			  <div class="form-group col-xs-12 col-sm-6 col-md-4">
 				<label for="anno">Anno</label> <?php echo form_error('anno'); ?>
 				<?php 
-					$attr=array("class"=>"form-control","id"=>"anno","name"=>"anno","placeholder"=>"1991","value"=>$libro->anno);
+					$attr=array("class"=>"form-control","id"=>"anno","name"=>"anno","value"=>$libro->anno);
+					if (!$readonly) $attr["readonly"]="true";
 					echo form_input($attr);
 				?>
 			  </div>
@@ -86,6 +94,7 @@
 				<?php
 					$options=array();
 					$attr="class=form-control";
+					if (!$readonly) $attr.=" disabled=true";
 					foreach ($select_tipidoc as $val) {
 						$options[$val['id']]=$val['nome'];
 					}
@@ -97,6 +106,7 @@
 				<?php
 					$options=array();
 					$attr="class=form-control";
+					if (!$readonly) $attr.=" disabled=true";
 					foreach ($select_argomenti as $val) {
 						$options[$val['id']]=$val['nome'];
 					}
@@ -106,7 +116,8 @@
 			  <div class="form-group col-xs-12 col-sm-6 col-md-4">
 				<label for="lingua">Lingua</label> <?php echo form_error('lingua'); ?>
 				<?php 
-					$attr=array("class"=>"form-control","id"=>"lingua","name"=>"lingua","placeholder"=>"Italiano","value"=>$libro->lingua);
+					$attr=array("class"=>"form-control","id"=>"lingua","name"=>"lingua","value"=>$libro->lingua);
+					if (!$readonly) $attr["readonly"]="true";
 					echo form_input($attr);
 				?>
 			  </div>
@@ -116,21 +127,24 @@
 			  <div class="form-group col-xs-12 col-sm-6 col-md-4">
 				<label for="isbn">ISBN</label>
 				<?php 
-					$attr=array("class"=>"form-control","id"=>"isbn","name"=>"isbn","placeholder"=>"978-88-7075-703-3","value"=>$libro->isbn);
+					$attr=array("class"=>"form-control","id"=>"isbn","name"=>"isbn","value"=>$libro->isbn);
+					if (!$readonly) $attr["readonly"]="true";
 					echo form_input($attr);
 				?>
 			  </div>
 			  <div class="form-group col-xs-12 col-sm-6 col-md-4">
 				<label for="cdd">CDD</label> <?php echo form_error('cdd'); ?>
 				<?php 
-					$attr=array("class"=>"form-control","id"=>"cdd","name"=>"cdd","placeholder"=>"554","value"=>$libro->cdd);
+					$attr=array("class"=>"form-control","id"=>"cdd","name"=>"cdd","value"=>$libro->cdd);
+					if (!$readonly) $attr["readonly"]="true";
 					echo form_input($attr);
 				?>
 			  </div>
 			  <div class="form-group col-xs-12 col-sm-6 col-md-4">
 				<label for="descrizione_cdd">Descrizione CDD</label> <?php echo form_error('descrizione_cdd'); ?>
 				<?php 
-					$attr=array("class"=>"form-control","id"=>"descrizione_cdd","name"=>"descrizione_cdd","placeholder"=>"Geologia. Europa","value"=>$libro->descrizione_cdd);
+					$attr=array("class"=>"form-control","id"=>"descrizione_cdd","name"=>"descrizione_cdd","value"=>$libro->descrizione_cdd);
+					if (!$readonly) $attr["readonly"]="true";
 					echo form_input($attr);
 				?>
 			  </div>
@@ -140,14 +154,16 @@
 			  <div class="form-group col-xs-12 col-sm-6">
 				<label for="curatore">Curatore</label> <?php echo form_error('curatore'); ?>
 				<?php 
-					$attr=array("class"=>"form-control","id"=>"curatore","name"=>"curatore","placeholder"=>"Lorenzo Insigne, Gonzalo Higuain","value"=>$libro->curatore);
+					$attr=array("class"=>"form-control","id"=>"curatore","name"=>"curatore","value"=>$libro->curatore);
+					if (!$readonly) $attr["readonly"]="true";
 					echo form_input($attr);
 				?>
 			  </div>
 			  <div class="form-group col-xs-12 col-sm-6">
 				<label for="traduttore">Traduttore</label> <?php echo form_error('traduttore'); ?>
 				<?php 
-					$attr=array("class"=>"form-control","id"=>"traduttore","name"=>"traduttore","placeholder"=>"Maurizio Sarri","value"=>$libro->traduttore);
+					$attr=array("class"=>"form-control","id"=>"traduttore","name"=>"traduttore","value"=>$libro->traduttore);
+					if (!$readonly) $attr["readonly"]="true";
 					echo form_input($attr);
 				?>
 			  </div>
@@ -157,7 +173,8 @@
 			  <div class="form-group col-xs-12">
 				<label for="note">Note</label>
 				<?php 
-					$attr=array("class"=>"form-control","id"=>"note","name"=>"note","placeholder"=>"Informazioni varie","value"=>$libro->note);
+					$attr=array("class"=>"form-control","id"=>"note","name"=>"note","value"=>$libro->note);
+					if (!$readonly) $attr["readonly"]="true";
 					echo form_textarea($attr);
 					echo form_hidden('id', $libro->id);		
 				?>

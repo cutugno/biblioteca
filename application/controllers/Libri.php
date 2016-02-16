@@ -144,6 +144,8 @@ class Libri extends MY_Controller {
 		// info menu
 		$data['utente']=$this->session->utente;
 		
+		$data['readonly']=$this->session->utente->livello > 0;		
+		
 		$this->load->view('templates/header');
 		$this->load->view('templates/menu',$data);
 		$this->load->view('libri/scheda',$data);
