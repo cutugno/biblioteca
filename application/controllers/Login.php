@@ -23,6 +23,8 @@ class Login extends MY_Controller {
 			$username=$this->input->post('username');
 			$password=$this->input->post('password');
 			if ($idutente=$this->utenti_model->checkLogin($username,$password)){
+				// aggiorno last login
+				$this->utenti_model->updateLastLogin($idutente);
 				// set session
 				$datiutente=$this->utenti_model->getUserData($idutente);
 				$this->session->set_userdata('utente',$datiutente);

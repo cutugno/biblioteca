@@ -46,6 +46,14 @@
 			
 		}	
 		
+		public function updateLastLogin ($id) {
+			
+			$query=$this->db->set('last_login','NOW()',FALSE)
+				->where('id',$id)
+				->update ('utenti');
+			
+		}
+		
 		public function updateUtente ($dati) {
 			
 			extract ($dati);		
