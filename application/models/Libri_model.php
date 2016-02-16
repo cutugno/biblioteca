@@ -54,13 +54,15 @@
 			
 		}
 		
-		public function searchLibriSemplice ($keyword) {
+		public function searchLibriSemplice ($keywords) {
 			
 			$query=$this->db->select('libri.*,localizzazioni.nome as localizzazione,argomenti.nome as argomento')
 				->join('localizzazioni','libri.id_localizzazione=localizzazioni.id')
-				->join('argomenti','libri.id_argomento=argomenti.id')
-				->like('libri.keywords',$keyword)
-				->order_by('inventario','ASC')
+				->join('argomenti','libri.id_argomento=argomenti.id');
+			foreach ($keywords as $val){
+				$query=$this->db->like('libri.keywords',$val);
+			}
+			$query=$this->db->order_by('inventario','ASC')
 				->get('libri');			
 				
 			if ($query->num_rows()>0){

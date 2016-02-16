@@ -17,8 +17,8 @@ class Search extends MY_Controller {
 		$type=$this->session->search['type'];		
 		switch ($type) {
 			case "csemplice":
-				$keyword=$this->session->search['keyword'];
-				$risultati=$this->libri_model->searchLibriSemplice($keyword);
+				$keywords=explode(" ",$this->session->search['keyword']);
+				$risultati=$this->libri_model->searchLibriSemplice($keywords);
 				break;
 			case "cprestito":
 				$codice=$this->session->search['codice'];
