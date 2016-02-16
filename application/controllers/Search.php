@@ -44,6 +44,10 @@ class Search extends MY_Controller {
 				$data["tipodoc"] = NULL != $this->session->search['id_tipodoc'] ? $this->select_model->getItemName("tipidocumento",$this->session->search['id_tipodoc']) : "";	
 				$data["local"] = NULL != $this->session->search['id_localizzazione'] ? $this->select_model->getItemName("localizzazioni",$this->session->search['id_localizzazione']) : "";	
 				$data["argomento"] = NULL != $this->session->search['id_argomento'] ? $this->select_model->getItemName("argomenti",$this->session->search['id_argomento']) : "";	
+				
+				$data['select_local']=$this->select_model->selectItems("localizzazioni");
+				$data['select_tipidoc']=$this->select_model->selectItems("tipidocumento");
+				$data['select_argomenti']=$this->select_model->selectItems("argomenti");
 				break;
 		}
 		

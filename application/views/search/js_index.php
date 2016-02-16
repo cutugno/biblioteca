@@ -55,6 +55,23 @@
 	
 	});
 	
+	$("#btn_modcrit").click(function(){
+		$("#modcrit").hide();
+		$("#criteri").hide();
+		$("#modcrit2").show();
+		$("#criteriform").show();
+	});
+	
+	$("#btn_undocrit").click(function(){
+		$("#modcrit2").hide();
+		$("#criteriform").hide();
+		$("#modcrit").show();
+		$("#criteri").show();
+	});
+	
+	$("#btn_newsearch").click(function(){
+		$("#newadvancedsearchlibro").submit();
+	});	
 </script>
 	
 
