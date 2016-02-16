@@ -7,7 +7,7 @@
 		<form>
 			<img src="<?php echo site_url('images/icons/first.png'); ?>" class="first"/>
 			<img src="<?php echo site_url('images/icons/prev.png'); ?>" class="prev"/>
-			<input type="text" class="pagedisplay form-control input-sm" style="width:150px; display:inline;background: #fff" readonly />
+			<input type="text" class="pagedisplay form-control input-sm" style="width:190px; display:inline;background: #fff" readonly />
 			<img src="<?php echo site_url('images/icons/next.png'); ?>" class="next"/>
 			<img src="<?php echo site_url('images/icons/last.png'); ?>" class="last"/>
 			<select class="pagesize form-control input-sm" style="width:60px; display:inline">
@@ -47,7 +47,7 @@
 		<form>
 			<img src="<?php echo site_url('images/icons/first.png'); ?>" class="first"/>
 			<img src="<?php echo site_url('images/icons/prev.png'); ?>" class="prev"/>
-			<input type="text" class="pagedisplay form-control input-sm" style="width:150px; display:inline;background: #fff" readonly />
+			<input type="text" class="pagedisplay form-control input-sm" style="width:190px; display:inline;background: #fff" readonly />
 			<img src="<?php echo site_url('images/icons/next.png'); ?>" class="next"/>
 			<img src="<?php echo site_url('images/icons/last.png'); ?>" class="last"/>
 			<select class="pagesize form-control input-sm" style="width:60px; display:inline">

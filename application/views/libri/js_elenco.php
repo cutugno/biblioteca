@@ -47,12 +47,11 @@
 					}
 				}
 			}
-		}) 
+		}) 		
 		.tablesorterPager({
 			container: $(".pagin"),
-			output: '{startRow}-{endRow} di {totalRows} risultati'
-		}); 
-	
+			output: '{startRow} - {endRow} di {filteredRows} (tot. {totalRows})'  
+		});	
 	});
 	
 </script>
