@@ -10,11 +10,26 @@
 			
 			$query = $this->db->order_by("nome")
 				->get($tabella);
+				
 			if ($query->num_rows()>0){
-				return $res=$query->result_array();
+				return $query->result_array();
 			}else{
 				return null;
 			}
+			
+		}
+		
+		public function getItemName($tabella,$id) {
+			
+			$query=$this->db->select("nome")
+				->where("id",$id)
+				->get($tabella);
+				
+			if ($query->num_rows()>0){
+				$res=$query->row();
+				return $res->nome;
+			}
+			return false;
 			
 		}
 			

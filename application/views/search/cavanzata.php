@@ -1,7 +1,23 @@
 <div class="container">
 	<a href="<?php echo site_url('homepage'); ?>" class="btn btn-link pull-right">Nuova ricerca</a>
 	<h1>Risultati ricerca</h1>
-	<!-- <h5>Tipo ricerca: </h5> -->
+	<strong>Ricerca avanzata</strong><br>
+	<?php if (NULL != $this->session->search['autore']) : ?>
+	<i>Autore: </i><?php echo $this->session->search['autore']; ?><br>
+	<?php endif ?>
+	<?php if (NULL != $this->session->search['titolo']) : ?>
+	<i>Titolo: </i><?php echo $this->session->search['titolo']; ?><br>
+	<?php endif ?>
+	<?php if (NULL != $this->session->search['id_tipodoc']) : ?>
+	<i>Tipo documento: </i><?php echo $tipodoc; ?><br>
+	<?php endif ?>
+	<?php if (NULL != $this->session->search['id_localizzazione']) : ?>
+	<i>Localizzazione: </i><?php echo $local; ?><br>
+	<?php endif ?>
+	<?php if (NULL != $this->session->search['id_argomento']) : ?>
+	<i>Argomento: </i><?php echo $argomento; ?>
+	<?php endif ?>
+	<div class="spacer-25"></div>
 	<div class="row">
 	  <?php if (!empty($risultati)) : ?> 
 	  <div class="col-xs-12 pagin text-left">

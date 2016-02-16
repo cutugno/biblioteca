@@ -1,7 +1,9 @@
 <div class="container">
 	<a href="<?php echo site_url('homepage'); ?>" class="btn btn-link pull-right">Nuova ricerca</a>
 	<h1>Risultati ricerca</h1>
-	<!-- <h5>Tipo ricerca: </h5> -->
+	<strong>Ricerca semplice</strong><br>
+	<i>Keywords: </i><?php echo $this->session->search['keyword']; ?>
+	<div class="spacer-25"></div>
 	<div class="row">
 	  <?php if (!empty($risultati)) : ?> 
 	  <div class="col-xs-12 pagin text-left">

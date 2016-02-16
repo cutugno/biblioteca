@@ -41,6 +41,9 @@ class Search extends MY_Controller {
 				break;
 			case "cavanzata":
 				$risultati=$this->libri_model->searchLibriAvanzata($this->session->search);
+				$data["tipodoc"] = NULL != $this->session->search['id_tipodoc'] ? $this->select_model->getItemName("tipidocumento",$this->session->search['id_tipodoc']) : "";	
+				$data["local"] = NULL != $this->session->search['id_localizzazione'] ? $this->select_model->getItemName("localizzazioni",$this->session->search['id_localizzazione']) : "";	
+				$data["argomento"] = NULL != $this->session->search['id_argomento'] ? $this->select_model->getItemName("argomenti",$this->session->search['id_argomento']) : "";	
 				break;
 		}
 		
