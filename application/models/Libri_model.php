@@ -81,7 +81,7 @@
 				->join('localizzazioni','libri.id_localizzazione=localizzazioni.id')
 				->join('argomenti','libri.id_argomento=argomenti.id');
 			if (NULL != $autore) $query=$this->db->like('autore',$autore);	
-			if (NULL != $titolo) $query=$this->db->like('autore',$autore);	
+			if (NULL != $titolo) $query=$this->db->like('titolo',$titolo);	
 			if (NULL != $id_tipodoc) $query=$this->db->where('id_tipodoc',$id_tipodoc);	
 			if (NULL != $id_localizzazione) $query=$this->db->where('id_localizzazione',$id_localizzazione);	
 			if (NULL != $id_argomento) $query=$this->db->where('id_argomento',$id_argomento);	
