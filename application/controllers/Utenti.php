@@ -78,6 +78,29 @@ class Utenti extends MY_Controller {
 				
 	}
 	
+	public function profilo () {
+		
+		$this->session->set_userdata('dopo',current_url());
+		
+		if (empty($this->session->utente->nome)) redirect('login');
+		
+		$data['utente']=$this->session->utente;
+		
+		$this->load->view('templates/header');
+		$this->load->view('templates/menu',$data);
+		$this->load->view('utenti/profilo',$data);
+		$this->load->view('templates/footer');
+		// altri js
+		// $this->load->view('utenti/js_profilo',$data);
+		$this->load->view('templates/close');
+		
+		$this->session->unset_userdata('idlibro');
+		$this->session->unset_userdata('fromsearch');
+		$this->session->unset_userdata('updateutente');
+		$this->session->unset_userdata('noupdateutente');
+		
+	}
+	
 	public function nuovo () {
 		
 		$this->session->set_userdata('dopo',current_url()); 

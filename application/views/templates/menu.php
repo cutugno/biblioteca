@@ -13,7 +13,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">	
       <!-- menu funzioni -->			
       <ul class="nav navbar-nav">
-		<li><a href="<?php echo site_url('homepage'); ?>">Ricerca</a></li>
+		<li><a href="<?php echo base_url(); ?>">Ricerca</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gestione libri<span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -52,8 +52,14 @@
       <?php if (($utente->livello >= 0) && (isset($utente->nome))) : ?>
       <!-- menu info -->
       <ul class="nav navbar-nav navbar-right">
-        <li><a class="btn btn-link disabled">Benvenuto <?php echo $utente->username." (".$utente->descrizione.")"; ?></a></li>
-        <li><a href="<?php echo site_url("logout"); ?>">Logout</a></li>
+        <li class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> <?php echo $utente->username." (".$utente->descrizione.")"; ?></a>
+			<ul class="dropdown-menu">
+				<li><a href="<?php echo site_url('profilo'); ?>">Profilo</a></li>
+				<li role="separator" class="divider"></li>
+				<li><a href="<?php echo site_url("logout"); ?>">Logout</a></li>
+            </ul>
+		</li>       
       </ul>
       <!-- /menu info -->
       <?php endif ?>

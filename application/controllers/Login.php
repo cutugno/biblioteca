@@ -63,7 +63,7 @@ class Login extends MY_Controller {
 		log_message("debug","Logout effettuato. Utente id #".$this->session->utente->id.". (login/logout)", LOGPREFIX);		
 		$this->session->sess_destroy();		
 		
-		redirect('homepage');
+		redirect(base_url());
 		
 	}
 	
