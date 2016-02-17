@@ -21,7 +21,7 @@
 		event.returnValue=0;
 		swal({ 
 				title: "", 
-				text: "Vuoi annullare questo presito?", 
+				text: "Vuoi annullare questo prestito?", 
 				html: true,
 				type: "warning",
 				showCancelButton: true,

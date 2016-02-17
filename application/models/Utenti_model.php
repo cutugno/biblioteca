@@ -117,5 +117,11 @@
 			return FALSE;
 				
 		}
+		
+		public function eliminaUtente ($id) {
+			
+			return $query=$this->db->delete('utenti', array('id' => $id));
+			
+		}
 	}
 	

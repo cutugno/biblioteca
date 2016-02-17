@@ -58,7 +58,7 @@
 			cancelButtonText: "Annulla", 
 			confirmButtonText: "Elimina"
 		},function(isConfirm){ 
-			if (isConfirm){ // chiamata ajax cambio livello senza logout   
+			if (isConfirm){ 
 				window.location.href = "<?php echo site_url('libri/delete'); ?>/"+idlibro;
 			}
 		});

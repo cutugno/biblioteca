@@ -30,11 +30,11 @@
 		resetForm("#schedautente");		
 	});
 	
-	$("#btn_deletelibro").click(function(){
-		var idlibro=$("input[name='id']").val();
+	$("#btn_deleteutente").click(function(){
+		var idutente=$("input[name='id']").val();
 		swal({ 
 			title: "", 
-			text: "Vuoi davvero eliminare questo libro?", 
+			text: "Vuoi davvero eliminare questo utente?", 
 			html: true,
 			type: "warning",
 			showCancelButton: true,
@@ -42,8 +42,8 @@
 			cancelButtonText: "Annulla", 
 			confirmButtonText: "Elimina"
 		},function(isConfirm){ 
-			if (isConfirm){ // chiamata ajax cambio livello senza logout   
-				window.location.href = "<?php echo site_url('libri/delete'); ?>/"+idlibro;
+			if (isConfirm){ 
+				window.location.href = "<?php echo site_url('utenti/delete'); ?>/"+idutente;
 			}
 		});
 	});

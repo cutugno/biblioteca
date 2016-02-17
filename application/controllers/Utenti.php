@@ -26,6 +26,8 @@ class Utenti extends MY_Controller {
 		
 		$this->session->unset_userdata('idlibro');
 		$this->session->unset_userdata('fromsearch');
+		$this->session->unset_userdata('eliminautente');
+		$this->session->unset_userdata('noeliminautente');
 		
 	}
 	
@@ -165,6 +167,24 @@ class Utenti extends MY_Controller {
 
 		redirect ('utenti/scheda/'.$aggiornamento_utente['id']);
 		
+	}
+	
+	public function delete($id) {
+		
+		if (!$this->checkLevel(2)){ // controllo se non loggato
+			$this->session->set_userdata('nocons',1);
+			redirect('login');
+		}
+		if (empty($id)) redirect('utenti/elenco'); // se $id non esiste torno a elenco
+		
+		if ($elimina=$this->utenti_model->eliminaUtente($id)){
+			log_message("debug", "Eliminato utente con id #".$id.". Utente operatore id #".$this->session->utente->id.". (utenti/delete)", LOGPREFIX);
+			$this->session->set_userdata('eliminautente',1);
+		}else{
+			log_message("error", "Errore eliminazione utente con id #".$id.". Utente operatore id #".$this->session->utente->id.". (utenti/delete)", LOGPREFIX);
+			$this->session->set_userdata('noeliminautente',1);
+		}
+		redirect ('utenti/elenco');
 	}
 
 	public function ajaxFetchUtenti() {
