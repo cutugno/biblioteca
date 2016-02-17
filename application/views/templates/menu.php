@@ -49,7 +49,7 @@
       </ul>
       <!-- /menu funzioni -->
           
-      <?php if ($utente->livello > 0) : ?>
+      <?php if (($utente->livello >= 0) && (isset($utente->nome))) : ?>
       <!-- menu info -->
       <ul class="nav navbar-nav navbar-right">
         <li><a class="btn btn-link disabled">Benvenuto <?php echo $utente->username." (".$utente->descrizione.")"; ?></a></li>
@@ -58,7 +58,7 @@
       <!-- /menu info -->
       <?php endif ?>
       
-      <?php if (($utente->livello==0) && ($this->uri->segment(1)!="login")) : ?>
+      <?php if ((!isset($utente->nome)) && ($this->uri->segment(1)!="login")) : ?>
        <!-- menu login -->
       <ul class="nav navbar-nav navbar-right">
         <li><a href="<?php echo site_url("login"); ?>">Login</a></li>

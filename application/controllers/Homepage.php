@@ -5,7 +5,7 @@ class Homepage extends MY_Controller {
 	
 	public function index()	{
 		
-		if (!$this->checkLevel(0)){ // controllo se loggato
+		if (!$this->checkLevel(-1)){ // controllo se non loggato
 			$utente = new stdClass();
 			$utente->livello=0;
 			$this->session->set_userdata('utente',$utente);

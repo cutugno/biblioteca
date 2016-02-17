@@ -63,6 +63,7 @@
 				->set('email',$email)
 				->set('telefono',$telefono)
 				->set('livello',$livello)
+				->set('last_edit','NOW()',FALSE)
 				->where('id',$id)
 				->update('utenti');
 				
@@ -72,8 +73,11 @@
 		
 		public function insertUtente ($dati) {
 			
-			if ($query=$this->db->insert('utenti', $dati)) return $this->db->insert_id();
-			 
+			$query=$this->db->set($dati)
+				->set('last_edit','NOW()',FALSE)
+				->insert('utenti');
+				
+			if ($query) return $this->db->insert_id();
 			return FALSE;
 			
 		}

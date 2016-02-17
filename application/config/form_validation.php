@@ -158,10 +158,11 @@ $config = array(
 	'csemplice' => array(
 			array(
 					'field'  => 'keyword',
-					'label'  => 'Cerca',
-					'rules'  => 'required',
+					'label'  => 'Ricerca',
+					'rules'  => 'required|min_length[4]',
 					'errors' => array(
-                         'required' => '%s qualcosa!'
+                         'required'   => '%s qualcosa!',
+                         'min_length' => 'Prova una %s più specifica (min 4 caratteri)' 
 					)
 			)
 	),
