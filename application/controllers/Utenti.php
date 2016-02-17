@@ -40,7 +40,7 @@ class Utenti extends MY_Controller {
 		
 		if (empty($id)) redirect('libri/elenco'); // se $id non esiste torno a elenco
 		
-		$this->load->library('form_validation');
+		$this->load->library('form_validation');		
 	
 		$this->form_validation->set_error_delimiters('<label class="text-danger">', '</label>');
 				
@@ -51,6 +51,11 @@ class Utenti extends MY_Controller {
 		
 		$data['utente']=$this->session->utente;
 		if (!$utente=$this->utenti_model->getUtente($id)) redirect('utenti/elenco');
+		
+		// gestione date
+		$this->load->library('dates');
+		$utente->last_login=$this->dates->convertDateTime($utente->last_login);
+
 		$data['infoutente']=$utente;
 		$data['readonly']=$this->session->utente->livello < 3;
 		$data['readonly'] ? $data['btn_col']=6 : $data['btn_col']=4;

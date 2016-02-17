@@ -8,7 +8,15 @@
 				echo form_open("utenti/scheda/".$infoutente->id,$attr);
 			?>
 			<div class="row">
-			  <div class="form-group col-xs-12 col-sm-8">
+		       <div class="form-group col-xs-12 col-sm-6 col-md-4">
+				<label for="nome">Username</label>
+				<?php 
+					$valore=isset($infoutente->username) ? $infoutente->username : set_value('username');
+					$attr=array("class"=>"form-control","id"=>"nome","name"=>"nome","value"=>$valore, "readonly"=>"true");
+					echo form_input($attr);
+				?>
+			  </div>		
+			  <div class="form-group col-xs-12 col-sm-6 col-md-4">
 				<label for="nome">Nome</label> <?php echo form_error('nome'); ?>
 				<?php 
 					$valore=isset($infoutente->nome) ? $infoutente->nome : set_value('nome');
@@ -17,7 +25,7 @@
 					echo form_input($attr);
 				?>
 			  </div>
-			  <div class="form-group col-xs-12 col-sm-4">
+			  <div class="form-group col-xs-12 col-sm-6 col-md-4">
 				<label for="nome">Livello</label>
 				<?php
 					$options=array();

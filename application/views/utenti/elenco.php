@@ -20,6 +20,7 @@
 		  <table class="table tablesorter hover-highlight" id="utenti_table">
 			  <thead>
 					<tr>
+						<th>Username</th>
 						<th>Nome</th>
 						<th class="filter-select" data-placeholder="Tutte">Classe</th>
 						<th>Email</th>
@@ -31,6 +32,7 @@
 				<tbody>
 					<?php foreach ($utenti as $val): ?>
 					<tr>
+						<td><?php echo $val->username; ?></td>
 						<td><?php echo $val->nome; ?></td>
 						<td><?php echo $val->classe; ?></td>
 						<td><?php echo $val->email; ?></td>

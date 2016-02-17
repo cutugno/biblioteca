@@ -92,7 +92,7 @@
 		
 		public function elencoUtenti () {
 			
-			$query=$this->db->select('utenti.id,utenti.nome,utenti.email,utenti.telefono,utenti.classe,livelli.nome as livello')
+			$query=$this->db->select('utenti.*,livelli.nome as livello')
 				->join('livelli', 'utenti.livello=livelli.livello')
 				->where_not_in('livelli.nome', 'super')
 				->get('utenti');
