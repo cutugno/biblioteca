@@ -27,7 +27,8 @@
 			<i id="preload_inv" class="fa fa-spin fa-spinner" style="display:none"></i>
 			<?php echo form_error('id_libro'); ?>
 			<?php 
-				$attr=array("class"=>"form-control text-uppercase","id"=>"inventario","value"=>@$prestito->inventario);
+				$valore=isset($prestito->inventario) ? $prestito->inventario : set_value('inventario');
+				$attr=array("class"=>"form-control text-uppercase","id"=>"inventario","name"=>"inventario","value"=>$valore);
 				echo form_input($attr);
 			?>
 		</div>
@@ -37,14 +38,16 @@
 		<div class="form-group col-xs-12 col-sm-6">
 			<label for="autore">Autore</label>
 			<?php 
-				$attr=array("class"=>"form-control","id"=>"autore","value"=>@$prestito->autore,"readonly"=>"true");
+			    $valore=isset($prestito->autore) ? $prestito->autore : set_value('autore');
+				$attr=array("class"=>"form-control","id"=>"autore","name"=>"autore","value"=>$valore,"readonly"=>"true");
 				echo form_input($attr);
 			?>
 		</div>
 		<div class="form-group col-xs-12 col-sm-6">
 			<label for="titolo">Titolo</label>
 			<?php 
-				$attr=array("class"=>"form-control","id"=>"titolo","value"=>@$prestito->titolo,"readonly"=>"true");
+			    $valore=isset($prestito->titolo) ? $prestito->titolo : set_value('titolo');
+				$attr=array("class"=>"form-control","id"=>"titolo","name"=>"titolo","value"=>$valore,"readonly"=>"true");
 				echo form_input($attr);
 			?>
 		</div>
@@ -54,14 +57,14 @@
 		<div class="form-group col-xs-12 col-sm-6 col-md-4">
 			<label for="isbn">ISBN</label>
 			<?php 
-				$attr=array("class"=>"form-control","id"=>"isbn","value"=>@$prestito->isbn,"readonly"=>"true");
+				$attr=array("class"=>"form-control","id"=>"isbn","name"=>"isbn","value"=>set_value('isbn'),"readonly"=>"true");
 				echo form_input($attr);
 			?>
 		</div>
 		<div class="form-group col-xs-12 col-sm-6 col-md-4">
 			<label for="cdd">CDD</label>
 			<?php 
-				$attr=array("class"=>"form-control","id"=>"cdd","value"=>@$prestito->cdd,"readonly"=>"true");
+				$attr=array("class"=>"form-control","id"=>"cdd","value"=>set_value('cdd'),"readonly"=>"true");
 				echo form_input($attr);
 			?>
 		</div>
@@ -74,37 +77,39 @@
 				$attr=array(
 						'type'  => 'hidden',
 						'name'  => 'id_utente',
-						'id'    => 'id_utente'
+						'id'    => 'id_utente',
+						'value' => set_value('id_utente')
 				);
 				echo form_input($attr);
 				$attr=array(
 						'type'  => 'hidden',
 						'name'  => 'livello',
-						'id'    => 'livello'
+						'id'    => 'livello',
+						'value' => set_value('livello')
 				);
 				echo form_input($attr);
-				$attr=array("class"=>"form-control","id"=>"nome","name"=>"nome","value"=>"");
+				$attr=array("class"=>"form-control","id"=>"nome","name"=>"nome","value"=>set_value('nome'));
 				echo form_input($attr);
 			?>
 		</div>
 		<div class="form-group col-xs-12 col-sm-6 col-md-3">
 			<label for="classe">Classe</label>
 			<?php 
-				$attr=array("class"=>"form-control","id"=>"classe","name"=>"classe","value"=>"");
+				$attr=array("class"=>"form-control","id"=>"classe","name"=>"classe","value"=>set_value('classe'));
 				echo form_input($attr);
 			?>
 		</div>
 		<div class="form-group col-xs-12 col-sm-6 col-md-3">
-			<label for="email">Email</label>
+			<label for="email">Email</label> <?php echo form_error('email'); ?>
 			<?php 
-				$attr=array("class"=>"form-control","id"=>"email","name"=>"email","value"=>"");
+				$attr=array("class"=>"form-control","id"=>"email","name"=>"email","value"=>set_value('email'));
 				echo form_input($attr);
 			?>
 		</div>
 		<div class="form-group col-xs-12 col-sm-6 col-md-3">
-			<label for="telefono">Telefono</label>
+			<label for="telefono">Telefono</label> <?php echo form_error('telefono'); ?>
 			<?php 
-				$attr=array("class"=>"form-control","id"=>"telefono","name"=>"telefono","value"=>"");
+				$attr=array("class"=>"form-control","id"=>"telefono","name"=>"telefono","value"=>set_value('telefono'));
 				echo form_input($attr);
 			?>
 		</div>
@@ -112,7 +117,7 @@
 	
 	<div class="row">
 		<div class="form-group col-xs-12">
-			<?php echo form_checkbox('comodato', 1); ?> 
+			<?php echo form_checkbox('comodato', 1, set_value('comodato')); ?> 
 			<label for="comodato">Comodato</label>
 		</div>
 	</div>
@@ -121,7 +126,7 @@
 		<div class="form-group col-xs-12">
 			<label for="note">Note</label>
 			<?php 
-				$attr=array("class"=>"form-control","id"=>"note_prestito","name"=>"note_prestito","placeholder"=>"Informazioni prestito","value"=>"");
+				$attr=array("class"=>"form-control","id"=>"note_prestito","name"=>"note_prestito","placeholder"=>"Informazioni prestito","value"=>set_value('note_prestito'));
 				echo form_textarea($attr);
 			?>
 		</div>
@@ -130,11 +135,12 @@
 	<div class="row">
 		<div class="form-group col-xs-12 text-center">
 			<?php
+				$valore=isset($prestito->id) ? $prestito->id : set_value('id_libro');
 				$attr=array(
 						'type'  => 'hidden',
 						'name'  => 'id_libro',
 						'id'    => 'id_libro',
-						'value' => @$prestito->id
+						'value' => $valore
 				);
 				echo form_input($attr);
 				$attr=array("type"=>"submit","class"=>"btn btn-success", "id"=>"btn_registraprestito", "content"=>"<i class=\"fa fa-pencil\"></i> REGISTRA PRESTITO");

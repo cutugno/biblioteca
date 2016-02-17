@@ -106,6 +106,14 @@ function validaPrestito (form){
 			},
 			nome: {
 				required: true
+			},
+			email: {
+				email: true
+			},
+			telefono: {
+				number: true,
+				minlegth: 6,
+				maxlength: 11
 			}
 		},
 		messages: {
@@ -114,6 +122,14 @@ function validaPrestito (form){
 			},
 			nome: {
 				required: "Nome obbligatorio"
+			},
+			email: {
+				email: "Formato email non valido"
+			},
+			telefono: {
+				number: "Solo numeri",
+				minlength: "Min 6 caratteri",
+				maxlength: "Max 6 caratteri"
 			}
 		},
 		errorPlacement: function(error, element) {

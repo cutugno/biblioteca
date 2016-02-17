@@ -142,6 +142,22 @@ $config = array(
 					'errors' => array(
                          'required' => '%s obbligatorio'
 					)
+			),array(
+					'field'  => 'email',
+					'label'  => 'Email',
+					'rules'  => 'valid_email',
+					'errors' => array(
+                         'valid_email' => 'Formato %s non valido'
+					)
+			),array(
+					'field'  => 'telefono',
+					'label'  => 'Telefono',
+					'rules'  => 'numeric|min_length[6]|max_length[11]',
+					'errors' => array(
+                         'numeric' => 'Solo numeri',
+                         'min_length' => 'Min 6 caratteri',
+                         'max_length' => 'Max 11 caratteri'
+					)
 			)
 	),
 	'utente' => array(
