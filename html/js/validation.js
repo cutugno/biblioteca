@@ -98,11 +98,15 @@ function validaLibro (form){
 	});
 }
 
+jQuery.validator.addMethod("alphanumeric", function(value, element) {
+        return this.optional(element) || /^[a-zA-Z0-9]+$/.test(value);
+}); 
+
 function validaPrestito (form){
 	$(form).validate({
 		rules: {
 			inventario: {
-				required: true
+				required: true,			
 			},
 			nome: {
 				required: true
@@ -112,7 +116,7 @@ function validaPrestito (form){
 			},
 			telefono: {
 				number: true,
-				minlegth: 6,
+				minlength: 6,
 				maxlength: 11
 			}
 		},
@@ -139,3 +143,49 @@ function validaPrestito (form){
 	});
 }
 
+function validaUtente (form){
+	$(form).validate({
+		rules: {
+			username: {
+				required: true,
+				alphanumeric: true,
+				minlength: 6,
+				maxlength: 12
+			},
+			nome: {
+				required: true
+			},
+			email: {
+				email: true
+			},
+			telefono: {
+				number: true,
+				minlegth: 6,
+				maxlength: 11
+			}
+		},
+		messages: {
+			username: {
+				required: "Username obbligatorio",
+				alphanumeric: "Solo caratteri alfanumerici",
+				minlength: "Min 6 caratteri",
+				maxlength: "Max 12 caratteri"
+			},
+			nome: {
+				required: "Nome obbligatorio"
+			},
+			email: {
+				email: "Formato email non valido"
+			},
+			telefono: {
+				number: "Solo numeri",
+				minlength: "Min 6 caratteri",
+				maxlength: "Max 6 caratteri"
+			}
+		},
+		errorPlacement: function(error, element) {
+			element.before(error);
+			error.css("color","#a94442");
+		}
+	});
+}

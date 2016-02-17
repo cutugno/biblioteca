@@ -5,12 +5,12 @@ class Utenti extends MY_Controller {
 	
 	public function elenco () {
 		
+		$this->session->set_userdata('dopo',current_url()); 
+		
 		if (!$this->checkLevel(1)){ // controllo se loggato
 			$this->session->set_userdata('nocons',1);
 			redirect('login');
 		}
-		
-		$this->session->set_userdata('dopo',current_url()); 
 		
 		$data['utente']=$this->session->utente;
 		$utenti=$this->utenti_model->elencoUtenti();
@@ -30,14 +30,13 @@ class Utenti extends MY_Controller {
 	}
 	
 	public function scheda ($id) {
-		
+			
+		$this->session->set_userdata('dopo',current_url()); 
 		
 		if (!$this->checkLevel(1)){ // controllo se loggato
 			$this->session->set_userdata('nocons',1);
 			redirect('login');
 		}
-		
-		$this->session->set_userdata('dopo',current_url()); 
 		
 		if (empty($id)) redirect('libri/elenco'); // se $id non esiste torno a elenco
 		
@@ -69,7 +68,73 @@ class Utenti extends MY_Controller {
 		$this->session->unset_userdata('fromsearch');
 		$this->session->unset_userdata('updateutente');
 		$this->session->unset_userdata('noupdateutente');
+				
+	}
+	
+	public function nuovo () {
 		
+		$this->session->set_userdata('dopo',current_url()); 
+		
+		if (!$this->checkLevel(2)){ // controllo se loggato
+			$this->session->set_userdata('nocons',1);
+			redirect('login');
+		}
+		
+		$this->load->library('form_validation');
+					
+		$this->form_validation->set_error_delimiters('<label class="text-danger">', '</label>');
+		
+		if ($this->form_validation->run('nuovoutente') !== FALSE) {
+			// controllo se username già esiste
+			$username=$this->input->post('username');
+			if (!$this->utenti_model->checkUsername($username)){
+				$this->session->set_userdata('nuovoutente',$this->input->post());
+				redirect ("utenti/insert");
+			}else{
+				// username già esiste
+				$this->session->set_flashdata('utenteesiste',$username);
+			}
+		}
+		
+		$data['utente']=$this->session->utente;
+		$data['select_livelli']=$this->select_model->selectLivelli();
+			
+		$this->load->view('templates/header');
+		$this->load->view('templates/menu',$data);
+		$this->load->view('utenti/nuovo',$data);
+		$this->load->view('templates/footer');
+		// altri js
+		$this->load->view('utenti/js_nuovo');
+		$this->load->view('templates/close');
+		
+		$this->session->unset_userdata('idlibro');
+		$this->session->unset_userdata('fromsearch');
+		$this->session->unset_userdata('insertutente');
+		$this->session->unset_userdata('noinsertutente');
+		
+	}
+	
+	public function insert () {
+		
+		if (!$this->checkLevel(2)){ // controllo se loggato
+			$this->session->set_userdata('nocons',1);
+			redirect('login');
+		}
+		
+		if (!$this->session->nuovoutente) redirect ('homepage');
+		
+		$nuovoutente=$this->session->nuovoutente;
+		$this->session->unset_userdata('nuovo_utente');
+		$nuovoutente['password']=sha1('cambiami');
+		if ($utente=$this->utenti_model->insertUtente($nuovoutente)){
+			log_message("debug", "Nuovo utente inserito con id #".$utente.". Utente id #".$this->session->utente->id.". (utenti/insert)", LOGPREFIX);
+			$this->session->set_userdata('insertutente',1);
+		}else{
+			log_message("error", "Errore inserimento nuovo utente. Utente id #".$this->session->utente->id.". (utenti/insert)", LOGPREFIX);
+			$this->session->set_userdata('noinsertutente',1);
+		}
+		
+		redirect ('utenti/nuovo');
 		
 	}
 	

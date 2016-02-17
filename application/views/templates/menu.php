@@ -37,7 +37,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gestione utenti<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <?php if ($utente->livello >= 3) : ?>
-            <li><a href="#">Nuovo utente</a></li>
+            <li><a href="<?php echo site_url('utenti/nuovo'); ?>">Nuovo utente</a></li>
 			<?php endif ?>
             <li><a href="<?php echo site_url('utenti/elenco'); ?>">Elenco utenti</a></li>
           </ul>

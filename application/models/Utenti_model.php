@@ -18,6 +18,14 @@
 			
 		}
 		
+		public function checkUsername ($username) {
+			
+			$query = $this->db->get_where('utenti', array('username' => $username));
+			
+			return $query->num_rows();
+			
+		}
+		
 		public function getUserData($id) {
 			
 			$query = $this->db->select("utenti.*,livelli.nome as descrizione")

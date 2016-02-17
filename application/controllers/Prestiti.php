@@ -46,7 +46,7 @@ class Prestiti extends MY_Controller {
 			$prestito['note_prestito']=$this->input->post('note_prestito');
 			$prestito['id_utente']=$id_utente;			
 			$this->session->set_userdata('nuovop',$prestito);
-			redirect ("prestiti/insertP");
+			redirect ("prestiti/insert");
 		}
 
 		$idlibro=$this->session->idlibro;
@@ -81,7 +81,7 @@ class Prestiti extends MY_Controller {
 				
 	}
 	
-	public function insertP() {
+	public function insert() {
 		
 		if (!$this->checkLevel(0)){ // controllo se non loggato
 			$this->session->set_userdata('nocons',1);

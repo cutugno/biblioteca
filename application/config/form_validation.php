@@ -186,6 +186,43 @@ $config = array(
 					)
 			)		
 	),
+	'nuovoutente' => array(
+			array(
+					'field'  => 'username',
+					'label'  => 'Username',
+					'rules'  => 'required|alpha_numeric|min_length[6]|max_length[12]',
+					'errors' => array(
+                         'required' => '%s obbligatorio',
+                         'alpha_numeric' => 'Solo caratteri alfanumerici',
+                         'min_length' => 'Min 6 caratteri',
+                         'max_length' => 'Max 12 caratteri',
+					)
+			),
+			array(
+					'field'  => 'nome',
+					'label'  => 'Nome',
+					'rules'  => 'required',
+					'errors' => array(
+                         'required' => '%s obbligatorio'
+					)
+			),array(
+					'field'  => 'email',
+					'label'  => 'Email',
+					'rules'  => 'valid_email',
+					'errors' => array(
+                         'valid_email' => 'Formato %s non valido'
+					)
+			),array(
+					'field'  => 'telefono',
+					'label'  => 'Telefono',
+					'rules'  => 'numeric|min_length[6]|max_length[11]',
+					'errors' => array(
+                         'numeric' => 'Solo numeri',
+                         'min_length' => 'Min 6 caratteri',
+                         'max_length' => 'Max 11 caratteri'
+					)
+			)		
+	),
 	// tipi ricerca
 	'csemplice' => array(
 			array(
