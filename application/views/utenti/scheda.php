@@ -11,7 +11,8 @@
 			  <div class="form-group col-xs-12 col-sm-8">
 				<label for="nome">Nome</label> <?php echo form_error('nome'); ?>
 				<?php 
-					$attr=array("class"=>"form-control","id"=>"nome","name"=>"nome","value"=>$infoutente->nome);
+					$valore=isset($infoutente->nome) ? $infoutente->nome : set_value('nome');
+					$attr=array("class"=>"form-control","id"=>"nome","name"=>"nome","value"=>$valore);
 					if ($readonly) $attr["readonly"]="true";
 					echo form_input($attr);
 				?>
@@ -39,17 +40,19 @@
 				?>
 			  </div>
 			  <div class="form-group col-xs-12 col-sm-6 col-md-4">
-				<label for="nome">Email</label> 
+				<label for="email">Email</label> <?php echo form_error('email'); ?>
 				<?php 
-					$attr=array("class"=>"form-control","id"=>"email","name"=>"email","value"=>$infoutente->email);
+					$valore=!empty($infoutente->email) ? $infoutente->email : set_value('email');
+					$attr=array("class"=>"form-control","id"=>"email","name"=>"email","value"=>$valore);
 					if ($readonly) $attr["readonly"]="true";
 					echo form_input($attr);
 				?>
 			  </div>
 			  <div class="form-group col-xs-12 col-sm-6 col-md-4">
-				<label for="nome">Telefono</label> 
+				<label for="telefono">Telefono</label> <?php echo form_error('telefono'); ?>
 				<?php 
-					$attr=array("class"=>"form-control","id"=>"telefono","name"=>"telefono","value"=>$infoutente->telefono);
+					$valore=!empty($infoutente->telefono) ? $infoutente->telefono : set_value('telefono');
+					$attr=array("class"=>"form-control","id"=>"telefono","name"=>"telefono","value"=>$valore);
 					if ($readonly) $attr["readonly"]="true";
 					echo form_input($attr);
 				?>
