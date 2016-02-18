@@ -44,7 +44,7 @@
         </li>
         <?php endif  ?>
         <?php if ($utente->livello >= 3) : ?>
-		<li><a href="#">Operazioni</a></li>
+		<li><a href="#">Strumenti</a></li>
 		<?php endif ?>
       </ul>
       <!-- /menu funzioni -->
@@ -56,6 +56,7 @@
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> <?php echo $utente->username." (".$utente->descrizione.")"; ?></a>
 			<ul class="dropdown-menu">
 				<li><a href="<?php echo site_url('profilo'); ?>">Profilo</a></li>
+				<li><a href="<?php echo site_url('modifica-password'); ?>">Modifica Password</a></li>
 				<li role="separator" class="divider"></li>
 				<li><a href="<?php echo site_url("logout"); ?>">Logout</a></li>
             </ul>

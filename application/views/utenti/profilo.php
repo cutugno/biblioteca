@@ -5,7 +5,7 @@
 		<div class="col-md-9">
 			<?php
 				$attr=array("id"=>"schedautente");
-				echo form_open("utenti/scheda/".$utente->id,$attr);
+				echo form_open("utenti/profilo",$attr);
 			?>
 			<div class="row">
 		       <div class="form-group col-xs-12 col-sm-6 col-md-4">
@@ -56,55 +56,7 @@
 					echo form_input($attr);
 				?>
 			  </div>
-			</div>
-			<div class="row">
-				<div class="col-xs-12">
-					<p class="lead">Modifica Password</p>
-					<form>
-						<div class="row">
-							<div class="form-group col-xs-12 col-sm-6 col-md-4">
-								<label for="old_password">Vecchia password</label>
-								<input type="password" class="form-control" id="old_password" name="old_password">
-							</div>
-							<div class="form-group col-xs-12 col-sm-6 col-md-4">
-								<label for="new_password">Nuova password</label>
-								<input type="password" class="form-control" id="new_password" name="new_password">
-							</div>
-							<div class="form-group col-xs-12 col-sm-6 col-md-4">
-								<label for="conf_password">Conferma password</label>
-								<input type="password" class="form-control" id="conf_password" name="conf_password">
-							</div>
-						</div>
-					</form>
-				</div>			
-			</div>			
-			<!--
-			<div class="row">
-				<div class="col-xs-12">
-					<p class="lead">Modifica Password</p>
-					<form>
-						<div class="row">
-							<div class="col-xs-12 col-sm-6 form-group">
-								<label for="old_password">Vecchia password</label>
-								<input type="password" class="form-control" id="old_password" name="old_password">
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-12 col-sm-6 form-group">
-								<label for="new_password">Nuova password</label>
-								<input type="password" class="form-control" id="new_password" name="new_password">
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-12 col-sm-6 form-group">
-								<label for="conf_password">Conferma password</label>
-								<input type="password" class="form-control" id="conf_password" name="conf_password">
-							</div>
-						</div>
-					</form>
-				</div>			
 			 </div>
-			 -->
 			 <div class="spacer-25"></div>
 			 <div class="row">
 				<div class="form-group col-xs-12 text-center">
@@ -120,30 +72,5 @@
 			 </div>
 			<?php echo form_close(); ?>
 		</div>	
-		<!--	
-		<div class="col-md-3">
-			<p class="lead">Modifica Password</p>
-			<form>
-				<div class="row">
-					<div class="col-xs-12 form-group">
-						<label for="old_password">Vecchia password</label>
-						<input type="password" class="form-control input-sm" id="old_password" name="old_password">
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-12 form-group">
-						<label for="new_password">Nuova password</label>
-						<input type="password" class="form-control input-sm" id="new_password" name="new_password">
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-12 form-group">
-						<label for="conf_password">Conferma password</label>
-						<input type="password" class="form-control input-sm" id="conf_password" name="conf_password">
-					</div>
-				</div>
-			</form>
-		</div>
-		-->
 	</div>		
 </div>
