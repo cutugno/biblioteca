@@ -109,4 +109,10 @@ class Test extends MY_Controller {
 		echo "Importazione completata. Importati $cont libri di $total";
 		
 	}
+	
+	public function connesso () {
+		$this->load->library('connessione');
+		$connesso=$this->connessione->connesso();
+		var_dump ($connesso);
+	}
 }

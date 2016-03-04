@@ -11,6 +11,8 @@ class Homepage extends MY_Controller {
 			$this->session->set_userdata('utente',$utente);
 		}
 		
+		$data['connesso']=$this->connesso(); // controllo connessione per caricamento css e js esterni o locali
+		
 		$this->session->set_userdata('dopo',current_url());
 		
 		$this->load->library('form_validation');
@@ -40,10 +42,10 @@ class Homepage extends MY_Controller {
 				break;
 		}
 		
-		$this->load->view('templates/header');
+		$this->load->view('templates/header',$data);
 		$this->load->view('templates/menu',$data);
 		$this->load->view('homepage/index');
-		$this->load->view('templates/footer');
+		$this->load->view('templates/footer',$data);
 		// altri js
 		$this->load->view('homepage/js_index');
 		$this->load->view('templates/close');

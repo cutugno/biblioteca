@@ -15,6 +15,8 @@ class Stampa extends MY_Controller {
 		
 		if (empty($id)) redirect('prestiti/elenco');	
 		
+		$data['connesso']=$this->connesso(); // controllo connessione per caricamento css e js esterni o locali
+		
 		$this->load->helper('tcpdf_helper');
 		$this->load->library('dates');	
 				

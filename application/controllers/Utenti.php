@@ -12,14 +12,16 @@ class Utenti extends MY_Controller {
 			redirect('login');
 		}
 		
+		$data['connesso']=$this->connesso(); // controllo connessione per caricamento css e js esterni o locali
+		
 		$data['utente']=$this->session->utente;
 		$utenti=$this->utenti_model->elencoUtenti();
 		$utenti ? $data['utenti']=$utenti : $data['utenti']="";
 		
-		$this->load->view('templates/header');
+		$this->load->view('templates/header',$data);
 		$this->load->view('templates/menu',$data);
 		$this->load->view('utenti/elenco',$data);
-		$this->load->view('templates/footer');
+		$this->load->view('templates/footer',$data);
 		// altri js
 		$this->load->view('utenti/js_elenco',$data);
 		$this->load->view('templates/close');
@@ -63,10 +65,10 @@ class Utenti extends MY_Controller {
 		$data['readonly'] ? $data['btn_col']=6 : $data['btn_col']=4;
 		$data['select_livelli']=$this->select_model->selectLivelli();
 		
-		$this->load->view('templates/header');
+		$this->load->view('templates/header',$data);
 		$this->load->view('templates/menu',$data);
 		$this->load->view('utenti/scheda',$data);
-		$this->load->view('templates/footer');
+		$this->load->view('templates/footer',$data);
 		// altri js
 		$this->load->view('utenti/js_scheda',$data);
 		$this->load->view('templates/close');
@@ -86,10 +88,10 @@ class Utenti extends MY_Controller {
 		
 		$data['utente']=$this->session->utente;
 		
-		$this->load->view('templates/header');
+		$this->load->view('templates/header',$data);
 		$this->load->view('templates/menu',$data);
 		$this->load->view('utenti/profilo',$data);
-		$this->load->view('templates/footer');
+		$this->load->view('templates/footer',$data);
 		// altri js
 		// $this->load->view('utenti/js_profilo',$data);
 		$this->load->view('templates/close');
@@ -109,10 +111,10 @@ class Utenti extends MY_Controller {
 		
 		$data['utente']=$this->session->utente;
 		
-		$this->load->view('templates/header');
+		$this->load->view('templates/header',$data);
 		$this->load->view('templates/menu',$data);
 		$this->load->view('utenti/password',$data);
-		$this->load->view('templates/footer');
+		$this->load->view('templates/footer',$data);
 		// altri js
 		// $this->load->view('utenti/js_profilo',$data);
 		$this->load->view('templates/close');
@@ -150,10 +152,10 @@ class Utenti extends MY_Controller {
 		$data['utente']=$this->session->utente;
 		$data['select_livelli']=$this->select_model->selectLivelli();
 			
-		$this->load->view('templates/header');
+		$this->load->view('templates/header',$data);
 		$this->load->view('templates/menu',$data);
 		$this->load->view('utenti/nuovo',$data);
-		$this->load->view('templates/footer');
+		$this->load->view('templates/footer',$data);
 		// altri js
 		$this->load->view('utenti/js_nuovo');
 		$this->load->view('templates/close');

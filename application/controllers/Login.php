@@ -12,6 +12,8 @@ class Login extends MY_Controller {
 			$utente = new stdClass();
 			$utente->livello=0;
 		}
+		
+		$data['connesso']=$this->connesso(); // controllo connessione per caricamento css e js esterni o locali
 
 		$this->load->library('form_validation');
 		
@@ -45,10 +47,10 @@ class Login extends MY_Controller {
 		
 		$data['utente']=$utente;
 				
-		$this->load->view('templates/header');
+		$this->load->view('templates/header'),$data;
 		$this->load->view('templates/menu',$data);
 		$this->load->view('login/index');
-		$this->load->view('templates/footer');
+		$this->load->view('templates/footer',$data);
 		$this->load->view('login/js_login');
 		$this->load->view('templates/close');
 	}

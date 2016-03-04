@@ -11,6 +11,8 @@ class Libri extends MY_Controller {
 			$this->session->set_userdata('nocons',1);
 			redirect('login');
 		}
+		
+		$data['connesso']=$this->connesso(); // controllo connessione per caricamento css e js esterni o locali
 				
 		$this->load->library('form_validation');
 					
@@ -33,10 +35,10 @@ class Libri extends MY_Controller {
 		$data['select_tipidoc']=$this->select_model->selectItems("tipidocumento");
 		$data['select_argomenti']=$this->select_model->selectItems("argomenti");
 			
-		$this->load->view('templates/header');
+		$this->load->view('templates/header',$data);
 		$this->load->view('templates/menu',$data);
 		$this->load->view('libri/nuovo',$data);
-		$this->load->view('templates/footer');
+		$this->load->view('templates/footer',$data);
 		// altri js
 		$this->load->view('libri/js_nuovo');
 		$this->load->view('templates/close');
@@ -84,10 +86,10 @@ class Libri extends MY_Controller {
 		$libri=$this->libri_model->elencoLibri();
 		$libri ? $data['libri']=$libri : $data['libri']="";
 		
-		$this->load->view('templates/header');
+		$this->load->view('templates/header',$data);
 		$this->load->view('templates/menu',$data);
 		$this->load->view('libri/elenco',$data);
-		$this->load->view('templates/footer');
+		$this->load->view('templates/footer',$data);
 		// altri js
 		$this->load->view('libri/js_elenco',$data);
 		$this->load->view('templates/close');
@@ -146,10 +148,10 @@ class Libri extends MY_Controller {
 		
 		$data['readonly']=$this->session->utente->livello > 0;		
 		
-		$this->load->view('templates/header');
+		$this->load->view('templates/header',$data);
 		$this->load->view('templates/menu',$data);
 		$this->load->view('libri/scheda',$data);
-		$this->load->view('templates/footer');
+		$this->load->view('templates/footer',$data);
 		// altri js
 		$this->load->view('libri/js_scheda',$data);
 		$this->load->view('templates/close');

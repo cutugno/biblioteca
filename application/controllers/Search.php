@@ -13,6 +13,8 @@ class Search extends MY_Controller {
 		
 		if (empty($this->session->search['type'])) redirect('homepage');
 		
+		$data['connesso']=$this->connesso(); // controllo connessione per caricamento css e js esterni o locali
+		
 		$this->session->set_userdata('fromsearch',1);
 		$type=$this->session->search['type'];		
 		switch ($type) {
@@ -57,10 +59,10 @@ class Search extends MY_Controller {
 		// info menu
 		$data['utente']=$this->session->utente;
 		
-		$this->load->view('templates/header');
+		$this->load->view('templates/header',$data);
 		$this->load->view('templates/menu',$data);
 		$this->load->view('search/'.$type,$data);
-		$this->load->view('templates/footer');
+		$this->load->view('templates/footer',$data);
 		// altri js
 		$this->load->view('search/js_index',$data);
 		$this->load->view('templates/close');

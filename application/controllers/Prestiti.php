@@ -11,6 +11,8 @@ class Prestiti extends MY_Controller {
 			$this->session->set_userdata('nocons',1);
 			redirect('login');
 		}
+		
+		$data['connesso']=$this->connesso(); // controllo connessione per caricamento css e js esterni o locali
 					
 		$this->load->library('form_validation');
 		
@@ -68,10 +70,10 @@ class Prestiti extends MY_Controller {
 
 		$data['utente']=$this->session->utente;
 		
-		$this->load->view('templates/header');
+		$this->load->view('templates/header',$data);
 		$this->load->view('templates/menu',$data);
 		$this->load->view('prestiti/nuovo',$data);
-		$this->load->view('templates/footer');
+		$this->load->view('templates/footer',$data);
 		// altri js
 		$this->load->view('prestiti/js_nuovo');
 		$this->load->view('templates/close');
@@ -202,10 +204,10 @@ class Prestiti extends MY_Controller {
 		
 		$data['prestiti']=$prestiti;
 		
-		$this->load->view('templates/header');
+		$this->load->view('templates/header',$data);
 		$this->load->view('templates/menu',$data);
 		$this->load->view('prestiti/elenco',$data);
-		$this->load->view('templates/footer');
+		$this->load->view('templates/footer',$data);
 		// altri js
 		$this->load->view('prestiti/js_elenco');
 		$this->load->view('templates/close');
@@ -245,10 +247,10 @@ class Prestiti extends MY_Controller {
 		// info menu
 		$data['utente']=$this->session->utente;
 		
-		$this->load->view('templates/header');
+		$this->load->view('templates/header',$data);
 		$this->load->view('templates/menu',$data);
 		$this->load->view('prestiti/scheda',$data);
-		$this->load->view('templates/footer');
+		$this->load->view('templates/footer',$data);
 		// altri js
 		$this->load->view('prestiti/js_scheda',$data);
 		$this->load->view('templates/close');
