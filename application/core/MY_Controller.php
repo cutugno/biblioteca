@@ -18,7 +18,7 @@ class MY_Controller extends CI_Controller {
 		
 		protected function connesso() {
 		
-			return $connesso=@fsockopen("www.google.it", 80); 
+			return $connesso=@fsockopen("www.google.it", 80,$errno,$errstr,300); 
 		
 		}
 		               
