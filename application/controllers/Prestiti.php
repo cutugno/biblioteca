@@ -178,6 +178,7 @@ class Prestiti extends MY_Controller {
 		}		
 		
 		$data['utente']=$this->session->utente;
+		$data['connesso']=$this->connesso(); // controllo connessione per caricamento css e js esterni o locali
 		
 		$prestiti=$this->prestiti_model->elencoPrestiti();
 		if ($prestiti) {
@@ -232,7 +233,8 @@ class Prestiti extends MY_Controller {
 			redirect('login');
 		}
 		if (empty($id)) redirect('prestiti/elenco'); // se $id non esiste torno a elenco
-		// $this->session->set_userdata('fromprestito',1);
+		
+		$data['connesso']=$this->connesso(); // controllo connessione per caricamento css e js esterni o locali
 				
 		// info prestito
 		if (!$prestito=$this->prestiti_model->getPrestito($id)) redirect('prestiti/elenco');

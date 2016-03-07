@@ -58,6 +58,8 @@ class Libri extends MY_Controller {
 		
 		if (!$this->session->nuovo) redirect ('homepage');
 		
+		$data['connesso']=$this->connesso(); // controllo connessione per caricamento css e js esterni o locali
+		
 		$nuovo=$this->session->nuovo;
 		$this->session->unset_userdata('nuovo');
 		if ($libro=$this->libri_model->insertLibro($nuovo)){
@@ -79,6 +81,8 @@ class Libri extends MY_Controller {
 			$utente->livello=0;
 			$this->session->set_userdata('utente',$utente);
 		}
+		
+		$data['connesso']=$this->connesso(); // controllo connessione per caricamento css e js esterni o locali
 		
 		$this->session->set_userdata('dopo',current_url()); 
 		
@@ -110,6 +114,8 @@ class Libri extends MY_Controller {
 		}		
 		
 		if (empty($id)) redirect('libri/elenco'); // se $id non esiste torno a elenco
+		
+		$data['connesso']=$this->connesso(); // controllo connessione per caricamento css e js esterni o locali
 		
 		$this->session->set_userdata('idlibro',$id); // mi serve se da qui passo alla scheda prestito
 		$this->session->set_userdata('dopo',current_url()); 

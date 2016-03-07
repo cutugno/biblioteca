@@ -44,6 +44,8 @@ class Utenti extends MY_Controller {
 		
 		if (empty($id)) redirect('libri/elenco'); // se $id non esiste torno a elenco
 		
+		$data['connesso']=$this->connesso(); // controllo connessione per caricamento css e js esterni o locali
+		
 		$this->load->library('form_validation');		
 	
 		$this->form_validation->set_error_delimiters('<label class="text-danger">', '</label>');
@@ -87,6 +89,7 @@ class Utenti extends MY_Controller {
 		if (empty($this->session->utente->nome)) redirect('login');
 		
 		$data['utente']=$this->session->utente;
+		$data['connesso']=$this->connesso(); // controllo connessione per caricamento css e js esterni o locali
 		
 		$this->load->view('templates/header',$data);
 		$this->load->view('templates/menu',$data);
@@ -110,6 +113,7 @@ class Utenti extends MY_Controller {
 		if (empty($this->session->utente->nome)) redirect('login');
 		
 		$data['utente']=$this->session->utente;
+		$data['connesso']=$this->connesso(); // controllo connessione per caricamento css e js esterni o locali
 		
 		$this->load->view('templates/header',$data);
 		$this->load->view('templates/menu',$data);
@@ -132,6 +136,10 @@ class Utenti extends MY_Controller {
 			$this->session->set_userdata('nocons',1);
 			redirect('login');
 		}
+				
+		$data['utente']=$this->session->utente;
+		$data['select_livelli']=$this->select_model->selectLivelli();			
+		$data['connesso']=$this->connesso(); // controllo connessione per caricamento css e js esterni o locali
 		
 		$this->load->library('form_validation');
 					
@@ -148,10 +156,7 @@ class Utenti extends MY_Controller {
 				$this->session->set_flashdata('utenteesiste',$username);
 			}
 		}
-		
-		$data['utente']=$this->session->utente;
-		$data['select_livelli']=$this->select_model->selectLivelli();
-			
+
 		$this->load->view('templates/header',$data);
 		$this->load->view('templates/menu',$data);
 		$this->load->view('utenti/nuovo',$data);
@@ -175,6 +180,8 @@ class Utenti extends MY_Controller {
 		}
 		
 		if (!$this->session->nuovoutente) redirect ('homepage');
+		
+		$data['connesso']=$this->connesso(); // controllo connessione per caricamento css e js esterni o locali
 		
 		$nuovoutente=$this->session->nuovoutente;
 		$this->session->unset_userdata('nuovo_utente');

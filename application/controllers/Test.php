@@ -14,7 +14,7 @@ class Test extends MY_Controller {
 		}
 		
 		if (empty($id)) redirect('prestiti/elenco');
-		
+				
 		$this->load->helper('tcpdf_helper');
 		$this->load->library('dates');
 				
@@ -37,6 +37,8 @@ class Test extends MY_Controller {
     }
     
     public function import () {
+		
+		$data['connesso']=$this->connesso(); // controllo connessione per caricamento css e js esterni o locali
 		
 		$this->load->model('import_model');
 		
@@ -110,9 +112,4 @@ class Test extends MY_Controller {
 		
 	}
 	
-	public function connesso () {
-		$this->load->library('connessione');
-		$connesso=$this->connessione->connesso();
-		var_dump ($connesso);
-	}
 }
