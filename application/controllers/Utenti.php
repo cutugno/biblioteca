@@ -113,7 +113,7 @@ class Utenti extends MY_Controller {
 		$this->session->unset_userdata('updateutente');
 		$this->session->unset_userdata('noupdateutente');
 		$this->session->unset_userdata('updateprofilo');
-		$this->session->unset_userdata('noupdateprofilo');
+		$this->session->unset_userdata('noupdateprofilo');		
 		
 	}
 	
@@ -128,6 +128,7 @@ class Utenti extends MY_Controller {
 		$this->form_validation->set_error_delimiters('<label class="text-danger">', '</label>');
 				
 		if ($this->form_validation->run('password') !== FALSE) {
+
 			$this->session->set_userdata('aggiornamento_password',$this->input->post());
 			redirect ("utenti/update_password");
 		}
@@ -140,11 +141,13 @@ class Utenti extends MY_Controller {
 		$this->load->view('utenti/password',$data);
 		$this->load->view('templates/footer',$data);
 		// altri js
-		// $this->load->view('utenti/js_profilo',$data);
+		$this->load->view('utenti/js_password',$data);
 		$this->load->view('templates/close');
 		
 		$this->session->unset_userdata('idlibro');
 		$this->session->unset_userdata('fromsearch');
+		$this->session->unset_userdata('updatepassword');
+		$this->session->unset_userdata('noupdatepassword');
 		
 	}
 	
@@ -296,25 +299,23 @@ class Utenti extends MY_Controller {
 		$aggiornamento_password=$this->session->aggiornamento_password;
 		$this->session->unset_userdata('aggiornamento_password');
 		
-		var_dump ($aggiornamento_password);
+		//aggiungo id utente
+		$aggiornamento_password['id']=$this->session->utente->id;		
 		
 		if ($password=$this->utenti_model->updatePassword($aggiornamento_password)) {
+			// aggiorno sessione utente
+			$this->session->unset_userdata('utente');
+			$datiutente=$this->utenti_model->getUserData($aggiornamento_password['id']);
+			$this->session->set_userdata('utente',$datiutente);
 			
-		}
-		
-		/* cambia 
-		
-		if ($utente=$this->utenti_model->updateUtente($aggiornamento_utente)){
-			log_message("debug", "Aggiornato utente con id #".$aggiornamento_utente['id'].". Utente id #".$this->session->utente->id.". (utenti/update)", LOGPREFIX);
-			$this->session->set_userdata('updateutente',1);
+			log_message("debug", "Aggiornata password utente con id #".$aggiornamento_password['id']."(utenti/update_password)", LOGPREFIX);
+			$this->session->set_userdata('updatepassword',1);
 		}else{
-			log_message("error", "Errore aggiornamento utente con id #".$aggiornamento_utente['id'].". Utente id #".$this->session->utente->id.". (utenti/update)", LOGPREFIX);
-			$this->session->set_userdata('noupdateutente',1);
-		}
+			log_message("debug", "Errore aggiornamento password utente con id #".$aggiornamento_password['id'].". (utenti/update_password)", LOGPREFIX);
+			$this->session->set_userdata('noupdatepassword',1);
+		}	
 
-		redirect ('utenti/scheda/'.$aggiornamento_utente['id']);
-		
-		*/
+		redirect ('modifica-password');
 		
 	}
 

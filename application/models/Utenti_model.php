@@ -97,6 +97,13 @@
 		
 		public function updatePassword ($dati) {
 			
+			extract($dati);
+			
+			$query=$this->db->set('password',sha1($new_password))
+				->where('id',$id)
+				->update('utenti');
+				
+			return $this->db->affected_rows()>0;			
 			
 		}
 		

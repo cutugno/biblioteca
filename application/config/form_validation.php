@@ -228,9 +228,20 @@ $config = array(
 			array(
 				'field'  => 'old_password',
 				'label'  => 'Vecchia password',
-				'rules'  => 'required',
+				'rules'  => array(
+					'required',
+					array(
+						'check_old_password',
+						function($value) {
+							$CI =& get_instance();
+						
+							return (sha1($value)==$CI->session->utente->password);
+						}
+					)
+				),
 				'errors' => array(
-						'required' => '%s obbligatoria'
+						'required' => '%s obbligatoria',
+						'check_old_password' => '%s errata'
 				)
 			),array(
 				'field'  => 'new_password',
