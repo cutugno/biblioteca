@@ -51,7 +51,7 @@
 				'.noorder': {
 					sorter:false
 				},
-				'.past' : { sorter: 'past' },
+				'.past'  : { sorter: 'past' },
 				'.past2' : { sorter: 'past' }
 			},
 			widgetOptions: {
