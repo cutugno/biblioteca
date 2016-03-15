@@ -51,16 +51,27 @@
 				'.noorder': {
 					sorter:false
 				},
-				'.past' : { sorter: 'past' }
+				'.past' : { sorter: 'past' },
+				'.past2' : { sorter: 'past' }
 			},
 			widgetOptions: {
 				filter_functions: {
 					'.past': {
-						"oggi"      : function(e, n, f, i, $r, c, data) { return e <= 1; },
-						"7 giorni"      : function(e, n, f, i, $r, c, data) { return e <= 7; },
-						"1 mese"      : function(e, n, f, i, $r, c, data) { return e <= 31; },
-						"6 mesi"      : function(e, n, f, i, $r, c, data) { return e <= 180; },
-						"1 anno"      : function(e, n, f, i, $r, c, data) { return e <= 365; }
+						"non reso"    : function(e, n, f, i, $r, c, data) { return e < 0; },
+						"oggi"        : function(e, n, f, i, $r, c, data) { return e == 0; },
+						"7 giorni"    : function(e, n, f, i, $r, c, data) { return e >= 0 && e <=7; },
+						"1 mese"      : function(e, n, f, i, $r, c, data) { return e >= 0 && e <= 31; },
+						"6 mesi"      : function(e, n, f, i, $r, c, data) { return e >= 0 && e <= 180; },
+						"1 anno"      : function(e, n, f, i, $r, c, data) { return e >= 0 && e <= 365; },
+						"oltre"       : function(e, n, f, i, $r, c, data) { return e > 365; }
+					},
+					'.past2': {						
+						"oggi"        : function(e, n, f, i, $r, c, data) { return e == 0; },
+						"7 giorni"    : function(e, n, f, i, $r, c, data) { return e >= 0 && e <=7; },
+						"1 mese"      : function(e, n, f, i, $r, c, data) { return e >= 0 && e <= 31; },
+						"6 mesi"      : function(e, n, f, i, $r, c, data) { return e >= 0 && e <= 180; },
+						"1 anno"      : function(e, n, f, i, $r, c, data) { return e >= 0 && e <= 365; },
+						"oltre"       : function(e, n, f, i, $r, c, data) { return e > 365; }
 					}
 				}
 			}
