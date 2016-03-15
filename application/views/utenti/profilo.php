@@ -1,5 +1,4 @@
 <div class="container">
-	<a href="<?php echo site_url('utenti/elenco'); ?>" class="btn btn-link pull-right">Torna all'elenco</a>
 	<h1><?php echo $utente->nome; ?></h1>
 	<div class="row">
 		<div class="col-md-9">
@@ -9,10 +8,10 @@
 			?>
 			<div class="row">
 		       <div class="form-group col-xs-12 col-sm-6 col-md-4">
-				<label for="nome">Username</label>
+				<label for="username">Username</label>
 				<?php 
 					$valore=isset($utente->username) ? $utente->username : set_value('username');
-					$attr=array("class"=>"form-control","id"=>"nome","name"=>"nome","value"=>$valore, "readonly"=>"true");
+					$attr=array("class"=>"form-control","id"=>"username","name"=>"username","value"=>$valore, "readonly"=>"true");
 					echo form_input($attr);
 				?>
 			  </div>		
@@ -64,7 +63,8 @@
 						<div class="col-xs-12 center-xs">
 							<?php					
 								$attr=array("type"=>"submit","class"=>"btn btn-success", "id"=>"btn_updateutente", "content"=>"<i class=\"fa fa-floppy-o\"></i> SALVA MODIFICHE");
-								echo form_button($attr);				
+								echo form_button($attr);	
+								echo form_hidden('id', $utente->id);			
 							?>		
 						</div>
 					</div>

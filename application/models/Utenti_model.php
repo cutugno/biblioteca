@@ -79,6 +79,27 @@
 		
 		}
 		
+		public function updateProfile ($dati) {
+			
+			extract($dati);
+			
+			$query=$this->db->set('nome',$nome)
+				->set('classe',$classe)
+				->set('email',$email)
+				->set('telefono',$telefono)				
+				->set('last_edit','NOW()',FALSE)
+				->where('id',$id)
+				->update('utenti');
+				
+			return $this->db->affected_rows()>0;
+			
+		}
+		
+		public function updatePassword ($dati) {
+			
+			
+		}
+		
 		public function insertUtente ($dati) {
 			
 			$query=$this->db->set($dati)

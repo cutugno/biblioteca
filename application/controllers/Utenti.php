@@ -91,18 +91,29 @@ class Utenti extends MY_Controller {
 		$data['utente']=$this->session->utente;
 		$data['connesso']=$this->connesso(); // controllo connessione per caricamento css e js esterni o locali
 		
+		$this->load->library('form_validation');		
+	
+		$this->form_validation->set_error_delimiters('<label class="text-danger">', '</label>');
+				
+		if ($this->form_validation->run('utente') !== FALSE) {
+			$this->session->set_userdata('aggiornamento_profilo',$this->input->post());
+			redirect ("utenti/update_profilo");
+		}
+		
 		$this->load->view('templates/header',$data);
 		$this->load->view('templates/menu',$data);
 		$this->load->view('utenti/profilo',$data);
 		$this->load->view('templates/footer',$data);
 		// altri js
-		// $this->load->view('utenti/js_profilo',$data);
+		$this->load->view('utenti/js_profilo',$data);
 		$this->load->view('templates/close');
 		
 		$this->session->unset_userdata('idlibro');
 		$this->session->unset_userdata('fromsearch');
 		$this->session->unset_userdata('updateutente');
 		$this->session->unset_userdata('noupdateutente');
+		$this->session->unset_userdata('updateprofilo');
+		$this->session->unset_userdata('noupdateprofilo');
 		
 	}
 	
@@ -231,6 +242,30 @@ class Utenti extends MY_Controller {
 		
 	}
 	
+	public function update_profilo () {
+		
+		if (!$this->session->aggiornamento_profilo) redirect ('homepage');
+		
+		$aggiornamento_profilo=$this->session->aggiornamento_profilo;
+		$this->session->unset_userdata('aggiornamento_profilo');
+
+		if ($profilo=$this->utenti_model->updateProfile($aggiornamento_profilo)) {
+			// aggiorno sessione utente
+			$this->session->unset_userdata('utente');
+			$datiutente=$this->utenti_model->getUserData($aggiornamento_profilo['id']);
+			$this->session->set_userdata('utente',$datiutente);
+		
+			log_message("debug", "Aggiornato profilo utente con id #".$aggiornamento_profilo['id'].". (utenti/update_profilo)", LOGPREFIX);
+			$this->session->set_userdata('updateprofilo',1);
+		}else{
+			log_message("error", "Errore aggiornamento profilo utente con id #".$aggiornamento_profilo['id'].". (utenti/update)", LOGPREFIX);
+			$this->session->set_userdata('noupdateprofilo',1);
+		}
+
+		redirect ('profilo');
+		
+	}
+	
 	public function delete($id) {
 		
 		if (!$this->checkLevel(2)){ // controllo se non loggato
@@ -261,7 +296,13 @@ class Utenti extends MY_Controller {
 		$aggiornamento_password=$this->session->aggiornamento_password;
 		$this->session->unset_userdata('aggiornamento_password');
 		
-		/* cambia */
+		var_dump ($aggiornamento_password);
+		
+		if ($password=$this->utenti_model->updatePassword($aggiornamento_password)) {
+			
+		}
+		
+		/* cambia 
 		
 		if ($utente=$this->utenti_model->updateUtente($aggiornamento_utente)){
 			log_message("debug", "Aggiornato utente con id #".$aggiornamento_utente['id'].". Utente id #".$this->session->utente->id.". (utenti/update)", LOGPREFIX);
@@ -272,6 +313,8 @@ class Utenti extends MY_Controller {
 		}
 
 		redirect ('utenti/scheda/'.$aggiornamento_utente['id']);
+		
+		*/
 		
 	}
 

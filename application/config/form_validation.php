@@ -171,8 +171,9 @@ $config = array(
 			),array(
 					'field'  => 'email',
 					'label'  => 'Email',
-					'rules'  => 'valid_email',
+					'rules'  => 'required|valid_email',
 					'errors' => array(
+						 'required' => '%s obbligatoria',
                          'valid_email' => 'Formato %s non valido'
 					)
 			),array(
