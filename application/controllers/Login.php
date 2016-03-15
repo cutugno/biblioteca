@@ -47,7 +47,7 @@ class Login extends MY_Controller {
 		
 		$data['utente']=$utente;
 				
-		$this->load->view('templates/header'),$data;
+		$this->load->view('templates/header',$data);
 		$this->load->view('templates/menu',$data);
 		$this->load->view('login/index');
 		$this->load->view('templates/footer',$data);

@@ -112,6 +112,15 @@ class Utenti extends MY_Controller {
 		
 		if (empty($this->session->utente->nome)) redirect('login');
 		
+		$this->load->library('form_validation');		
+	
+		$this->form_validation->set_error_delimiters('<label class="text-danger">', '</label>');
+				
+		if ($this->form_validation->run('password') !== FALSE) {
+			$this->session->set_userdata('aggiornamento_password',$this->input->post());
+			redirect ("utenti/update_password");
+		}
+		
 		$data['utente']=$this->session->utente;
 		$data['connesso']=$this->connesso(); // controllo connessione per caricamento css e js esterni o locali
 		
@@ -238,6 +247,32 @@ class Utenti extends MY_Controller {
 			$this->session->set_userdata('noeliminautente',1);
 		}
 		redirect ('utenti/elenco');
+	}
+	
+	public function update_password () {
+		
+		if (!$this->checkLevel(2)){ // controllo se loggato
+			$this->session->set_userdata('nocons',1);
+			redirect('login');
+		}
+		
+		if (!$this->session->aggiornamento_password) redirect ('homepage');
+		
+		$aggiornamento_password=$this->session->aggiornamento_password;
+		$this->session->unset_userdata('aggiornamento_password');
+		
+		/* cambia */
+		
+		if ($utente=$this->utenti_model->updateUtente($aggiornamento_utente)){
+			log_message("debug", "Aggiornato utente con id #".$aggiornamento_utente['id'].". Utente id #".$this->session->utente->id.". (utenti/update)", LOGPREFIX);
+			$this->session->set_userdata('updateutente',1);
+		}else{
+			log_message("error", "Errore aggiornamento utente con id #".$aggiornamento_utente['id'].". Utente id #".$this->session->utente->id.". (utenti/update)", LOGPREFIX);
+			$this->session->set_userdata('noupdateutente',1);
+		}
+
+		redirect ('utenti/scheda/'.$aggiornamento_utente['id']);
+		
 	}
 
 	public function ajaxFetchUtenti() {

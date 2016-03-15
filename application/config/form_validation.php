@@ -223,6 +223,31 @@ $config = array(
 					)
 			)		
 	),
+	'password' => array(
+			array(
+				'field'  => 'old_password',
+				'label'  => 'Vecchia password',
+				'rules'  => 'required',
+				'errors' => array(
+						'required' => '%s obbligatoria'
+				)
+			),array(
+				'field'  => 'new_password',
+				'label'  => 'Nuova password',
+				'rules'  => 'required',
+				'errors' => array(
+						'required' => '%s obbligatoria'
+				)
+			),array(
+				'field'  => 'conf_password',
+				'label'  => 'Conferma password',
+				'rules'  => 'required|matches[new_password]',
+				'errors' => array(
+						'required' => '%s obbligatoria',
+						'matches' => 'Le due password non corrispondono'
+				)
+			),
+	),
 	// tipi ricerca
 	'csemplice' => array(
 			array(
