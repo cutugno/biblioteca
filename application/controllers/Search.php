@@ -24,9 +24,13 @@ class Search extends MY_Controller {
 				break;
 			case "cprestito":
 				$codice=$this->session->search['codice'];
-				$risultati=$this->prestiti_model->getPrestitoByCodice($codice); // risultati in realtà è un singolo record
-				$this->load->library('dates');
+				if (!$risultati=$this->prestiti_model->getPrestitoByCodice($codice)){
+					$risultati=""; 
+					break;
+				}
+				
 				// gestione date e giorni passati
+				$this->load->library('dates');				
 				$adesso=date("Y-m-d", time());
 				if (null != $risultati->data_prestito) {
 					$prestito=explode(" ",$risultati->data_prestito);
@@ -54,7 +58,6 @@ class Search extends MY_Controller {
 		}
 		
 		$risultati ? $data['risultati']=$risultati : $data['risultati']="";
-		// var_dump ($risultati);
 		
 		// info menu
 		$data['utente']=$this->session->utente;
