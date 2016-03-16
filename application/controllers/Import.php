@@ -48,25 +48,25 @@ class Import extends MY_Controller {
 		
 		$this->load->model('import_model');
 			
-		$output="";
+		$output="Inizio procedura di importazione libri con metodo ".$importazione['metodo'].". Utente ID #".$this->session->utente->id."\n";
 		
 		// metodo truncate
 		if ($importazione['metodo']=="truncate") {			
 			$tabelle=array("libri","tipidocumento","prestiti");
 				foreach ($tabelle as $val) {
 				$this->import_model->truncateTable($val);
+				$output.="Svuotate tabelle Libri, Tipi_documento e Prestiti\n";
 			}
 		}
 		
 		$cont=0;
 		$total=-1;
 		$filename=CSVUPLOADIR.$importazione['csvname'];
-		// $filename="csv/liceale.csv"; 
 		
 		// controllo se $filename esiste ed è apribile
 		if (file_exists($filename)){			
 			$handle=fopen($filename,"r");
-			
+			$output.="Aperto file ".$filename."\n";
 			while (($data=fgetcsv($handle,1000,","))!==FALSE){
 				$total++;	
 				if ($total==0) continue;
@@ -125,17 +125,17 @@ class Import extends MY_Controller {
 				
 				if ($new_libro=$this->import_model->newLibro($libro)){
 					$cont++;
-					$output.="Libro #$total inserito. ID: $new_libro<br>";
+					$output.="Libro #$total inserito. ID: $new_libro\n";
 				}else{
-					$output.="Libro #$total non inserito<br>";
+					$output.="Libro #$total non inserito\n";
 				}	
 			}
 			$echo="Importazione libri completata. Importati $cont libri di $total";
 			$output.=$echo;
-			// $output va in file log dedicato per importazione
-			// $echo va in log generico e stampato a video in swal
+			// $output va in file log dedicato per importazione; $echo va in log generico e stampato a video in swal
 			log_message("debug", $echo." con metodo ".$importazione['metodo'].". Utente id #".$this->session->utente->id.". (import/doimport)", LOGPREFIX);
-			$this->session->set_userdata('import',1);
+			$this->session->set_userdata('import',1);		
+			unlink($filename);	
 		}else{
 			// file csv inesistente o inaccessibile
 			$echo="Importazione libri non effettuata. Il file .csv non può essere aperto";
@@ -145,11 +145,21 @@ class Import extends MY_Controller {
 		}
 		$this->session->set_userdata('echoimport',$echo);
 		
+		//scrittura $output in file di .log
+		$this->load->library('dates');
+		$this->load->helper('file');
+		
+		$now=$this->dates->currentDateTime();
+		$logname=IMPORTLOGDIR."import-".$now.".log";
+		write_file($logname, $output);
+
 		redirect ('import');
 		
 	}
 	
 	public function loadCSV () {
+		
+		/* salvo file csv per importazione libri */
 		
 		$this->output->enable_profiler(FALSE);
 		
@@ -168,6 +178,8 @@ class Import extends MY_Controller {
 	}
 	
 	public function unlinkCSV () {
+		
+		/* cancello file csv per importazione libri */
 		
 		$this->output->enable_profiler(FALSE);
 		

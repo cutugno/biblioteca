@@ -44,8 +44,31 @@
 		url="<?php echo site_url('import/unlinkCSV'); ?>"; // funzione che elimina il file
 		$.post(url,dati,function(msg) { 
 			$("#loadfile").show();
+			$("#csvname").val("");
 			console.log(msg);
 			swal({title:"", text:"File rimosso", timer:1500, showConfirmButton:false, type: "success"});
+		});
+	});
+	
+	$("#btn_import").click(function(event){
+		event.preventDefault();
+		event.returnValue=0;		
+		var metodo=$("select[name='metodo']").val();
+		var swaltext=metodo=="append" ? "Stai per aggiungere dei libri al database.<br>" : "Attenzione! Cliccando su CONFERMA avvierai la procedura per svuotare il database.<br><strong>Perderai tutti i libri e i prestiti già inseriti</strong>.<br>" ;
+		swaltext+=" Confermi l'operazione?";
+		swal({ 
+			title: "", 
+			text: swaltext, 
+			html: true,
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			cancelButtonText: "Annulla", 
+			confirmButtonText: "Conferma"
+		},function(isConfirm){ 
+			if (isConfirm){ 
+				$("#formimport").submit();
+			}
 		});
 	});
 	

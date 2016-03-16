@@ -47,5 +47,14 @@ Class Dates {
 		
 	}
 	
+	public function currentDateTime($datestring="%d.%m.%Y-%h.%i.%s") {
+		
+		$CI =& get_instance();
+		
+		$CI->load->helper('date');
+		return mdate($datestring, time());
+		
+	}
+	
 	
 }
