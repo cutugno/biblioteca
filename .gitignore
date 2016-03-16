@@ -1,7 +1,6 @@
 .DS_Store
 
 imp_exp/*
-public/csv/*
 
 application/cache/*
 !application/cache/index.html
