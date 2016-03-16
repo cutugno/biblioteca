@@ -93,7 +93,6 @@
 			<div class="row">
 				<div class="col-xs-12">						
 					<div class="row">
-					<!-- <p>pulsante stampa ricevuta</p> -->
 						<?php if ($prestito->data_reso=="") : ?>
 						<div class="col-xs-12">
 							<a id="stamparicevuta" href="<?php echo site_url('stampa/ricevuta/'.$prestito->id); ?>" class="btn btn-primary" target="_blank"><i class="fa fa-print"></i> STAMPA RICEVUTA</a>										
