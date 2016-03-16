@@ -58,7 +58,7 @@
 			<div class="spacer-25"></div>
 			<div class="row">
 				<div class="col-xs-12">
-					<p class="lead">Info utente</p>
+					<p class="lead">Info utente</p> 
 				</div>
 			</div>
 			<div class="row">
@@ -107,7 +107,13 @@
 						<div class="col-xs-12">
 							<a href="<?php echo site_url('prestiti/reso/'.$prestito->id); ?>" class="btn btn-success"><i class="fa fa-reply"></i> REGISTRA RESO</a>
 						</div>
-						<?php endif ?>		
+						<?php endif ?>	
+						<?php if (null!=$prestito->email) : ?>
+						<div class="col-xs-12 spacer-10"></div>
+						<div class="col-xs-12">
+							<a href="<?php echo "#" ?>" class="btn btn-danger"><i class="fa fa-envelope"></i> CONTATTA UTENTE</a>
+						</div>	
+						<?php endif ?>
 					</div>
 				</div>
 			</div>

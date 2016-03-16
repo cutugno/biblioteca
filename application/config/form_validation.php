@@ -145,9 +145,28 @@ $config = array(
 			),array(
 					'field'  => 'email',
 					'label'  => 'Email',
-					'rules'  => 'valid_email',
+					// controllo email è utilizzabile (non esiste)
+					'rules'  => array(
+						'valid_email',						
+						array(
+							'usable_email',
+							function($value) {
+								$CI =& get_instance();
+							
+								$CI->load->database();
+								
+								$query = $CI->db->select('*')
+									->where('email',$value)
+									->where('id !=',$CI->input->post('id_utente'))
+									->get('utenti');
+									
+								return $query->num_rows()==0;
+							}
+						)
+					),
 					'errors' => array(
-                         'valid_email' => 'Formato %s non valido'
+							'valid_email' => 'Formato %s non valido',
+							'usable_email' => '%s già in uso'
 					)
 			),array(
 					'field'  => 'telefono',
@@ -171,10 +190,27 @@ $config = array(
 			),array(
 					'field'  => 'email',
 					'label'  => 'Email',
-					'rules'  => 'required|valid_email',
+					'rules'  => array(
+						'valid_email',						
+						array(
+							'usable_email',
+							function($value) {
+								$CI =& get_instance();
+							
+								$CI->load->database();
+								
+								$query = $CI->db->select('*')
+									->where('email',$value)
+									->where('id !=',$CI->input->post('id_utente'))
+									->get('utenti');
+									
+								return $query->num_rows()==0;
+							}
+						)
+					),
 					'errors' => array(
-						 'required' => '%s obbligatoria',
-                         'valid_email' => 'Formato %s non valido'
+							'valid_email' => 'Formato %s non valido',
+							'usable_email' => '%s già in uso'
 					)
 			),array(
 					'field'  => 'telefono',
@@ -209,9 +245,27 @@ $config = array(
 			),array(
 					'field'  => 'email',
 					'label'  => 'Email',
-					'rules'  => 'valid_email',
+					'rules'  => array(
+						'valid_email',						
+						array(
+							'usable_email',
+							function($value) {
+								$CI =& get_instance();
+							
+								$CI->load->database();
+								
+								$query = $CI->db->select('*')
+									->where('email',$value)
+									->where('id !=',$CI->input->post('id_utente'))
+									->get('utenti');
+									
+								return $query->num_rows()==0;
+							}
+						)
+					),
 					'errors' => array(
-                         'valid_email' => 'Formato %s non valido'
+							'valid_email' => 'Formato %s non valido',
+							'usable_email' => '%s già in uso'
 					)
 			),array(
 					'field'  => 'telefono',
