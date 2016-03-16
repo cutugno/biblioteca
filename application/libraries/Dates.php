@@ -47,7 +47,7 @@ Class Dates {
 		
 	}
 	
-	public function currentDateTime($datestring="%d.%m.%Y-%h.%i.%s") {
+	public function currentDateTime($datestring="%d.%m.%Y-%H.%i.%s") {
 		
 		$CI =& get_instance();
 		
