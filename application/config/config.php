@@ -7,7 +7,7 @@ define ('LOGPREFIX', 'BIBLIO_'); // prefisso per log personali in /var/log/bibli
 define ('CODL', 4); // lunghezza codice prestito
 define ('CODI', 4); // lunghezza codice inventario
 define ('CSVUPLOADIR', '/var/www/biblioteca/public/csv/'); // percorso upload file csv per importazione libri
-define ('IMPORTLOGDIR', '/var/www/biblioteca/public/csv/log/'); // percorso file log importazione libri
+define ('IMPORTLOGDIR', '/var/log/biblioteca/import/'); // percorso file log importazione libri
 
 /*
 |--------------------------------------------------------------------------
