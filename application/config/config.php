@@ -6,6 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 define ('LOGPREFIX', 'BIBLIO_'); // prefisso per log personali in /var/log/biblioteca
 define ('CODL', 4); // lunghezza codice prestito
 define ('CODI', 4); // lunghezza codice inventario
+define ('CSVUPLOADIR', '/var/www/biblioteca/html/csv/'); // percorso upload file csv per importazione libri
 
 /*
 |--------------------------------------------------------------------------

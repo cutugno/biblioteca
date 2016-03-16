@@ -260,6 +260,23 @@ $config = array(
 				)
 			),
 	),
+	'import' => array(
+			array(
+					'field'  => 'csvname',
+					'label'  => 'File .csv',
+					'rules'  => 'required',
+					'errors' => array(
+                         'required' => '%s obbligatorio'
+					)
+			),array(
+					'field'  => 'metodo',
+					'label'  => 'Metodo',
+					'rules'  => 'required',
+					'errors' => array(
+						 'required' => '%s obbligatorio'
+					)
+			)
+	),
 	// tipi ricerca
 	'csemplice' => array(
 			array(

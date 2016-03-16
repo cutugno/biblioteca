@@ -44,7 +44,12 @@
         </li>
         <?php endif  ?>
         <?php if ($utente->livello >= 3) : ?>
-		<li><a href="#">Strumenti</a></li>
+		 <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Strumenti<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="<?php echo site_url('import'); ?>">Importazione libri</a></li>            
+          </ul>
+        </li>
 		<?php endif ?>
       </ul>
       <!-- /menu funzioni -->

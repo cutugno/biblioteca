@@ -56,12 +56,12 @@ class Libri extends MY_Controller {
 			redirect('login');
 		}
 		
-		if (!$this->session->nuovo) redirect ('homepage');
+		if (!$this->session->nuovo) redirect ('homepage');		
+		$nuovo=$this->session->nuovo;
+		$this->session->unset_userdata('nuovo');
 		
 		$data['connesso']=$this->connesso(); // controllo connessione per caricamento css e js esterni o locali
 		
-		$nuovo=$this->session->nuovo;
-		$this->session->unset_userdata('nuovo');
 		if ($libro=$this->libri_model->insertLibro($nuovo)){
 			log_message("debug", "Libro inserito con id #".$libro.". Utente id #".$this->session->utente->id.". (libri/insert)", LOGPREFIX);
 			$this->session->set_userdata('insertlibro',1);

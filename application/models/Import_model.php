@@ -23,10 +23,7 @@
 		
 		public function countLibriForLoc ($id_loc) {
 			
-			//$query=$this->db->get_where("libri",array("id_localizzazione"=>$id_loc));
-			
-			$query=$this->db->where("id_localizzazione",$id_loc)
-				->get("libri");
+			$query=$this->db->get_where("libri",array("id_localizzazione"=>$id_loc));
 			
 			return $query->num_rows();
 			
