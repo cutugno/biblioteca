@@ -129,7 +129,7 @@ class Libri extends MY_Controller {
 			redirect ("libri/update");
 		}
 
-		$this->load->library('dates');
+		$this->load->helper('date');
 		
 		// info libro
 		$libro=$this->libri_model->getLibro($id);
@@ -143,8 +143,8 @@ class Libri extends MY_Controller {
 		
 		// gestione date
 		if ($prestito) {
-			$prestito->data_prestito=$this->dates->convertDateTime($prestito->data_prestito,1);
-			$prestito->data_reso ? $prestito->data_reso=$this->dates->convertDateTime($prestito->data_reso,1) : $prestito->data_reso="";
+			$prestito->data_prestito=convertDateTime($prestito->data_prestito,1);
+			$prestito->data_reso ? $prestito->data_reso=convertDateTime($prestito->data_reso,1) : $prestito->data_reso="";
 		}
 		
 		$data['prestito']=$prestito;

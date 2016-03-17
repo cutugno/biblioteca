@@ -146,10 +146,10 @@ class Import extends MY_Controller {
 		$this->session->set_userdata('echoimport',$echo);
 		
 		//scrittura $output in file di .log
-		$this->load->library('dates');
+		$this->load->helper('date');
 		$this->load->helper('file');
 		
-		$now=$this->dates->currentDateTime();
+		$now=currentDateTime();
 		$logname=IMPORTLOGDIR."import-".$now.".log";
 		write_file($logname, $output);
 

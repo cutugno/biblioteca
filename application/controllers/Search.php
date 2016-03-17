@@ -30,19 +30,19 @@ class Search extends MY_Controller {
 				}
 				
 				// gestione date e giorni passati
-				$this->load->library('dates');				
+				$this->load->helper('date');				
 				$adesso=date("Y-m-d", time());
 				if (null != $risultati->data_prestito) {
 					$prestito=explode(" ",$risultati->data_prestito);
 					$prestito=$prestito[0];
-					$risultati->diff_prestito=$this->dates->dateDifference($adesso,$prestito);
-					$risultati->data_prestito=$this->dates->convertDateTime($risultati->data_prestito,1);
+					$risultati->diff_prestito=dateDifference($adesso,$prestito);
+					$risultati->data_prestito=convertDateTime($risultati->data_prestito,1);
 				}			
 				if (null != $risultati->data_reso) {
 					$reso=explode(" ",$risultati->data_reso);
 					$reso=$reso[0];
-					$risultati->diff_reso=$this->dates->dateDifference($adesso,$reso);
-					$risultati->data_reso=$this->dates->convertDateTime($risultati->data_reso,1);				
+					$risultati->diff_reso=dateDifference($adesso,$reso);
+					$risultati->data_reso=convertDateTime($risultati->data_reso,1);				
 				}
 				break;
 			case "cavanzata":

@@ -182,21 +182,21 @@ class Prestiti extends MY_Controller {
 		
 		$prestiti=$this->prestiti_model->elencoPrestiti();
 		if ($prestiti) {
-			$this->load->library('dates');
+			$this->load->helper('date');
 			foreach ($prestiti as $key=>$val){
 				// gestione date e giorni passati
 				$adesso=date("Y-m-d", time());
 				if (null != $val->data_prestito) {
 					$prestito=explode(" ",$val->data_prestito);
 					$prestito=$prestito[0];
-					$prestiti[$key]->diff_prestito=$this->dates->dateDifference($adesso,$prestito);
-					$prestiti[$key]->data_prestito=$this->dates->convertDateTime($val->data_prestito,1);
+					$prestiti[$key]->diff_prestito=dateDifference($adesso,$prestito);
+					$prestiti[$key]->data_prestito=convertDateTime($val->data_prestito,1);
 				}			
 				if (null != $val->data_reso) {
 					$reso=explode(" ",$val->data_reso);
 					$reso=$reso[0];
-					$prestiti[$key]->diff_reso=$this->dates->dateDifference($adesso,$reso);
-					$prestiti[$key]->data_reso=$this->dates->convertDateTime($val->data_reso,1);				
+					$prestiti[$key]->diff_reso=dateDifference($adesso,$reso);
+					$prestiti[$key]->data_reso=convertDateTime($val->data_reso,1);				
 				}
 			}
 		}else{
@@ -240,9 +240,9 @@ class Prestiti extends MY_Controller {
 		if (!$prestito=$this->prestiti_model->getPrestito($id)) redirect('prestiti/elenco');
 		
 		// gestione date
-		$this->load->library('dates');
-		$prestito->data_prestito=$this->dates->convertDateTime($prestito->data_prestito);
-		$prestito->data_reso ? $prestito->data_reso=$this->dates->convertDateTime($prestito->data_reso) : $prestito->data_reso="";
+		$this->load->helper('date');
+		$prestito->data_prestito=convertDateTime($prestito->data_prestito);
+		$prestito->data_reso ? $prestito->data_reso=convertDateTime($prestito->data_reso) : $prestito->data_reso="";
 		
 		$data['prestito']=$prestito;
 

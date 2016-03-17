@@ -18,14 +18,14 @@ class Stampa extends MY_Controller {
 		$data['connesso']=$this->connesso(); // controllo connessione per caricamento css e js esterni o locali
 		
 		$this->load->helper('tcpdf_helper');
-		$this->load->library('dates');	
+		$this->load->helper('date');	
 				
 		// info prestito
 		$prestito=$this->prestiti_model->getPrestito($id);
 		
 		// gestione date
-		$prestito->data_prestito=$this->dates->convertDateTime($prestito->data_prestito);
-		$prestito->data_reso ? $prestito->data_reso=$this->dates->convertDateTime($prestito->data_reso) : $prestito->data_reso="";
+		$prestito->data_prestito=convertDateTime($prestito->data_prestito);
+		$prestito->data_reso ? $prestito->data_reso=convertDateTime($prestito->data_reso) : $prestito->data_reso="";
 		
 		$data['prestito']=$prestito;
 		$data['title']="TEST";

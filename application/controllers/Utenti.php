@@ -59,8 +59,8 @@ class Utenti extends MY_Controller {
 		if (!$utente=$this->utenti_model->getUtente($id)) redirect('utenti/elenco');
 		
 		// gestione date
-		$this->load->library('dates');
-		$utente->last_login=$this->dates->convertDateTime($utente->last_login);
+		$this->load->helper('date');
+		$utente->last_login=convertDateTime($utente->last_login);
 
 		$data['infoutente']=$utente; // utente della scheda
 		$data['readonly']=$this->session->utente->livello < 3;
