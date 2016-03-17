@@ -49,4 +49,9 @@ class Test extends MY_Controller {
 		
 	}
 	
+	public function aa(){
+		
+		
+	}
+	
 }
