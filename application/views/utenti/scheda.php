@@ -102,8 +102,10 @@
 			 </div>
 			<?php echo form_close(); ?>
 		</div>
-		<div class="col-md-3">
-			<!-- <a href="#" class="btn btn-primary"><i class="fa fa-envelope-o"></i> CONTATTA UTENTE</a> -->
+		<div class="col-md-3 text-right center-sm">
+			<?php if (!empty($infoutente->email)) : ?>
+			<a href="<?php echo site_url('contatta-utente/'.$infoutente->id); ?>" class="btn btn-primary"><i class="fa fa-envelope-o"></i> CONTATTA UTENTE</a>
+			<?php endif ?>
 		</div>
 		
 	</div>

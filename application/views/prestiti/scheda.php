@@ -5,7 +5,6 @@
 	<a href="<?php echo site_url('prestiti/elenco'); ?>" class="btn btn-link pull-right">Torna all'elenco</a>
 	<?php endif ?>
 	<h1>Prestito #<?php echo $prestito->codice; ?></h1>
-	<div class="spacer-10"></div>
 	<div class="row">
 		<div class="col-md-9">
 			<div class="row">
@@ -89,7 +88,7 @@
 			-->
 			<?php endif ?>
 		</div>
-		<div class="col-md-3">
+		<div class="col-md-3 text-right center-sm">
 			<div class="row">
 				<div class="col-xs-12">						
 					<div class="row">
@@ -111,7 +110,7 @@
 						<?php if (null!=$prestito->email) : ?>
 						<div class="col-xs-12 spacer-10"></div>
 						<div class="col-xs-12">
-							<a href="<?php echo "#" ?>" class="btn btn-danger"><i class="fa fa-envelope"></i> CONTATTA UTENTE</a>
+							<a href="<?php echo site_url('contatta-utente/'.$prestito->id_utente); ?>" class="btn btn-danger"><i class="fa fa-envelope-o"></i> CONTATTA UTENTE</a>
 						</div>	
 						<?php endif ?>
 					</div>

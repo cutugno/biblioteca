@@ -8,6 +8,7 @@
 <script src="<?php echo site_url('js/dist/bootstrap.min.js'); ?>"></script>
 <?php endif ?>
 <script src="<?php echo site_url("js/sweetalert.min.js"); ?>" type="text/javascript"></script>
+<script src="<?php echo site_url("js/summernote.min.js"); ?>" type="text/javascript"></script>
 <script src="<?php echo site_url('js/jquery.tablesorter.js'); ?>"></script>
 <script src="<?php echo site_url('js/jquery.tablesorter.pager.js'); ?>"></script>
 <script src="<?php echo site_url('js/jquery.tablesorter.widgets.js'); ?>"></script>

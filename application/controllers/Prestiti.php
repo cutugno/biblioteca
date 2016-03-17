@@ -262,6 +262,7 @@ class Prestiti extends MY_Controller {
 		$this->session->unset_userdata('noinsertprestito');
 		$this->session->unset_userdata('registratoreso');
 		$this->session->unset_userdata('noregistratoreso');
+		$this->session->unset_userdata('noutente');
 			
 	}
 

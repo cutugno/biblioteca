@@ -18,6 +18,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<?php endif ?>
 	<link href="<?php echo site_url("css/sweetalert.css"); ?>" rel="stylesheet">
 	<link href="<?php echo site_url('css/tablesorter.css'); ?>" rel="stylesheet">
+	<link href="<?php echo site_url('css/summernote.css'); ?>" rel="stylesheet">
 	<link href="<?php echo site_url('css/stile.css'); ?>" rel="stylesheet">
 </head>
 

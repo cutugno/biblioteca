@@ -331,6 +331,34 @@ $config = array(
 					)
 			)
 	),
+	'contatta' => array(
+			array(
+					'field'  => 'email',
+					'label'  => 'Email',
+					'rules'  => 'required|valid_email',
+					'errors' => array(
+                         'required' => '%s obbligatoria',
+                         'valid_email' => 'Formato %s non valido'
+					)
+			),
+			array(
+					'field'  => 'messaggio',
+					'label'  => 'Messaggio',
+					'rules'  => array(
+						'required',
+						array(
+							'summernote_required',
+							function($value) {
+								return strip_tags($value)!="";
+							}
+						)
+					),
+					'errors' => array(
+							'required' => '%s obbligatorio',
+							'summernote_required' => '%s obbligatorio'
+					)
+			)
+	),
 	// tipi ricerca
 	'csemplice' => array(
 			array(

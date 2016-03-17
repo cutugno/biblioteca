@@ -43,6 +43,12 @@ i.fa.fa-circle.danger {
     }
 }
 
+@media screen and (max-width: 991px) {
+    .center-sm {
+        text-align: center;
+    }
+}
+
 .nav-tabs {
 	border-bottom: 0px !important;
 }

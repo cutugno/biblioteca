@@ -42,8 +42,8 @@ class Utenti extends MY_Controller {
 			redirect('login');
 		}
 		
-		if (empty($id)) redirect('libri/elenco'); // se $id non esiste torno a elenco
-		
+		if (empty($id)) redirect('utenti/elenco'); // se $id non esiste torno a elenco
+	
 		$data['connesso']=$this->connesso(); // controllo connessione per caricamento css e js esterni o locali
 		
 		$this->load->library('form_validation');		
@@ -55,14 +55,14 @@ class Utenti extends MY_Controller {
 			redirect ("utenti/update");
 		}
 		
-		$data['utente']=$this->session->utente;
+		$data['utente']=$this->session->utente; // utente loggato
 		if (!$utente=$this->utenti_model->getUtente($id)) redirect('utenti/elenco');
 		
 		// gestione date
 		$this->load->library('dates');
 		$utente->last_login=$this->dates->convertDateTime($utente->last_login);
 
-		$data['infoutente']=$utente;
+		$data['infoutente']=$utente; // utente della scheda
 		$data['readonly']=$this->session->utente->livello < 3;
 		$data['readonly'] ? $data['btn_col']=6 : $data['btn_col']=4;
 		$data['select_livelli']=$this->select_model->selectLivelli();
@@ -79,6 +79,7 @@ class Utenti extends MY_Controller {
 		$this->session->unset_userdata('fromsearch');
 		$this->session->unset_userdata('updateutente');
 		$this->session->unset_userdata('noupdateutente');
+		$this->session->unset_userdata('noutente');
 				
 	}
 	
@@ -359,6 +360,73 @@ class Utenti extends MY_Controller {
 		$id=$this->input->post('id');
 		$utente=$this->utenti_model->getUserData($id);
 		echo json_encode($utente);
+		
+	}
+	
+	public function contatta($id) {
+		
+		if (empty($id)) redirect($this->session->dopo); // se $id non esiste torno da dove sto venendo
+				
+		if (!$this->checkLevel(0)){ // controllo se loggato
+			$this->session->set_userdata('nocons',1);
+			redirect('login');
+		}
+		
+		$this->load->library('form_validation');		
+	
+		$this->form_validation->set_error_delimiters('<label class="text-danger">', '</label>');
+								
+		if ($this->form_validation->run('contatta') !== FALSE) {
+			
+			/* str_replace messaggio dopo validazione
+			 * 	$rcosa=array('"');
+			 *	$rcon=array('\"');
+			*/
+
+			$this->session->set_userdata('contatta_utente',$this->input->post());
+			redirect ("utenti/invia_messaggio");
+		}
+		
+		
+				
+		$data['utente']=$this->session->utente;
+		$data['connesso']=$this->connesso(); // controllo connessione per caricamento css e js esterni o locali
+		$data['torna_url']=$this->session->dopo;
+		$data['torna_txt']="Torna alla scheda";		
+		
+		$this->session->set_userdata('dopo',current_url()); 
+		
+		if (!$infoutente=$this->utenti_model->getUtente($id)){
+			$this->session->set_userdata('noutente',1);
+			redirect($data['torna_url']);
+		}
+		$data['infoutente']=$infoutente;
+		
+		$this->load->view('templates/header',$data);
+		$this->load->view('templates/menu',$data);
+		$this->load->view('utenti/contatta',$data);
+		$this->load->view('templates/footer',$data);
+		// altri js
+		$this->load->view('utenti/js_contatta');
+		$this->load->view('templates/close');
+		
+	}
+	
+	public function invia_messaggio() {
+			
+		if (!$this->checkLevel(0)){ // controllo se loggato
+			$this->session->set_userdata('nocons',1);
+			redirect('login');
+		}
+		
+		if (!$this->session->contatta_utente) redirect ('homepage');
+		
+		$contatta_utente=$this->session->contatta_utente;
+		$this->session->unset_userdata('contatta_utente');
+		
+		// invia mail a utente
+		
+		// redirect ('utenti/contatta/'.$contatta_utente['id'])
 		
 	}
 	

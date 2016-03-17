@@ -204,7 +204,7 @@
 			 </div>
 			<?php echo form_close(); ?>
 		</div>
-		<div class="col-md-3 center-xs">
+		<div class="col-md-3 text-right center-sm">
 			<p class="lead">Info prestiti</p>
 			<p>Questo libro è 
 			<?php if ($libro->disp==1) : ?>
