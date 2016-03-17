@@ -36,12 +36,16 @@ class Test extends MY_Controller {
         
     }
     
-    public function dates() {
+    public function mail() {
 		
-		$this->load->helper('date');
+		$this->load->library('email');
 		
-		$ora=currentDateTime();
-		echo $ora;
+		$mailview="contatta";
+		$data['prova']="Prova email";
+		$destinatario="sberz666@gmail.com";		
+		$subject="Prova mail";
+		
+		echo $this->email->sendMail($mailview,$data,$destinatario,$subject);
 		
 	}
 	

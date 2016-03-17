@@ -410,6 +410,9 @@ class Utenti extends MY_Controller {
 		$this->load->view('utenti/js_contatta');
 		$this->load->view('templates/close');
 		
+		$this->session->unset_userdata('okemail');
+		$this->session->unset_userdata('noemail');
+		
 	}
 	
 	public function invia_messaggio() {
@@ -424,9 +427,20 @@ class Utenti extends MY_Controller {
 		$contatta_utente=$this->session->contatta_utente;
 		$this->session->unset_userdata('contatta_utente');
 		
-		// invia mail a utente
+		$this->load->library('email');
 		
-		// redirect ('utenti/contatta/'.$contatta_utente['id'])
+		$mailview="contatta";
+		$data['messaggio']=$contatta_utente['messaggio'];
+		$destinatario=$contatta_utente['email'];		
+		$subject="Prova email";
+		
+		if ($this->email->sendMail($mailview,$data,$destinatario,$subject)){
+			$this->session->set_userdata('okemail',1);
+		}else{
+			$this->session->set_userdata('noemail',1);
+		}
+		
+		redirect ('utenti/contatta/'.$contatta_utente['id']);
 		
 	}
 	
