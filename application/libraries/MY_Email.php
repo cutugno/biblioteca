@@ -59,9 +59,9 @@ class MY_Email extends CI_Email {
 		 */
 		  
 		$CI =& get_instance();
-		$CI->load->library('email');
+		$CI->load->library('email'); // libreria estesa con funzione sendMail
 		
-		$CI->config->load('email',TRUE);
+		$CI->config->load('email',TRUE); // file config application/config/email.php
 		$email_config = $CI->config->item('email');
 
 		$message=$CI->load->view($email_config['email_templates_folder'].$mailview,$data,TRUE);		
