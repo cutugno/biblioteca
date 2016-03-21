@@ -1,5 +1,5 @@
 <div class="container">
-	<a href="<?php echo site_url($torna_url); ?>" class="btn btn-link pull-right"><?php echo $torna_txt; ?></a>
+	<a href="<?php echo $torna_url; ?>" class="btn btn-link pull-right"><?php echo $torna_txt; ?></a>
 	<h1>Contatta <?php echo $infoutente->nome; ?></h1>
 	<div class="row">
 		<div class="col-md-9">

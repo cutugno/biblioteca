@@ -110,7 +110,7 @@
 						<?php if (null!=$prestito->email) : ?>
 						<div class="col-xs-12 spacer-10"></div>
 						<div class="col-xs-12">
-							<a href="<?php echo site_url('contatta-utente/'.$prestito->id_utente); ?>" class="btn btn-danger"><i class="fa fa-envelope-o"></i> CONTATTA UTENTE</a>
+							<a href="<?php echo site_url('utenti/contatta/'.$prestito->id_utente); ?>" class="btn btn-danger"><i class="fa fa-envelope-o"></i> CONTATTA UTENTE</a>
 						</div>	
 						<?php endif ?>
 					</div>

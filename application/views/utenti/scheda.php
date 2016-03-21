@@ -104,7 +104,7 @@
 		</div>
 		<div class="col-md-3 text-right center-sm">
 			<?php if (!empty($infoutente->email)) : ?>
-			<a href="<?php echo site_url('contatta-utente/'.$infoutente->id); ?>" class="btn btn-primary"><i class="fa fa-envelope-o"></i> CONTATTA UTENTE</a>
+			<a href="<?php echo site_url('utenti/contatta/'.$infoutente->id); ?>" class="btn btn-primary"><i class="fa fa-envelope-o"></i> CONTATTA UTENTE</a>
 			<?php endif ?>
 		</div>
 		

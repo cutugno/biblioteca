@@ -49,4 +49,15 @@ class Test extends MY_Controller {
 		
 	}
 	
+	public function livello () {
+		
+		if (!$this->checkLevel(1)){ // controllo se non loggato
+			$this->session->set_userdata('nocons',1);
+			redirect('login');
+		}
+		
+		
+		
+	}
+	
 }
