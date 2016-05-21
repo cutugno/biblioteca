@@ -5,8 +5,6 @@ class Homepage extends MY_Controller {
 	
 	public function index()	{
 		
-		// ciao
-		
 		if (!$this->checkLevel(-1)){ // controllo se non loggato
 			$utente = new stdClass();
 			$utente->livello=0;
